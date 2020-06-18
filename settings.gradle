@@ -1,0 +1,2 @@
+rootProject.name='INFS3605 Group Assignment'
+include ':app'
