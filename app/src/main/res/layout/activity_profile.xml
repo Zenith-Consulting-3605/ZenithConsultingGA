@@ -153,12 +153,16 @@
                 android:layout_height="3dp"
                 android:background="@drawable/divider" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cslFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scvFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/txvDummy"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
 
         </LinearLayout>
     </ScrollView>

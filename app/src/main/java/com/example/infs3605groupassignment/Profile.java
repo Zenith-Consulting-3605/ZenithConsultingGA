@@ -1,6 +1,9 @@
 package com.example.infs3605groupassignment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,5 +42,10 @@ public class Profile extends AppCompatActivity {
                 startActivity(new Intent(Profile.this, Profile.class));
             }
         });
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment fragment = new ExperienceFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.scvFragment, fragment).commit();
     }
 }
