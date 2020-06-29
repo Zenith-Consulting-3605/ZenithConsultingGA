@@ -1,6 +1,8 @@
 package com.example.infs3605groupassignment;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -54,6 +56,7 @@ public class SignUp extends AppCompatActivity {
                             Boolean insert = db.insert(fn, ln, em, ps);
                             if (insert == true) {
                                 Toast.makeText(getApplicationContext(), "Register Successful", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignUp.this, MainActivity.class));
                             }
                         }
                         else {
