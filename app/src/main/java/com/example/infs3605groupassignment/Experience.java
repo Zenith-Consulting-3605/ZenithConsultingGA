@@ -13,8 +13,9 @@ public class Experience {
 
     }
 
-    public Experience(String title, String startDate, String endDate) {
+    public Experience(String title, String company, String startDate, String endDate) {
         this.title = title;
+        this.company = company;
         this.startDate = startDate;
         this.endDate = endDate;
     }

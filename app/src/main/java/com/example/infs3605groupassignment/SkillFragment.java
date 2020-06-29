@@ -3,22 +3,29 @@ package com.example.infs3605groupassignment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 
 import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ExperienceFragment#newInstance} factory method to
+ * Use the {@link SkillFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExperienceFragment extends Fragment {
+public class SkillFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +39,9 @@ public class ExperienceFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public ExperienceFragment() {
+    private String TAG = "SKILL_FRAGMENT";
+
+    public SkillFragment() {
         // Required empty public constructor
     }
 
@@ -42,11 +51,11 @@ public class ExperienceFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ExperienceFragment.
+     * @return A new instance of fragment SkillFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ExperienceFragment newInstance(String param1, String param2) {
-        ExperienceFragment fragment = new ExperienceFragment();
+    public static SkillFragment newInstance(String param1, String param2) {
+        SkillFragment fragment = new SkillFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,19 +76,24 @@ public class ExperienceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_experience, container, false);
+        View v = inflater.inflate(R.layout.fragment_skill, container, false);
 
         recyclerView = v.findViewById(R.id.rvList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
-        layoutManager = new LinearLayoutManager(getContext());
+
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getContext());
+        layoutManager.setFlexDirection(FlexDirection.ROW);
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
+        layoutManager.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutManager);
 
         final DbHelper dbHelper = new DbHelper(getContext());
 
-        List<Experience> experienceList = dbHelper.getExperiences();
+        List<Skill> skillList = dbHelper.getSkills();
+//        Log.d(TAG, skillList.toString());
 
-        adapter = new ExperienceAdapter(this, experienceList);
+        adapter = new SkillAdapter(this, skillList);
         recyclerView.setAdapter(adapter);
 
         return v;

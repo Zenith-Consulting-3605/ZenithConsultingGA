@@ -20,14 +20,14 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
     }
 
     public static class ExperienceViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, startDate, endDate;
+        public TextView title, company, startDate;
         public ImageView image;
 
         public ExperienceViewHolder(View v) {
             super(v);
             title = v.findViewById(R.id.txvTitle);
-            startDate = v.findViewById(R.id.txvStartDate);
-            endDate = v.findViewById(R.id.txvEndDate);
+            company = v.findViewById(R.id.txvCompany);
+            startDate = v.findViewById(R.id.txvDate);
             image = v.findViewById(R.id.imvArt);
         }
     }
@@ -41,9 +41,9 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
     @Override
     public void onBindViewHolder(ExperienceViewHolder holder, int position) {
         Experience experience = experiences.get(position);
-        holder.title.setText(experience.getTitle()); //NEED TO SET TEXT
-        holder.startDate.setText(experience.getStartDate()); //NEED TO SET TEXT
-        holder.endDate.setText(experience.getEndDate()); //NEED TO SET TEXT
+        holder.title.setText(experience.getTitle());
+        holder.company.setText(experience.getCompany());
+        holder.startDate.setText(experience.getStartDate() + "  -  " + experience.getEndDate());
     }
 
     @Override
