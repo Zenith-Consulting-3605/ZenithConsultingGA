@@ -2,6 +2,8 @@ package com.example.infs3605groupassignment;
 
 import android.provider.BaseColumns;
 
+import java.sql.Date;
+
 public final class DbContract {
 
     private DbContract(){}
@@ -32,7 +34,14 @@ public final class DbContract {
         public static final String START_DATE = "start_date";
         public static final String END_DATE = "end_date";
         public static final String DESCRIPTION = "description";
-        public static final String USER_ID = "user_id";
+        public static final String USER_ID = "user_id"; //CHECK THIS IF RETRIEVING USER_IDS AS FOREIGN KEYS POSE PROBLEMS
+    }
+
+    public static class SkillTable implements BaseColumns {
+        public static final String TABLE_NAME = "skill";
+        public static final String NAME = "name";
+        public static final String DESCRIPTION = "description";
+        public static final String USER_ID = "user_id"; //CHECK THIS IF RETRIEVING USER_IDS AS FOREIGN KEYS POSE PROBLEMS
     }
 
 
