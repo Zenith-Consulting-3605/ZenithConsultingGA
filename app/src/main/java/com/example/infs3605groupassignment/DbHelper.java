@@ -1,5 +1,6 @@
 package com.example.infs3605groupassignment;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,11 +26,15 @@ public class DbHelper extends SQLiteOpenHelper {
         this.db = db;
 
         db.execSQL("DROP TABLE IF EXISTS " + DbContract.ExperienceTable.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DbContract.UsersTable.TABLE_NAME);
+
         final String SQL_CREATE_USERS_TABLE = "CREATE TABLE " +
                 DbContract.UsersTable.TABLE_NAME + "( " +
                 DbContract.UsersTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DbContract.UsersTable.EMAIL + " TEXT, " +
-                DbContract.UsersTable.PASSWORD + " TEXT " +
+                DbContract.UsersTable.PASSWORD + " TEXT," +
+                DbContract.UsersTable.FIRST_NAME + " TEXT, " +
+                DbContract.UsersTable.LAST_NAME + " TEXT" +
                 ")";
 
         db.execSQL(SQL_CREATE_USERS_TABLE);
@@ -55,6 +60,31 @@ public class DbHelper extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
+    public boolean insert(String firstName, String lastName, String email, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("first_name", firstName);
+        contentValues.put("last_name", lastName);
+        contentValues.put("email", email);
+        contentValues.put("password", password);
+        //contentValues.put("user_type", userType);
+
+        long ins = db.insert("users", null, contentValues);
+        if(ins==-1) return false;
+        else return true;
+    }
+
+    public Boolean checkEmail(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email=?", new String[]{email});
+        if (cursor.getCount()>0) return false;
+        else return true;
+    }
+
+
+
+
 
     public List<Experience> getExperiences() {
         SQLiteDatabase db = this.getReadableDatabase();
