@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment;
+package com.example.infs3605groupassignment.Profile;
 
 public class Skill {
     private String name;

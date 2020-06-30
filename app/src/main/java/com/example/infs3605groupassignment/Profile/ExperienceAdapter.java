@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment;
+package com.example.infs3605groupassignment.Profile;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.infs3605groupassignment.R;
 
 import java.util.List;
 

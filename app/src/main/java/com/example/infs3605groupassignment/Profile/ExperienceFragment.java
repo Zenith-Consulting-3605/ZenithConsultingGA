@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment;
+package com.example.infs3605groupassignment.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.infs3605groupassignment.DbHelper;
+import com.example.infs3605groupassignment.Project;
+import com.example.infs3605groupassignment.R;
 
 import java.util.List;
 
