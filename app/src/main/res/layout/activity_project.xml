@@ -10,9 +10,9 @@
         android:id="@+id/txvPROJECT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="212dp"
-        android:layout_marginLeft="212dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="252dp"
         android:text="THIS IS PROJECT"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,4 +26,48 @@
         android:layout_marginTop="305dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cslTaskbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/border_stroke"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_constraintBottom_toBottomOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imvHome"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imvProject"
+        app:layout_constraintStart_toStartOf="@+id/cslTaskbar"
+        app:srcCompat="@drawable/tkb_home" />
+
+    <ImageView
+        android:id="@+id/imvProfile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cslTaskbar"
+        app:layout_constraintStart_toEndOf="@+id/imvProject"
+        app:srcCompat="@drawable/tkb_profile" />
+
+    <ImageView
+        android:id="@+id/imvProject"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cslTaskbar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cslTaskbar"
+        app:srcCompat="@drawable/tkb_project"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
