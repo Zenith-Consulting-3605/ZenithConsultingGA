@@ -86,6 +86,7 @@ public class ExperienceDetailFragment extends Fragment {
 
         adapter = new ExperienceDetailAdapter(this, experienceList);
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         return v;
     }

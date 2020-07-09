@@ -94,12 +94,13 @@ public class ExperienceFragment extends Fragment {
 
             @Override
             public void onButtonClick(String title) {
-                Intent intent = new Intent(getContext(), Project.class); //WILL NEED TO FIX
-                intent.putExtra(ProfileDetail.CODE_EXTRA, title); //WILL NEED TO FIX
+                Intent intent = new Intent(getContext(), ExperienceEdit.class);
+                intent.putExtra(ExperienceEdit.CODE_EXTRA, title);
                 startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         return v;
     }

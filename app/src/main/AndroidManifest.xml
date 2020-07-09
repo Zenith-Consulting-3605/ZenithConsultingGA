@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profile.ProfileDetail"></activity>
+        <activity android:name=".Profile.ExperienceEdit" android:theme="@style/AppTheme.CustomTheme"></activity>
+        <activity android:name=".Profile.ProfileDetail" />
         <activity android:name=".Project" />
-        <activity android:name=".Profile.Profile" />
+        <activity android:name=".Profile.Profile" android:theme="@style/AppTheme.BaseTheme"></activity>
         <activity android:name=".SignUp" />
-        <activity android:name=".Home" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Home" android:theme="@style/AppTheme.BaseTheme"/>
+        <activity android:name=".MainActivity" android:theme="@style/AppTheme.BaseTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

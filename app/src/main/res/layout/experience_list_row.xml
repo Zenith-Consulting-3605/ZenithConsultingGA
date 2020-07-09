@@ -47,14 +47,14 @@
 
                     <Button
                         android:id="@+id/btnEditExp"
-                        android:layout_width="25dp"
+                        android:layout_width="50dp"
                         android:layout_height="35dp"
                         android:layout_marginTop="13dp"
                         android:layout_marginRight="5dp"
-                        android:layout_weight="1"
                         android:fontFamily="@font/regular"
+                        android:background="@drawable/button"
                         android:text="Edit"
-                        android:textAllCaps="false"
+                        android:textAllCaps="true"
                         android:textSize="12dp" />
                 </LinearLayout>
 

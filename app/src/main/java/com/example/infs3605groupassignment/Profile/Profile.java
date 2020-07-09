@@ -1,5 +1,7 @@
 package com.example.infs3605groupassignment.Profile;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -7,6 +9,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +18,9 @@ import android.widget.TextView;
 import com.example.infs3605groupassignment.Home;
 import com.example.infs3605groupassignment.Project;
 import com.example.infs3605groupassignment.R;
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Profile extends AppCompatActivity {
     private ImageView home;
@@ -28,31 +35,33 @@ public class Profile extends AppCompatActivity {
     private View dividerSkill;
     private View dividerQualification;
 
+    private ActionBar toolbar;
+
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        home = findViewById(R.id.imvHome);
-        project = findViewById(R.id.imvProject);
-        profile = findViewById(R.id.imvProfile);
-
-        home.setOnClickListener(new View.OnClickListener() {
+        toolbar = getSupportActionBar();
+        BottomNavigationView nav = findViewById(R.id.bnvNav);
+        nav.setSelectedItemId(R.id.profile);
+        nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Home.class));
-            }
-        });
-        project.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Project.class));
-            }
-        });
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Profile.this, Profile.class));
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), Home.class));
+                        return true;
+                    case R.id.project:
+                        startActivity(new Intent(getApplicationContext(), Project.class));
+                        return true;
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(), Profile.class));
+                        return true;
+                }
+                return false;
             }
         });
 
@@ -69,6 +78,8 @@ public class Profile extends AppCompatActivity {
         dividerSkill = findViewById(R.id.divSkill);
         dividerQualification = findViewById(R.id.divQualification);
 
+        fab = findViewById(R.id.fabAdd);
+
 
         experience.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +89,7 @@ public class Profile extends AppCompatActivity {
                 dividerExperience.setBackgroundResource(R.color.dark_magenta);
                 dividerSkill.setBackgroundResource(R.color.white);
                 dividerQualification.setBackgroundResource(R.color.white);
+                fab.setVisibility(View.VISIBLE);
             }
         });
 
@@ -89,6 +101,8 @@ public class Profile extends AppCompatActivity {
                 dividerExperience.setBackgroundResource(R.color.white);
                 dividerSkill.setBackgroundResource(R.color.dark_magenta);
                 dividerQualification.setBackgroundResource(R.color.white);
+                fab.setVisibility(View.GONE);
+
             }
         });
 
@@ -100,12 +114,10 @@ public class Profile extends AppCompatActivity {
                 dividerExperience.setBackgroundResource(R.color.white);
                 dividerSkill.setBackgroundResource(R.color.white);
                 dividerQualification.setBackgroundResource(R.color.dark_magenta);
+                fab.setVisibility(View.GONE);
             }
         });
 
-
-
-
-
     }
+
 }

@@ -41,6 +41,7 @@ public final class DbContract {
         public static final String TABLE_NAME = "skill";
         public static final String NAME = "name";
         public static final String DESCRIPTION = "description";
+        public static final String DUMMY = "dummy";
         public static final String USER_ID = "user_id"; //CHECK THIS IF RETRIEVING USER_IDS AS FOREIGN KEYS POSE PROBLEMS
     }
 

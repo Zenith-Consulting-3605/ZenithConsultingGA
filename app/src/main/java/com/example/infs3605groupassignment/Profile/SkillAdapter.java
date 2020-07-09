@@ -1,5 +1,6 @@
 package com.example.infs3605groupassignment.Profile;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,10 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.SkillViewHol
     public void onBindViewHolder(SkillViewHolder holder, int position) {
         Skill skill = skills.get(position);
         holder.name.setText(skill.getName());
+        if (skill.getName().equals("Add Skill+")) {
+            holder.name.setBackgroundResource(R.drawable.skill_add);
+            holder.name.setTextColor(Color.parseColor("#5F4B8B"));
+        }
     }
 
     @Override

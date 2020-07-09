@@ -45,7 +45,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + DbContract.ProfileTable.TABLE_NAME + "( " + DbContract.ProfileTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ProfileTable.FIRST_NAME + " TEXT, " + DbContract.ProfileTable.LAST_NAME + " TEXT, " + DbContract.ProfileTable.OCCUPATION + " TEXT, " + DbContract.ProfileTable.LOCATION + " TEXT )");
         db.execSQL("CREATE TABLE " + DbContract.ExperienceTable.TABLE_NAME + "( " + DbContract.ExperienceTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ExperienceTable.TITLE + " TEXT, " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + " TEXT, " + DbContract.ExperienceTable.COMPANY + " TEXT, " + DbContract.ExperienceTable.LOCATION + " TEXT, " + DbContract.ExperienceTable.START_DATE + " TEXT, " + DbContract.ExperienceTable.END_DATE + " TEXT, " + DbContract.ExperienceTable.DESCRIPTION + " TEXT, " + DbContract.ExperienceTable.USER_ID + " INTEGER )");
-        db.execSQL("CREATE TABLE " + DbContract.SkillTable.TABLE_NAME + "( " + DbContract.SkillTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.SkillTable.NAME + " TEXT, " + DbContract.SkillTable.DESCRIPTION + " TEXT, " + DbContract.SkillTable.USER_ID + " INTEGER )");
+        db.execSQL("CREATE TABLE " + DbContract.SkillTable.TABLE_NAME + "( " + DbContract.SkillTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.SkillTable.NAME + " TEXT, " + DbContract.SkillTable.DESCRIPTION + " TEXT, " + DbContract.SkillTable.USER_ID + " INTEGER, " + DbContract.SkillTable.DUMMY + " INTEGER)");
 
         db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " ( " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('Web Designer, Frontend Developer', 'Full-Time', 'Champion', 'Sydney, Australia', '2009-12-12', '2010-09-11', 'Worked at Champion like an absolute Champ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 1)");
         db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " ( " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('Frontend Developer', 'Full-Time', 'BigBoi Co.', 'Sydney, Australia', '2005-12-14', '2006-11-20', 'Was a BigLad', 1)");
@@ -55,11 +55,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " ( " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('Engineering Intern @ TerumoBCT', 'Full-Time', 'To Say', 'Sydney, Australia', '2014-08-13', '2014-09-14', 'Was a BigLad', 1)");
         db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " ( " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('AUTOCad Developer', 'Full-Time', 'Haw', 'Sydney, Australia', '2014-08-14', '2015-12-15', 'Was a BigLad', 1)");
 
-        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ") VALUES ('UI Design', 'Learnt to design UIs professionally', 1)");
-        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ") VALUES ('UX Design', 'Learnt to design UXs professionally', 1)");
-        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ") VALUES ('Adobe XD', 'Learnt to design UX/UI using Adobe XD', 1)");
-        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ") VALUES ('Web Design', 'Learnt to HTML5 to design webpages', 1)");
-        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ") VALUES ('Android Studio v1.2', 'Learnt to design UIs professionally in Android Studio', 1)");
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('UI Design', 'Learnt to design UIs professionally', 1, 0)");
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('UX Design', 'Learnt to design UXs professionally', 1, 0)");
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('Adobe XD', 'Learnt to design UX/UI using Adobe XD', 1, 0)");
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('Web Design', 'Learnt to HTML5 to design webpages', 1, 0)");
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('Android Studio v1.2', 'Learnt to design UIs professionally in Android Studio', 1, 0)");
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('Add Skill+', 'Add Skill+', 1, 1)");
     }
 
     @Override
@@ -155,10 +156,54 @@ public class DbHelper extends SQLiteOpenHelper {
         return experienceList;
     }
 
+    public Experience getExperience(String identifier) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable.USER_ID + " = " + 1 + " AND " + DbContract.ExperienceTable.TITLE + " = '" + identifier + "'", null);
+
+        int titleCol = cursor.getColumnIndex(DbContract.ExperienceTable.TITLE);
+        int empTypeCol = cursor.getColumnIndex(DbContract.ExperienceTable.EMPLOYMENT_TYPE);
+        int companyCol = cursor.getColumnIndex(DbContract.ExperienceTable.COMPANY);
+        int locationCol = cursor.getColumnIndex(DbContract.ExperienceTable.LOCATION);
+        int startCol = cursor.getColumnIndex(DbContract.ExperienceTable.START_DATE);
+        int endCol = cursor.getColumnIndex(DbContract.ExperienceTable.END_DATE);
+        int descriptionCol = cursor.getColumnIndex(DbContract.ExperienceTable.DESCRIPTION);
+        String title, empType, company, location, start, end, description;
+        Experience retrievedExp = null;
+
+        while (cursor.moveToNext()) {
+            title = cursor.getString(titleCol);
+            empType = cursor.getString(empTypeCol);
+            company = cursor.getString(companyCol);
+            location = cursor.getString(locationCol);
+            start = cursor.getString(startCol);
+            end = cursor.getString(endCol);
+            description = cursor.getString(descriptionCol);
+            retrievedExp = new Experience(title, empType, company, location, start, end, description);
+        }
+
+        return retrievedExp;
+
+    }
+
+    public void setExperience(Experience editExp, String oldTitle) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String title = editExp.getTitle();
+        String empType = editExp.getEmploymentType();
+        String company = editExp.getCompany();
+        String location = editExp.getLocation();
+        String description = editExp.getDescription();
+        String startDate = editExp.getStartDate();
+        String endDate = editExp.getEndDate();
+
+        db.execSQL("UPDATE " + DbContract.ExperienceTable.TABLE_NAME + " SET " + DbContract.ExperienceTable.TITLE + " = '" + title + "', " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + " = '" + empType + "', " + DbContract.ExperienceTable.COMPANY + " = '" + company + "', " + DbContract.ExperienceTable.LOCATION + " = '" + location + "', " + DbContract.ExperienceTable.DESCRIPTION + " = '" + description + "', " + DbContract.ExperienceTable.START_DATE + " = '" + startDate + "', " + DbContract.ExperienceTable.END_DATE + " = '" + endDate + "' WHERE " + DbContract.ExperienceTable.TITLE + " = '" + oldTitle + "'");
+    }
+
     public List<Skill> getSkills() {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT " + DbContract.SkillTable.NAME + " FROM " + DbContract.SkillTable.TABLE_NAME + " WHERE " + DbContract.SkillTable.USER_ID + " = " + 1 + " ORDER BY " + DbContract.SkillTable.NAME, null); //NEED TO SWITCH USER_ID WHEN USER PROFILES ARE CORRECTLY SET UP
+        Cursor cursor = db.rawQuery("SELECT " + DbContract.SkillTable.NAME + " FROM " + DbContract.SkillTable.TABLE_NAME + " WHERE " + DbContract.SkillTable.USER_ID + " = " + 1 + " ORDER BY " + DbContract.SkillTable.DUMMY + ", " + DbContract.SkillTable.NAME, null); //NEED TO SWITCH USER_ID WHEN USER PROFILES ARE CORRECTLY SET UP
 
         while (cursor.moveToNext()) {
             Skill retrievedSkill = new Skill(cursor.getString(cursor.getColumnIndex(DbContract.SkillTable.NAME)));
