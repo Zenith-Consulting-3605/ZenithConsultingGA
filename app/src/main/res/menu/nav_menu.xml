@@ -12,7 +12,7 @@
     <item
         android:id="@+id/project"
         android:icon="@drawable/project"
-        android:title="Project"
+        android:title="Add Project"
         app:showAsAction="ifRoom"/>
 
     <item
