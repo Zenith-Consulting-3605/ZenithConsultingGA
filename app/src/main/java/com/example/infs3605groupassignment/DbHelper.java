@@ -41,7 +41,17 @@ public class DbHelper extends SQLiteOpenHelper {
                 DbContract.UsersTable.LAST_NAME + " TEXT" +
                 ")";
 
+        final String SQL_CREATE_PROJECTS_TABLE = "CREATE TABLE " +
+                DbContract.ProjectTable.TABLE_NAME + "( " +
+                DbContract.ProjectTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DbContract.ProjectTable.NAME + " TEXT, " +
+                DbContract.ProjectTable.DESCRIPTION + " TEXT," +
+                DbContract.ProjectTable.CATEGORY + " TEXT, " +
+                DbContract.ProjectTable.PROGRESS + " TEXT" +
+                ")";
+
         db.execSQL(SQL_CREATE_USERS_TABLE);
+        db.execSQL(SQL_CREATE_PROJECTS_TABLE);
 
         db.execSQL("CREATE TABLE " + DbContract.ProfileTable.TABLE_NAME + "( " + DbContract.ProfileTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ProfileTable.FIRST_NAME + " TEXT, " + DbContract.ProfileTable.LAST_NAME + " TEXT, " + DbContract.ProfileTable.OCCUPATION + " TEXT, " + DbContract.ProfileTable.LOCATION + " TEXT )");
         db.execSQL("CREATE TABLE " + DbContract.ExperienceTable.TABLE_NAME + "( " + DbContract.ExperienceTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ExperienceTable.TITLE + " TEXT, " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + " TEXT, " + DbContract.ExperienceTable.COMPANY + " TEXT, " + DbContract.ExperienceTable.LOCATION + " TEXT, " + DbContract.ExperienceTable.START_DATE + " TEXT, " + DbContract.ExperienceTable.END_DATE + " TEXT, " + DbContract.ExperienceTable.DESCRIPTION + " TEXT, " + DbContract.ExperienceTable.USER_ID + " INTEGER )");
@@ -70,6 +80,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DbContract.ProfileTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DbContract.ExperienceTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DbContract.SkillTable.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DbContract.ProjectTable.TABLE_NAME);
 
         onCreate(db);
     }
@@ -87,6 +98,18 @@ public class DbHelper extends SQLiteOpenHelper {
         if(ins==-1) return false;
         else return true;
     }
+
+    public boolean insertProjects(String projectName, String description){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", projectName);
+        contentValues.put("description", description);
+
+        long ins = db.insert("project",null, contentValues);
+        if(ins==-1) return false;
+        else return true;
+    }
+
 
     public Boolean checkEmail(String email){
         SQLiteDatabase db = this.getReadableDatabase();

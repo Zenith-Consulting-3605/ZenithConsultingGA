@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">INFS3605 Group Assignment</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string-array name="categories">
+        <item>Graphic Designer</item>
+        <item>Placeholder 1</item>
+        <item>Placeholder 2</item>
+        <item>Placeholder 3</item>
+        <item>Placeholder 4</item>
+    </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
