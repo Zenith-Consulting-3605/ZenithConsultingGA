@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment.Profile;
+package com.example.infs3605groupassignment.Objects;
 
 public class Experience {
     private String title;

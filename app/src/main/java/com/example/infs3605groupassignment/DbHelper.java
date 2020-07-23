@@ -6,8 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.infs3605groupassignment.Profile.Experience;
-import com.example.infs3605groupassignment.Profile.Skill;
+import com.example.infs3605groupassignment.Objects.Experience;
+import com.example.infs3605groupassignment.Objects.Skill;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -223,6 +223,20 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + DbContract.ExperienceTable.TABLE_NAME + " SET " + DbContract.ExperienceTable.TITLE + " = '" + title + "', " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + " = '" + empType + "', " + DbContract.ExperienceTable.COMPANY + " = '" + company + "', " + DbContract.ExperienceTable.LOCATION + " = '" + location + "', " + DbContract.ExperienceTable.DESCRIPTION + " = '" + description + "', " + DbContract.ExperienceTable.START_DATE + " = '" + startDate + "', " + DbContract.ExperienceTable.END_DATE + " = '" + endDate + "' WHERE " + DbContract.ExperienceTable.TITLE + " = '" + oldTitle + "'");
     }
 
+    public void addExperience(Experience newExperience) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String title = newExperience.getTitle();
+        String empType = newExperience.getEmploymentType();
+        String company = newExperience.getCompany();
+        String location = newExperience.getLocation();
+        String description = newExperience.getDescription();
+        String startDate = newExperience.getStartDate();
+        String endDate = newExperience.getEndDate();
+
+        db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " (" + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('" + title + "', '" + empType + "', '" + company + "', '" + location + "', '" + startDate + "', '" + endDate + "', '" + description + "', " + 1 + ")"); // NEED TO SWITCH TO WORK WITH INDIVIDUAL PROFILES
+    }
+
     public List<Skill> getSkills() {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -235,4 +249,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return skillList;
     }
+
+    public void addSkill(Skill newSkill) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String addName = newSkill.getName();
+        String addDescription = newSkill.getDescription();
+
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('" + addName + "', '" + addDescription + "', 1, 0)");    }
 }

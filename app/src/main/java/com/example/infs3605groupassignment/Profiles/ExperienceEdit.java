@@ -1,22 +1,20 @@
-package com.example.infs3605groupassignment.Profile;
+package com.example.infs3605groupassignment.Profiles;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.infs3605groupassignment.DbHelper;
-import com.example.infs3605groupassignment.Project;
+import com.example.infs3605groupassignment.Objects.Experience;
 import com.example.infs3605groupassignment.R;
-
-import java.util.List;
 
 public class ExperienceEdit extends AppCompatActivity {
     public String TAG = "ExperienceEdit";
@@ -24,6 +22,7 @@ public class ExperienceEdit extends AppCompatActivity {
     private TextView title, company, location, description, startYear, endYear;
     private Spinner empType, startMonth, endMonth;
     private Button save;
+    private ImageView close;
     private String savedTitle;
 
     @Override
@@ -108,7 +107,6 @@ public class ExperienceEdit extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.d(TAG, empType.getSelectedItem().toString());
                 String assemTitle = title.getText().toString();
                 String assemEmp = empType.getSelectedItem().toString();
                 String assemCompany = company.getText().toString();
@@ -120,10 +118,21 @@ public class ExperienceEdit extends AppCompatActivity {
                 Experience editExp = new Experience(assemTitle, assemEmp, assemCompany, assemLocation, assemStart, assemEnd, assemDescription);
                 dbHelper.setExperience(editExp, savedTitle);
 
-                startActivity(new Intent(ExperienceEdit.this, Profile.class));
+                finish();
+                startActivity(new Intent(ExperienceEdit.this, ProfileDetail.class));
+                overridePendingTransition(0, 0);
             }
         });
 
+        close = findViewById(R.id.imvClose);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(ExperienceEdit.this, ProfileDetail.class));
+                overridePendingTransition(0, 0);
+            }
+        });
     }
 
     public String monthRet(String retrieved) {

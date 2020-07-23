@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment.Profile;
+package com.example.infs3605groupassignment.Profiles;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.infs3605groupassignment.DbHelper;
-import com.example.infs3605groupassignment.Project;
+import com.example.infs3605groupassignment.Objects.Experience;
 import com.example.infs3605groupassignment.R;
 
 import java.util.List;

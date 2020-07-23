@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.infs3605groupassignment.Profile.Profile;
+import com.example.infs3605groupassignment.Objects.Project;
+import com.example.infs3605groupassignment.Profiles.Profile;
 
 public class Home extends AppCompatActivity {
 

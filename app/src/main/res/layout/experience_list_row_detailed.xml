@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:clickable="true"
     android:focusable="true"
-    android:layout_margin="0dp">
+    android:layout_margin="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
                 android:layout_width="60dp"
                 android:layout_height="120dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/prf_progress" />
+                app:srcCompat="@drawable/prf_progress_detail" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,6 +44,18 @@
                         android:fontFamily="@font/bold"
                         android:text="Title"
                         android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/btnEditExp"
+                        android:layout_width="62dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/button"
+                        android:fontFamily="@font/regular"
+                        android:text="Edit"
+                        android:textAllCaps="true"
+                        android:textSize="12dp" />
 
                 </LinearLayout>
 
@@ -97,6 +109,7 @@
                     android:layout_marginLeft="1dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginBottom="16dp"
                     android:text="Description" />
 
             </LinearLayout>

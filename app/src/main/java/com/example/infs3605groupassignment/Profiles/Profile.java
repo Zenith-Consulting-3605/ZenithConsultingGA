@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment.Profile;
+package com.example.infs3605groupassignment.Profiles;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -9,16 +9,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.infs3605groupassignment.Home;
-import com.example.infs3605groupassignment.Project;
+import com.example.infs3605groupassignment.Objects.Project;
 import com.example.infs3605groupassignment.R;
-import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -79,6 +77,14 @@ public class Profile extends AppCompatActivity {
         dividerQualification = findViewById(R.id.divQualification);
 
         fab = findViewById(R.id.fabAdd);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ExperienceAdd.class);
+                startActivity(intent);
+            }
+        });
 
 
         experience.setOnClickListener(new View.OnClickListener() {

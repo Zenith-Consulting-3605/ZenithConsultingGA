@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment.Profile;
+package com.example.infs3605groupassignment.Profiles;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,13 +7,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.infs3605groupassignment.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProfileDetail extends AppCompatActivity {
     public static final String CODE_EXTRA = "CODE_EXTRA";
     private TextView trial;
+    private FloatingActionButton fabR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,14 @@ public class ProfileDetail extends AppCompatActivity {
         Bundle arguments = new Bundle();
         arguments.putString("title", title);
         fragment.setArguments(arguments);
-        getSupportFragmentManager().beginTransaction().replace(R.id.scvDetailContainer, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.scvDC1, fragment).commit();
+
+        fabR = findViewById(R.id.fabReturn);
+        fabR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Profile.class));
+            }
+        });
     }
 }

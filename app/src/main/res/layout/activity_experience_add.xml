@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profiles.ExperienceEdit">
+    tools:context=".Profiles.ExperienceAdd">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cslTop"
+        android:id="@+id/cslTop1"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/dark_magenta"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imvClose"
+            android:id="@+id/imvClose1"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="10dp"
@@ -27,19 +27,19 @@
             app:srcCompat="@drawable/cross" />
 
         <Button
-            android:id="@+id/btnSave"
-            android:layout_width="80dp"
+            android:id="@+id/btnExperienceAdd"
+            android:layout_width="65dp"
             android:layout_height="0dp"
             android:elevation="0dp"
             android:stateListAnimator="@null"
-            android:text="Save"
+            android:text="Add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/txvTitle"
+        android:id="@+id/txvTitleAdd"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="36dp"
@@ -49,15 +49,13 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
-        android:hint="Job Title"
         android:inputType="textPersonName"
-        android:text="Job Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/cslTop1" />
 
     <EditText
-        android:id="@+id/txvCompany"
+        android:id="@+id/txvCompanyAdd"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginTop="40dp"
@@ -65,26 +63,23 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
-        android:hint="Company"
         android:inputType="textPersonName"
-        android:text="Company"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/txvTitle"
-        app:layout_constraintTop_toBottomOf="@+id/txvTitle" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txvTitleAdd"
+        app:layout_constraintTop_toBottomOf="@+id/txvTitleAdd" />
 
     <Spinner
-        android:id="@+id/sprEmpType"
+        android:id="@+id/sprEmpTypeAdd"
         android:layout_width="140dp"
         android:layout_height="30dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/spinner"
-        android:gravity="center"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@+id/txvCompany"
-        app:layout_constraintTop_toBottomOf="@+id/txvCompany" />
+        app:layout_constraintStart_toStartOf="@+id/txvCompanyAdd"
+        app:layout_constraintTop_toBottomOf="@+id/txvCompanyAdd" />
 
     <EditText
-        android:id="@+id/txvLocation"
+        android:id="@+id/txvLocationAdd"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginTop="40dp"
@@ -92,15 +87,13 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
-        android:hint="Location"
         android:inputType="textPersonName"
-        android:text="Location"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/sprEmpType"
-        app:layout_constraintTop_toBottomOf="@+id/sprEmpType" />
+        app:layout_constraintStart_toStartOf="@+id/sprEmpTypeAdd"
+        app:layout_constraintTop_toBottomOf="@+id/sprEmpTypeAdd" />
 
     <EditText
-        android:id="@+id/txvDescription"
+        android:id="@+id/txvDescriptionAdd"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginTop="40dp"
@@ -108,134 +101,127 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
-        android:hint="Description"
         android:inputType="textPersonName"
-        android:text="Description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/txvLocation"
-        app:layout_constraintTop_toBottomOf="@+id/txvLocation" />
+        app:layout_constraintStart_toStartOf="@+id/txvLocationAdd"
+        app:layout_constraintTop_toBottomOf="@+id/txvLocationAdd" />
 
     <Spinner
-        android:id="@+id/sprStartMonth"
+        android:id="@+id/sprStartMonthAdd"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/spinner"
-        app:layout_constraintStart_toStartOf="@+id/txvDescription"
-        app:layout_constraintTop_toBottomOf="@+id/txvDescription" />
+        app:layout_constraintStart_toStartOf="@+id/txvDescriptionAdd"
+        app:layout_constraintTop_toBottomOf="@+id/txvDescriptionAdd" />
 
     <Spinner
-        android:id="@+id/sprEndMonth"
+        android:id="@+id/sprEndMonthAdd"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/spinner"
-        app:layout_constraintStart_toStartOf="@+id/sprStartMonth"
-        app:layout_constraintTop_toBottomOf="@+id/txvStartYear" />
+        app:layout_constraintStart_toStartOf="@+id/sprStartMonthAdd"
+        app:layout_constraintTop_toBottomOf="@+id/sprStartMonthAdd" />
 
     <EditText
-        android:id="@+id/txvStartYear"
+        android:id="@+id/txvStartYearAdd"
         android:layout_width="90dp"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/input_field"
         android:ems="10"
-        android:hint="YYYY"
         android:inputType="textPersonName"
-        android:text="StartYear"
-        app:layout_constraintStart_toEndOf="@+id/sprStartMonth"
-        app:layout_constraintTop_toTopOf="@+id/sprStartMonth" />
+        app:layout_constraintStart_toEndOf="@+id/sprStartMonthAdd"
+        app:layout_constraintTop_toTopOf="@+id/sprStartMonthAdd" />
 
     <EditText
-        android:id="@+id/txvEndYear"
+        android:id="@+id/txvEndYearAdd"
         android:layout_width="90dp"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/input_field"
         android:ems="10"
-        android:hint="YYYY"
         android:inputType="textPersonName"
-        android:text="EndYear"
-        app:layout_constraintStart_toEndOf="@+id/sprEndMonth"
-        app:layout_constraintTop_toTopOf="@+id/sprEndMonth" />
+        app:layout_constraintStart_toEndOf="@+id/sprEndMonthAdd"
+        app:layout_constraintTop_toTopOf="@+id/sprEndMonthAdd" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:text="Title"
         android:fontFamily="@font/bold"
-        app:layout_constraintBottom_toTopOf="@+id/txvTitle"
-        app:layout_constraintStart_toStartOf="@+id/txvTitle" />
+        app:layout_constraintBottom_toTopOf="@+id/txvTitleAdd"
+        app:layout_constraintStart_toStartOf="@+id/txvTitleAdd" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:text="Company"
         android:fontFamily="@font/bold"
-        app:layout_constraintBottom_toTopOf="@+id/txvCompany"
-        app:layout_constraintStart_toStartOf="@+id/txvCompany" />
+        app:layout_constraintBottom_toTopOf="@+id/txvCompanyAdd"
+        app:layout_constraintStart_toStartOf="@+id/txvCompanyAdd" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:text="Employment Type"
         android:fontFamily="@font/bold"
-        app:layout_constraintBottom_toTopOf="@+id/sprEmpType"
-        app:layout_constraintStart_toStartOf="@+id/sprEmpType" />
+        app:layout_constraintBottom_toTopOf="@+id/sprEmpTypeAdd"
+        app:layout_constraintStart_toStartOf="@+id/sprEmpTypeAdd" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:text="Location"
         android:fontFamily="@font/bold"
-        app:layout_constraintBottom_toTopOf="@+id/txvLocation"
-        app:layout_constraintStart_toStartOf="@+id/txvLocation" />
+        app:layout_constraintBottom_toTopOf="@+id/txvLocationAdd"
+        app:layout_constraintStart_toStartOf="@+id/txvLocationAdd" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:text="Description"
         android:fontFamily="@font/bold"
-        app:layout_constraintBottom_toTopOf="@+id/txvDescription"
-        app:layout_constraintStart_toStartOf="@+id/txvDescription" />
+        app:layout_constraintBottom_toTopOf="@+id/txvDescriptionAdd"
+        app:layout_constraintStart_toStartOf="@+id/txvDescriptionAdd" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:text="Start Date"
         android:fontFamily="@font/bold"
-        app:layout_constraintBottom_toTopOf="@+id/sprStartMonth"
-        app:layout_constraintStart_toStartOf="@+id/sprStartMonth" />
+        app:layout_constraintBottom_toTopOf="@+id/sprStartMonthAdd"
+        app:layout_constraintStart_toStartOf="@+id/sprStartMonthAdd" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:text="End Date"
         android:fontFamily="@font/bold"
-        app:layout_constraintBottom_toTopOf="@+id/sprEndMonth"
-        app:layout_constraintStart_toStartOf="@+id/sprEndMonth" />
-
+        app:layout_constraintBottom_toTopOf="@+id/sprEndMonthAdd"
+        app:layout_constraintStart_toStartOf="@+id/sprEndMonthAdd" />
 </androidx.constraintlayout.widget.ConstraintLayout>

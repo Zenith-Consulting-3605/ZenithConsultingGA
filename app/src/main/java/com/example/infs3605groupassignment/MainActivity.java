@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.infs3605groupassignment.Profile.Profile;
+import com.example.infs3605groupassignment.Profiles.Profile;
 
 public class MainActivity extends AppCompatActivity {
     DbHelper db;

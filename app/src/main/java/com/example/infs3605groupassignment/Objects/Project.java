@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment;
+package com.example.infs3605groupassignment.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.infs3605groupassignment.Profile.Profile;
-import com.example.infs3605groupassignment.Profile.ProfileDetail;
+import com.example.infs3605groupassignment.Home;
+import com.example.infs3605groupassignment.Profiles.Profile;
+import com.example.infs3605groupassignment.Profiles.ProfileDetail;
+import com.example.infs3605groupassignment.R;
 
 public class Project extends AppCompatActivity {
     public static final String CODE_EXTRA = "CODE_EXTRA";

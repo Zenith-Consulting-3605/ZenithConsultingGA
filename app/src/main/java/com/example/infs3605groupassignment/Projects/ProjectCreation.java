@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.example.infs3605groupassignment.DbHelper;
 import com.example.infs3605groupassignment.MainActivity;
 import com.example.infs3605groupassignment.R;
-import com.example.infs3605groupassignment.SignUp;
 
 public class ProjectCreation extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     DbHelper db;

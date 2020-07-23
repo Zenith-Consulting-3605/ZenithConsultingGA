@@ -1,14 +1,14 @@
-package com.example.infs3605groupassignment.Profile;
+package com.example.infs3605groupassignment.Profiles;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infs3605groupassignment.Objects.Experience;
 import com.example.infs3605groupassignment.R;
 
 import java.util.List;
@@ -31,7 +31,6 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
 
     public class ExperienceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView title, company, startDate;
-        private Button edit;
         private ImageView image;
         private ExperienceClickListener listener;
 
@@ -45,14 +44,6 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
             company = v.findViewById(R.id.txvCompany);
             startDate = v.findViewById(R.id.txvDate);
             image = v.findViewById(R.id.imvArt);
-            edit = v.findViewById(R.id.btnEditExp);
-
-            edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onButtonClick(getSpecTitle(getAdapterPosition()));
-                }
-            });
         }
 
         @Override
