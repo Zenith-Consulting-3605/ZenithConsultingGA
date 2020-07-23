@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.infs3605groupassignment.Home;
-import com.example.infs3605groupassignment.Objects.Project;
+import com.example.infs3605groupassignment.AddProject;
 import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -53,7 +53,7 @@ public class Profile extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), Home.class));
                         return true;
                     case R.id.project:
-                        startActivity(new Intent(getApplicationContext(), Project.class));
+                        startActivity(new Intent(getApplicationContext(), AddProject.class));
                         return true;
                     case R.id.profile:
                         startActivity(new Intent(getApplicationContext(), Profile.class));

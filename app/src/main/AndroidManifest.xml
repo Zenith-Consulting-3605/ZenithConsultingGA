@@ -17,7 +17,7 @@
             android:name=".Profiles.ExperienceEdit"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".Profiles.ProfileDetail" />
-        <activity android:name=".Objects.Project" />
+        <activity android:name=".AddProject" />
         <activity
             android:name=".Profiles.Profile"
             android:theme="@style/AppTheme.BaseTheme" />
