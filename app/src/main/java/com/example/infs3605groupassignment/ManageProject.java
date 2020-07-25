@@ -7,22 +7,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.infs3605groupassignment.Profiles.Profile;
+import com.example.infs3605groupassignment.Profiles.ProfileDetail;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Home extends AppCompatActivity {
+public class ManageProject extends AppCompatActivity {
+    public static final String CODE_EXTRA = "CODE_EXTRA";
+    private TextView trial;
 
     private ActionBar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_manage_project);
 
         toolbar = getSupportActionBar();
         BottomNavigationView nav = findViewById(R.id.bnvNav);
-        nav.setSelectedItemId(R.id.home);
+        nav.setSelectedItemId(R.id.project);
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -41,6 +45,11 @@ public class Home extends AppCompatActivity {
             }
         });
 
-
+        //WILL BE ERASED
+        Intent intent = getIntent();
+        String title = intent.getStringExtra(ProfileDetail.CODE_EXTRA);
+        trial = findViewById(R.id.txvTRIAL);
+        trial.setText(title);
+        //WILL BE ERASED
     }
 }

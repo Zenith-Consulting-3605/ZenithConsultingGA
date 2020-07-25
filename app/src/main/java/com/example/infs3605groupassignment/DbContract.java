@@ -45,14 +45,24 @@ public final class DbContract {
         public static final String USER_ID = "user_id"; //CHECK THIS IF RETRIEVING USER_IDS AS FOREIGN KEYS POSE PROBLEMS
     }
 
-        public static class ProjectTable implements BaseColumns {
-            public static final String TABLE_NAME = "project";
-            public static final String NAME = "name";
-            public static final String DESCRIPTION = "description";
-            public static final String CATEGORY = "category";
-            public static final String PROGRESS = "progress";
-            public static final String USER_ID = "user_id"; //CHECK THIS IF RETRIEVING USER_IDS AS FOREIGN KEYS POSE PROBLEMS
-        }
+    public static class ProjectTable implements BaseColumns {
+        public static final String TABLE_NAME = "project";
+        public static final String NAME = "name";
+        public static final String DESCRIPTION = "description";
+        public static final String FUNDING = "funding";
+        public static final String CATEGORY = "category";
+        public static final String PROGRESS = "progress";
+        public static final String COUNTRY = "country";
+        public static final String COMPANY = "company";
+        public static final String OWNER = "owner"; //CHECK THIS IF RETRIEVING USER_IDS AS FOREIGN KEYS POSE PROBLEMS
+    }
+
+    public static class CollaboratorTable implements BaseColumns {
+        public static final String TABLE_NAME = "collaborator";
+        public static final String MEMBER = "member";
+        public static final String OWNER = "user_id";
+        public static final String PROJECT_ID = "project_id";
+    }
 
 
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddProject">
+    tools:context=".ManageProject">
 
     <TextView
         android:id="@+id/txvPROJECT"
@@ -39,35 +39,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/imvHome"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnvNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_taskbar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imvProject"
-        app:layout_constraintStart_toStartOf="@+id/cslTaskbar"
-        app:srcCompat="@drawable/tkb_home" />
-
-    <ImageView
-        android:id="@+id/imvProfile"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/cslTaskbar"
-        app:layout_constraintStart_toEndOf="@+id/imvProject"
-        app:srcCompat="@drawable/tkb_profile" />
-
-    <ImageView
-        android:id="@+id/imvProject"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cslTaskbar"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cslTaskbar"
-        app:srcCompat="@drawable/tkb_project"
-        />
+        app:menu="@menu/nav_menu"
+        app:backgroundTint="@color/light_gray"
+        app:itemRippleColor="@color/dark_magenta"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

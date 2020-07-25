@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.infs3605groupassignment.Home;
-import com.example.infs3605groupassignment.AddProject;
+import com.example.infs3605groupassignment.ManageProject;
 import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -53,7 +53,7 @@ public class Profile extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), Home.class));
                         return true;
                     case R.id.project:
-                        startActivity(new Intent(getApplicationContext(), AddProject.class));
+                        startActivity(new Intent(getApplicationContext(), ManageProject.class));
                         return true;
                     case R.id.profile:
                         startActivity(new Intent(getApplicationContext(), Profile.class));
@@ -115,7 +115,7 @@ public class Profile extends AppCompatActivity {
         qualification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new SkillFragment(); //NEED TO CREATE CORRECT FRAGMENT
+                Fragment fragment = new ProjectFragment(); //NEED TO CREATE CORRECT FRAGMENT
                 getSupportFragmentManager().beginTransaction().replace(R.id.scvFragment, fragment).commit();
                 dividerExperience.setBackgroundResource(R.color.white);
                 dividerSkill.setBackgroundResource(R.color.white);
