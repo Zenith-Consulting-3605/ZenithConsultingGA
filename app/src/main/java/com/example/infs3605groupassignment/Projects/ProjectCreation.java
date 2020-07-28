@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.infs3605groupassignment.DbHelper;
+import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.MainActivity;
 import com.example.infs3605groupassignment.R;
 

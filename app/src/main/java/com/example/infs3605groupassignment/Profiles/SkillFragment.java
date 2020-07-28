@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.infs3605groupassignment.DbHelper;
+import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Objects.Skill;
 import com.example.infs3605groupassignment.R;
 import com.google.android.flexbox.FlexDirection;

@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.infs3605groupassignment.DbHelper;
+import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Objects.Experience;
 import com.example.infs3605groupassignment.R;
 

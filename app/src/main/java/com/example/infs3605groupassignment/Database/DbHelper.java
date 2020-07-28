@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment;
+package com.example.infs3605groupassignment.Database;
 
 import android.content.ContentValues;
 import android.content.Context;

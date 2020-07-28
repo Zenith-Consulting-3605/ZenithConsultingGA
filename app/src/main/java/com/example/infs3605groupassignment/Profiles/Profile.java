@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.infs3605groupassignment.Home;
-import com.example.infs3605groupassignment.ManageProject;
+import com.example.infs3605groupassignment.Projects.ManageProject;
 import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

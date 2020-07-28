@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Profiles.Profile;
 
 public class MainActivity extends AppCompatActivity {

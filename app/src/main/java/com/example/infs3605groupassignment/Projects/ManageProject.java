@@ -1,4 +1,4 @@
-package com.example.infs3605groupassignment;
+package com.example.infs3605groupassignment.Projects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.infs3605groupassignment.Home;
 import com.example.infs3605groupassignment.Profiles.Profile;
 import com.example.infs3605groupassignment.Profiles.ProfileDetail;
+import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ManageProject extends AppCompatActivity {
@@ -45,11 +47,5 @@ public class ManageProject extends AppCompatActivity {
             }
         });
 
-        //WILL BE ERASED
-        Intent intent = getIntent();
-        String title = intent.getStringExtra(ProfileDetail.CODE_EXTRA);
-        trial = findViewById(R.id.txvTRIAL);
-        trial.setText(title);
-        //WILL BE ERASED
     }
 }

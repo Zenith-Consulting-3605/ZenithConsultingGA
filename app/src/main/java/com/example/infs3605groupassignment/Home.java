@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.infs3605groupassignment.Profiles.Profile;
+import com.example.infs3605groupassignment.Projects.ManageProject;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity {
