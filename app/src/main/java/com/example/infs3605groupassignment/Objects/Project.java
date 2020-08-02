@@ -8,9 +8,14 @@ public class Project {
     private String progress;
     private String country;
     private String company;
+    private int ID;
 
     public Project() {
 
+    }
+
+    public Project(int ID) {
+        this.ID = ID;
     }
 
     public Project(String name, String company, String category) {
@@ -23,6 +28,15 @@ public class Project {
         this.name = name;
         this.company = company;
         this.category = category;
+        this.progress = progress;
+    }
+
+    public Project(String name, String funding, String company, String country, String description, String progress) {
+        this.name = name;
+        this.funding = funding;
+        this.company = company;
+        this.country = country;
+        this.description = description;
         this.progress = progress;
     }
 
@@ -64,6 +78,8 @@ public class Project {
         return company;
     }
 
+    public int getID() { return ID; }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -91,5 +107,7 @@ public class Project {
     public void setOwner(String company) {
         this.company = company;
     }
+
+    public void setID(int ID) { this.ID = ID; }
 }
 

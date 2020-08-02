@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.infs3605groupassignment.Objects.Experience;
 import com.example.infs3605groupassignment.Objects.Project;
 import com.example.infs3605groupassignment.Objects.Skill;
+import com.example.infs3605groupassignment.Objects.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private List<Experience> experienceList = new ArrayList<>();
     private List<Skill> skillList = new ArrayList<>();
     private List<Project> projectList = new ArrayList<>();
+    private List<User> userList = new ArrayList<>();
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null,1);
@@ -51,7 +53,13 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + DbContract.ExperienceTable.TABLE_NAME + "( " + DbContract.ExperienceTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ExperienceTable.TITLE + " TEXT, " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + " TEXT, " + DbContract.ExperienceTable.COMPANY + " TEXT, " + DbContract.ExperienceTable.LOCATION + " TEXT, " + DbContract.ExperienceTable.START_DATE + " TEXT, " + DbContract.ExperienceTable.END_DATE + " TEXT, " + DbContract.ExperienceTable.DESCRIPTION + " TEXT, " + DbContract.ExperienceTable.USER_ID + " INTEGER )");
         db.execSQL("CREATE TABLE " + DbContract.SkillTable.TABLE_NAME + "( " + DbContract.SkillTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.SkillTable.NAME + " TEXT, " + DbContract.SkillTable.DESCRIPTION + " TEXT, " + DbContract.SkillTable.USER_ID + " INTEGER, " + DbContract.SkillTable.DUMMY + " INTEGER)");
         db.execSQL("CREATE TABLE " + DbContract.ProjectTable.TABLE_NAME + "( " + DbContract.ProjectTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ProjectTable.NAME + " TEXT, " + DbContract.ProjectTable.DESCRIPTION + " TEXT, " + DbContract.ProjectTable.FUNDING + " TEXT, " + DbContract.ProjectTable.CATEGORY + " TEXT, " + DbContract.ProjectTable.PROGRESS + " TEXT, " + DbContract.ProjectTable.COUNTRY + " TEXT, " + DbContract.ProjectTable.COMPANY + " TEXT, " + DbContract.ProjectTable.OWNER + " INTEGER)"); //CREATE TABLE FOR PROJECTS
-//        db.execSQL("CREATE TABLE " + DbContract.CollaboratorTable.TABLE_NAME + "( " + DbContract.CollaboratorTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.CollaboratorTable.N); //CREATE TABLE FOR COLLABORATORS
+        db.execSQL("CREATE TABLE " + DbContract.CollaboratorTable.TABLE_NAME + "( " + DbContract.CollaboratorTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.CollaboratorTable.MEMBER + " INTEGER, " + DbContract.CollaboratorTable.OWNER + " INTEGER, " + DbContract.CollaboratorTable.PROJECT_ID + " INTEGER, " + DbContract.CollaboratorTable.STATUS + " TEXT)"); //CREATE TABLE FOR COLLABORATORS
+
+        db.execSQL("INSERT INTO " + DbContract.UsersTable.TABLE_NAME + "( " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + ", " + DbContract.UsersTable.PASSWORD + ") VALUES ('James', 'Cook', 'james.cook@gmail.com', 'jamescook')");
+        db.execSQL("INSERT INTO " + DbContract.UsersTable.TABLE_NAME + "( " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + ", " + DbContract.UsersTable.PASSWORD + ") VALUES ('Sam', 'Smith', 'sammyboy@gmail.com', 'samsmith')");
+        db.execSQL("INSERT INTO " + DbContract.UsersTable.TABLE_NAME + "( " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + ", " + DbContract.UsersTable.PASSWORD + ") VALUES ('Shiv', 'Kumar', 'shivkumar@hotmail.com', 'shivkumar')");
+        db.execSQL("INSERT INTO " + DbContract.UsersTable.TABLE_NAME + "( " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + ", " + DbContract.UsersTable.PASSWORD + ") VALUES ('Vidal', 'Coe', 'coe.vidal@outlook.com', 'vidalcoe')");
+        db.execSQL("INSERT INTO " + DbContract.UsersTable.TABLE_NAME + "( " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + ", " + DbContract.UsersTable.PASSWORD + ") VALUES ('Jesus', 'Christ', 'jesus@gmail.com', 'jesuschrist')");
 
         db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " ( " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('Web Designer, Frontend Developer', 'Full-Time', 'Champion', 'Sydney, Australia', '2009-12-12', '2010-09-11', 'Worked at Champion like an absolute Champ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 1)");
         db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " ( " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('Frontend Developer', 'Full-Time', 'BigBoi Co.', 'Sydney, Australia', '2005-12-14', '2006-11-20', 'Was a BigLad', 1)");
@@ -73,7 +81,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Designing the UI/UX of Mudskipper.IO', 'Mudskipper.IO is an up and coming company which is aiming to create a platform which will reduce fragmentation in the creative desing industry', 'UX/UI Design', 'Requires Sponsorship', 'A', 'India', 'Mudskipper.IO', 1)");
         db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Flex Tape', 'Flex Tape is the newest fad to hit the markets! It can seal up any cracks and problems', 'Product Design', 'Requires Sponsorship', 'C', 'New Zealand', 'Flex Seal & Tape', 2)");
         db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Development for InLinked', 'As a completely seperate app to LinkedIn, InLinked attempts to link individuals within themselves and find their true calling!', 'Front-end Development', 'Requires Sponsorship', 'A', 'Japan', 'InLinked', 2)");
-        db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Mobile Application for Valorant', 'When analysing the market for mobile games, there is a need for FPS on mobile experiences. This is the project for converting Valorant to a mobile application which can be monetised', 'Mobile & Web Developent', 'Not-for-profit', 'A', 'South Korea', 'Riot Games', 2)");
+        db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Mobile Application for Valorant', 'When analysing the market for mobile games, there is a need for FPS on mobile experiences. This is the project for converting Valorant to a mobile application which can be monetised', 'Mobile & Web Development', 'Not-for-profit', 'A', 'South Korea', 'Riot Games', 2)");
         db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Avatar: The Last Airbender(S)', 'Continuing from the original Avatar: The Last Airbender. Avatar: The Last Airbender(S) is the sequel which is a satircal work which will satsify all weaboos', 'Illustration & Animation', 'Requires Sponsorship', 'C', 'Canada', 'Avatary Boys', 1)");
         db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Virgil Abloh: Fall Season 3', 'Join Virgil Abloh in creating the hottest styles for the next season. Compensation will be sufficient to last you a lifetime', 'Fashion & Textile Design', 'Requires Sponsorship', 'B', 'USA', 'Off-White', 3)");
         db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Falling Clouds', 'Instead of Falling Water, join Frank Lloyd Wright in designing and building Falling Clouds. Falling Clouds is his next big project for the Australian Government and will define the next generation of architects', 'Architecture', 'Not-for-profit', 'A', 'USA', 'Masterton Artchitects', 4)");
@@ -134,35 +142,48 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
+//        try {
+//
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            cursor.close();
+//        }
 
-
-
-    public List<Experience> getExperiences() {
+    //FIXED//
+    public List<Experience> getExperiences(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + " FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable.USER_ID + " = " + 1 + " ORDER BY " + DbContract.ExperienceTable.START_DATE + " DESC", null); //NEED TO SWITCH USER_ID WHEN USER PROFILES ARE CORRECTLY SET UP
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + " FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable.USER_ID + " = '" + userID + "' ORDER BY " + DbContract.ExperienceTable.START_DATE + " DESC", null);
+            int titleCol = cursor.getColumnIndex(DbContract.ExperienceTable.TITLE);
+            int companyCol = cursor.getColumnIndex(DbContract.ExperienceTable.COMPANY);
+            int startCol = cursor.getColumnIndex(DbContract.ExperienceTable.START_DATE);
+            int endCol = cursor.getColumnIndex(DbContract.ExperienceTable.END_DATE);
 
-        int titleCol = cursor.getColumnIndex(DbContract.ExperienceTable.TITLE);
-        int companyCol = cursor.getColumnIndex(DbContract.ExperienceTable.COMPANY);
-        int startCol = cursor.getColumnIndex(DbContract.ExperienceTable.START_DATE);
-        int endCol = cursor.getColumnIndex(DbContract.ExperienceTable.END_DATE);
+            while (cursor.moveToNext()) {
+                String title = cursor.getString(titleCol);
+                String company = cursor.getString(companyCol);
+                String start = cursor.getString(startCol);
+                String end = cursor.getString(endCol);
+                Experience retrievedExp = new Experience(title, company, start, end);
+                experienceList.add(retrievedExp);
+            }
 
-        while (cursor.moveToNext()) {
-            String title = cursor.getString(titleCol);
-            String company = cursor.getString(companyCol);
-            String start = cursor.getString(startCol);
-            String end = cursor.getString(endCol);
-            Experience retrievedExp = new Experience(title, company, start, end);
-            experienceList.add(retrievedExp);
+            return experienceList;
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
         }
-
         return experienceList;
     }
-
-    public List<Experience> getDetailExperiences() {
+    //FIXED//
+    public List<Experience> getDetailExperiences(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable.USER_ID + " = " + 1 + " ORDER BY " + DbContract.ExperienceTable.START_DATE + " DESC", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable.USER_ID + " = '" + userID + "' ORDER BY " + DbContract.ExperienceTable.START_DATE + " DESC", null);
 
         int titleCol = cursor.getColumnIndex(DbContract.ExperienceTable.TITLE);
         int empTypeCol = cursor.getColumnIndex(DbContract.ExperienceTable.EMPLOYMENT_TYPE);
@@ -186,37 +207,45 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return experienceList;
     }
-
-    public Experience getExperience(String identifier) {
+    //FIXED//
+    public Experience getExperience(String identifier, int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable.USER_ID + " = " + 1 + " AND " + DbContract.ExperienceTable.TITLE + " = '" + identifier + "'", null);
-
-        int titleCol = cursor.getColumnIndex(DbContract.ExperienceTable.TITLE);
-        int empTypeCol = cursor.getColumnIndex(DbContract.ExperienceTable.EMPLOYMENT_TYPE);
-        int companyCol = cursor.getColumnIndex(DbContract.ExperienceTable.COMPANY);
-        int locationCol = cursor.getColumnIndex(DbContract.ExperienceTable.LOCATION);
-        int startCol = cursor.getColumnIndex(DbContract.ExperienceTable.START_DATE);
-        int endCol = cursor.getColumnIndex(DbContract.ExperienceTable.END_DATE);
-        int descriptionCol = cursor.getColumnIndex(DbContract.ExperienceTable.DESCRIPTION);
-        String title, empType, company, location, start, end, description;
         Experience retrievedExp = null;
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT * FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable.USER_ID + " = '" + userID + "' AND " + DbContract.ExperienceTable.TITLE + " = '" + identifier + "'", null);
 
-        while (cursor.moveToNext()) {
-            title = cursor.getString(titleCol);
-            empType = cursor.getString(empTypeCol);
-            company = cursor.getString(companyCol);
-            location = cursor.getString(locationCol);
-            start = cursor.getString(startCol);
-            end = cursor.getString(endCol);
-            description = cursor.getString(descriptionCol);
-            retrievedExp = new Experience(title, empType, company, location, start, end, description);
+            int titleCol = cursor.getColumnIndex(DbContract.ExperienceTable.TITLE);
+            int empTypeCol = cursor.getColumnIndex(DbContract.ExperienceTable.EMPLOYMENT_TYPE);
+            int companyCol = cursor.getColumnIndex(DbContract.ExperienceTable.COMPANY);
+            int locationCol = cursor.getColumnIndex(DbContract.ExperienceTable.LOCATION);
+            int startCol = cursor.getColumnIndex(DbContract.ExperienceTable.START_DATE);
+            int endCol = cursor.getColumnIndex(DbContract.ExperienceTable.END_DATE);
+            int descriptionCol = cursor.getColumnIndex(DbContract.ExperienceTable.DESCRIPTION);
+            String title, empType, company, location, start, end, description;
+
+
+            while (cursor.moveToNext()) {
+                title = cursor.getString(titleCol);
+                empType = cursor.getString(empTypeCol);
+                company = cursor.getString(companyCol);
+                location = cursor.getString(locationCol);
+                start = cursor.getString(startCol);
+                end = cursor.getString(endCol);
+                description = cursor.getString(descriptionCol);
+                retrievedExp = new Experience(title, empType, company, location, start, end, description);
+            }
+
+            return retrievedExp;
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
         }
-
         return retrievedExp;
-
     }
-
+    //MAY NEED FIXING//
     public void setExperience(Experience editExp, String oldTitle) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -230,8 +259,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("UPDATE " + DbContract.ExperienceTable.TABLE_NAME + " SET " + DbContract.ExperienceTable.TITLE + " = '" + title + "', " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + " = '" + empType + "', " + DbContract.ExperienceTable.COMPANY + " = '" + company + "', " + DbContract.ExperienceTable.LOCATION + " = '" + location + "', " + DbContract.ExperienceTable.DESCRIPTION + " = '" + description + "', " + DbContract.ExperienceTable.START_DATE + " = '" + startDate + "', " + DbContract.ExperienceTable.END_DATE + " = '" + endDate + "' WHERE " + DbContract.ExperienceTable.TITLE + " = '" + oldTitle + "'");
     }
-
-    public void addExperience(Experience newExperience) {
+    //FIXED//
+    public void addExperience(Experience newExperience, int userID) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String title = newExperience.getTitle();
@@ -242,52 +271,192 @@ public class DbHelper extends SQLiteOpenHelper {
         String startDate = newExperience.getStartDate();
         String endDate = newExperience.getEndDate();
 
-        db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " (" + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('" + title + "', '" + empType + "', '" + company + "', '" + location + "', '" + startDate + "', '" + endDate + "', '" + description + "', " + 1 + ")"); // NEED TO SWITCH TO WORK WITH INDIVIDUAL PROFILES
+        db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " (" + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('" + title + "', '" + empType + "', '" + company + "', '" + location + "', '" + startDate + "', '" + endDate + "', '" + description + "', " + userID + ")"); // NEED TO SWITCH TO WORK WITH INDIVIDUAL PROFILES
     }
-
-    public List<Skill> getSkills() {
+    //FIXED//
+    public List<Skill> getSkills(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
 
-        Cursor cursor = db.rawQuery("SELECT " + DbContract.SkillTable.NAME + " FROM " + DbContract.SkillTable.TABLE_NAME + " WHERE " + DbContract.SkillTable.USER_ID + " = " + 1 + " ORDER BY " + DbContract.SkillTable.DUMMY + ", " + DbContract.SkillTable.NAME, null); //NEED TO SWITCH USER_ID WHEN USER PROFILES ARE CORRECTLY SET UP
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.SkillTable.NAME + " FROM " + DbContract.SkillTable.TABLE_NAME + " WHERE " + DbContract.SkillTable.USER_ID + " = '" + userID + "' ORDER BY " + DbContract.SkillTable.DUMMY + ", " + DbContract.SkillTable.NAME, null); //NEED TO SWITCH USER_ID WHEN USER PROFILES ARE CORRECTLY SET UP
 
-        while (cursor.moveToNext()) {
-            Skill retrievedSkill = new Skill(cursor.getString(cursor.getColumnIndex(DbContract.SkillTable.NAME)));
-            skillList.add(retrievedSkill);
+            while (cursor.moveToNext()) {
+                Skill retrievedSkill = new Skill(cursor.getString(cursor.getColumnIndex(DbContract.SkillTable.NAME)));
+                skillList.add(retrievedSkill);
+            }
+            return skillList;
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
         }
 
         return skillList;
     }
-
-    public void addSkill(Skill newSkill) {
+    //FIXED//
+    public void addSkill(Skill newSkill, int userID) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String addName = newSkill.getName();
         String addDescription = newSkill.getDescription();
 
-        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('" + addName + "', '" + addDescription + "', 1, 0)");
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('" + addName + "', '" + addDescription + "', + '" + userID + "', 0)");
     }
-
-    public List<Project> getIndividualProjects() {
+    //FIXED//
+    public List<Project> getIndividualProjects(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.PROGRESS + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable.OWNER + " = '" + userID + "' ORDER BY " + DbContract.ProjectTable.PROGRESS, null);
 
-        Cursor cursor = db.rawQuery("SELECT " + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.PROGRESS + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable.OWNER + " = " + 1 + " ORDER BY " + DbContract.ProjectTable.PROGRESS, null);
+            int nameCol = cursor.getColumnIndex(DbContract.ProjectTable.NAME);
+            int companyCol = cursor.getColumnIndex(DbContract.ProjectTable.COMPANY);
+            int categoryCol = cursor.getColumnIndex(DbContract.ProjectTable.CATEGORY);
+            int progressCol = cursor.getColumnIndex(DbContract.ProjectTable.PROGRESS);
 
-        int nameCol = cursor.getColumnIndex(DbContract.ProjectTable.NAME);
-        int companyCol = cursor.getColumnIndex(DbContract.ProjectTable.COMPANY);
-        int categoryCol = cursor.getColumnIndex(DbContract.ProjectTable.CATEGORY);
-        int progressCol = cursor.getColumnIndex(DbContract.ProjectTable.PROGRESS);
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(nameCol);
+                String company = cursor.getString(companyCol);
+                String category = cursor.getString(categoryCol);
+                String progress = cursor.getString(progressCol);
+                Project retrievedProj = new Project(name, company, category, progress);
+                Log.d(TAG, "getIndividualProjects: " + name);
+                projectList.add(retrievedProj);
+            }
 
-        while (cursor.moveToNext()) {
-            String name = cursor.getString(nameCol);
-            String company = cursor.getString(companyCol);
-            String category = cursor.getString(categoryCol);
-            String progress = cursor.getString(progressCol);
-            Project retrievedProj = new Project(name, company, category, progress);
-            Log.d(TAG, "getIndividualProjects: " + name);
-            projectList.add(retrievedProj);
+            return projectList;
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
         }
 
         return projectList;
+    }
+    //FIXED//
+    public List<Project> getProjectManageList(int userID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.PROGRESS + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable.OWNER + " = '" + userID + "' ORDER BY " + DbContract.ProjectTable.PROGRESS, null);
+
+            int nameCol = cursor.getColumnIndex(DbContract.ProjectTable.NAME);
+            int fundingCol = cursor.getColumnIndex(DbContract.ProjectTable.FUNDING);
+            int companyCol = cursor.getColumnIndex(DbContract.ProjectTable.COMPANY);
+            int countryCol = cursor.getColumnIndex(DbContract.ProjectTable.COUNTRY);
+            int descriptionCol = cursor.getColumnIndex(DbContract.ProjectTable.DESCRIPTION);
+            int progressCol = cursor.getColumnIndex(DbContract.ProjectTable.PROGRESS);
+
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(nameCol);
+                String funding = cursor.getString(fundingCol);
+                String company = cursor.getString(companyCol);
+                String country = cursor.getString(countryCol);
+                String description = cursor.getString(descriptionCol);
+                String progress = cursor.getString(progressCol);
+                Project retreivedProj = new Project(name, funding, company, country, description, progress);
+                projectList.add(retreivedProj);
+            }
+
+            return projectList;
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+
+        return projectList;
+    }
+    //FIXED//
+    public void addProject(Project newProject, int userID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String name = newProject.getName();
+        String description = newProject.getDescription();
+        String category = newProject.getCategory();
+        String funding = newProject.getFunding();
+        String progress = newProject.getProgress();
+        String country = newProject.getCountry();
+        String company = newProject.getCompany();
+
+        db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('" + name + "', '" + description + "', '" + category + "', '" + funding + "', '" + progress + "', '" + country + "', '" + company + "', '" + userID + "')"); // NEED TO SWITCH TO WORK WITH INDIVIDUAL PROFILES
+    }
+    //FIXED//
+    public int getProjectID(String projName, int userID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int projID = 0;
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable._ID + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable.NAME + " = '" + projName + "' AND " + DbContract.ProjectTable.OWNER + " = " + userID, null);
+
+            while (cursor.moveToNext()) {
+                projID = cursor.getInt(cursor.getColumnIndex(DbContract.ProjectTable._ID));
+            }
+            return projID;
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+
+        return projID;
+    }
+    //WILL NEED TO PERHAPS FILTER OUT INDIVIDUAL OWNING PROJECT//
+    public List<User> getUserList() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.UsersTable._ID + ", " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + " FROM " + DbContract.UsersTable.TABLE_NAME, null);
+
+            int idCol = cursor.getColumnIndex(DbContract.UsersTable._ID);
+            int fNameCol = cursor.getColumnIndex(DbContract.UsersTable.FIRST_NAME);
+            int lNameCol = cursor.getColumnIndex(DbContract.UsersTable.LAST_NAME);
+            int emailCol = cursor.getColumnIndex(DbContract.UsersTable.EMAIL);
+
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(idCol);
+                String fName = cursor.getString(fNameCol);
+                String lName = cursor.getString(lNameCol);
+                String email = cursor.getString(emailCol);
+                User retreivedUser = new User(id, fName, lName,email);
+                userList.add(retreivedUser);
+            }
+
+            return userList;
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+
+        return userList;
+    }
+    //FIXED//
+    public int getUserID(String email, String password) {
+        SQLiteDatabase db= this.getReadableDatabase();
+        int userID = 0;
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.UsersTable._ID + " FROM " + DbContract.UsersTable.TABLE_NAME + " WHERE " + DbContract.UsersTable.EMAIL + " = '" + email + "' AND " + DbContract.UsersTable.PASSWORD + " = '" + password + "'", null);
+
+            while (cursor.moveToNext()) {
+                userID = cursor.getInt(cursor.getColumnIndex(DbContract.UsersTable._ID));
+            }
+            return userID;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+
+        return userID;
+    }
+    //FIXED//
+    public void sendInvitation(int member, int owner, int projectID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("INSERT INTO " + DbContract.CollaboratorTable.TABLE_NAME + " (" + DbContract.CollaboratorTable.MEMBER + ", " + DbContract.CollaboratorTable.OWNER + ", " + DbContract.CollaboratorTable.PROJECT_ID + ", " + DbContract.CollaboratorTable.STATUS + ") VALUES (" + member + ", " + owner + ", " + projectID + ", '" + false + "')");
     }
 
 }

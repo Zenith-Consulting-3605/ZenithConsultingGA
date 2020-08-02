@@ -1,49 +1,46 @@
-package com.example.infs3605groupassignment.Profiles;
+package com.example.infs3605groupassignment.Projects;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
-import com.example.infs3605groupassignment.Objects.Skill;
+import com.example.infs3605groupassignment.Objects.Project;
+import com.example.infs3605groupassignment.Profiles.Profile;
 import com.example.infs3605groupassignment.R;
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexWrap;
-import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.android.flexbox.JustifyContent;
 
 import java.util.List;
 
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SkillFragment#newInstance} factory method to
+ * Use the {@link ProjectManageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SkillFragment extends Fragment {
+public class ProjectManageFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private String TAG = "SKILL_FRAGMENT";
+    private String TAG = "PROJECT_MANAGE_FRAGMENT";
 
-    public SkillFragment() {
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public ProjectManageFragment() {
         // Required empty public constructor
     }
 
@@ -53,11 +50,11 @@ public class SkillFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SkillFragment.
+     * @return A new instance of fragment ProjectManageFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SkillFragment newInstance(String param1, String param2) {
-        SkillFragment fragment = new SkillFragment();
+    public static ProjectManageFragment newInstance(String param1, String param2) {
+        ProjectManageFragment fragment = new ProjectManageFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,37 +75,30 @@ public class SkillFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_skill, container, false);
+        View v = inflater.inflate(R.layout.fragment_project_manage, container, false);
 
-        final int userID = getArguments().getInt("userID");
+        final int userID = getArguments().getInt("userID", 0);
 
-        recyclerView = v.findViewById(R.id.rvList);
-        recyclerView.setHasFixedSize(true);
+        recyclerView = v.findViewById(R.id.rvListProjectsManage);
+        recyclerView.setHasFixedSize(false);
         recyclerView.setNestedScrollingEnabled(false);
-
-        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(getContext());
-        layoutManager.setFlexDirection(FlexDirection.ROW);
-        layoutManager.setFlexWrap(FlexWrap.WRAP);
-        layoutManager.setJustifyContent(JustifyContent.CENTER);
+        layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         final DbHelper dbHelper = new DbHelper(getContext());
 
-        List<Skill> skillList = dbHelper.getSkills(userID);
+        List<Project> projectList = dbHelper.getProjectManageList(userID);
 
-        adapter = new SkillAdapter(this, skillList, new SkillAdapter.SkillAddListener() {
+        adapter = new ProjectManageAdapter(this, projectList, new ProjectManageAdapter.ProjectManageClickListener() {
             @Override
-            public void onClick(String dummy) {
-                if(dummy.equals("Add Skill+")) {
-                    Intent intent = new Intent(getContext(), SkillAdd.class);
-                    intent.putExtra("userID", userID);
-                    startActivity(intent);
-                } else {
-                    Log.d(TAG, "The dummy value returned as: " + dummy);
-                }
+            public void onClick(String title) {
+                Intent intent = new Intent(getContext(), Profile.class); //REDIRECTS TO THE WRONG PLACE NEED TO FIX
+                intent.putExtra("userID", userID);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         return v;
     }

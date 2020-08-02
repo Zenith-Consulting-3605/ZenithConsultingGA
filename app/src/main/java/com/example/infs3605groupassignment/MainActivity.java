@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Profiles.Profile;
 
 public class MainActivity extends AppCompatActivity {
+    private String TAG = "MAIN_ACTIVITY";
     DbHelper db;
     private Button signIn;
     private Button signUp;
@@ -39,10 +41,17 @@ public class MainActivity extends AppCompatActivity {
                 String ps = password.getText().toString();
                 Boolean checkLogin = db.loginCheck(em,ps);
 
+                Log.d(TAG, em);
+                Log.d(TAG, ps);
+
                 if(checkLogin==true){
                     Toast.makeText(getApplicationContext(),"Successful Login", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, Home.class));
-                }else{
+                    int userID = db.getUserID(em, ps);
+                    Log.d(TAG, "userID is " + userID);
+                    Intent intent = new Intent(MainActivity.this, Home.class);
+                    intent.putExtra("userID", userID);
+                    startActivity(intent);
+                } else{
                     Toast.makeText(getApplicationContext(),"Invalid Email or Password", Toast.LENGTH_SHORT).show();
                 }
 

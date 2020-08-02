@@ -40,6 +40,7 @@ public class ExperienceEdit extends AppCompatActivity {
 
         Intent intent = getIntent();
         String identifier = intent.getStringExtra(ExperienceEdit.CODE_EXTRA);
+        final int userID = intent.getIntExtra("userID", 0);
 
         title = findViewById(R.id.txvTitle);
         company = findViewById(R.id.txvCompany);
@@ -64,7 +65,7 @@ public class ExperienceEdit extends AppCompatActivity {
 
         final DbHelper dbHelper = new DbHelper(getApplicationContext());
 
-        Experience experience = dbHelper.getExperience(identifier);
+        Experience experience = dbHelper.getExperience(identifier, userID);
         title.setText(experience.getTitle());
         savedTitle = experience.getTitle();
         company.setText(experience.getCompany());
@@ -119,7 +120,9 @@ public class ExperienceEdit extends AppCompatActivity {
                 dbHelper.setExperience(editExp, savedTitle);
 
                 finish();
-                startActivity(new Intent(ExperienceEdit.this, ProfileDetail.class));
+                Intent intent = new Intent(ExperienceEdit.this, ProfileDetail.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });
@@ -129,7 +132,9 @@ public class ExperienceEdit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(ExperienceEdit.this, ProfileDetail.class));
+                Intent intent = new Intent(ExperienceEdit.this, ProfileDetail.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });

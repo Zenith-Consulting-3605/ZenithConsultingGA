@@ -75,25 +75,29 @@ public class ProjectFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_project, container, false);
-         recyclerView = v.findViewById(R.id.rvListProjects);
-         recyclerView.setHasFixedSize(true);
-         recyclerView.setNestedScrollingEnabled(false);
-         layoutManager = new LinearLayoutManager(getContext());
-         recyclerView.setLayoutManager(layoutManager);
 
-         final DbHelper dbHelper = new DbHelper(getContext());
+        final int userID = getArguments().getInt("userID");
 
-         List<Project> projectList = dbHelper.getIndividualProjects();
+        recyclerView = v.findViewById(R.id.rvListProjects);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
 
-         adapter = new ProjectAdapter(this, projectList, new ProjectAdapter.ProjectClickListener() {
+        final DbHelper dbHelper = new DbHelper(getContext());
+
+        List<Project> projectList = dbHelper.getIndividualProjects(userID);
+
+        adapter = new ProjectAdapter(this, projectList, new ProjectAdapter.ProjectClickListener() {
              @Override
              public void onClick(String title) {
                  Intent intent = new Intent(getContext(), Profile.class); //WILL NEED TO FIX THIS
+                 intent.putExtra("userID", userID);
                  startActivity(intent);
              }
          });
-         recyclerView.setAdapter(adapter);
-         adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         return v;
 

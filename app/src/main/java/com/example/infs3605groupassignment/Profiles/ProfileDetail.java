@@ -25,12 +25,14 @@ public class ProfileDetail extends AppCompatActivity {
 
         Intent intent = getIntent();
         String title = intent.getStringExtra(ProfileDetail.CODE_EXTRA);
+        final int userID = intent.getIntExtra("userID", 0);
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         Fragment fragment = new ExperienceDetailFragment();
         Bundle arguments = new Bundle();
         arguments.putString("title", title);
+        arguments.putInt("userID", userID);
         fragment.setArguments(arguments);
         getSupportFragmentManager().beginTransaction().replace(R.id.scvDC1, fragment).commit();
 
@@ -38,7 +40,9 @@ public class ProfileDetail extends AppCompatActivity {
         fabR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Profile.class));
+                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
             }
         });
     }

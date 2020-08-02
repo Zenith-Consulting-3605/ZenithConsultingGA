@@ -174,7 +174,7 @@
         app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/scvPage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/white_add" />
+        app:srcCompat="@drawable/white_add"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

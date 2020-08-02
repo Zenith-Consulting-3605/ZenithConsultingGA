@@ -24,6 +24,9 @@ public class SkillAdd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skill_add);
 
+        Intent intent = getIntent();
+        final int userID = intent.getIntExtra("userID", 0);
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -45,10 +48,11 @@ public class SkillAdd extends AppCompatActivity {
                 String assemName = name.getText().toString();
                 String assemDescription = description.getText().toString();
                 Skill tbdSkill = new Skill(assemName, assemDescription);
-                dbHelper.addSkill(tbdSkill);
-
+                dbHelper.addSkill(tbdSkill, userID);
                 finish();
-                startActivity(new Intent(SkillAdd.this, Profile.class));
+                Intent intent = new Intent(SkillAdd.this, Profile.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });
@@ -57,7 +61,9 @@ public class SkillAdd extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(SkillAdd.this, Profile.class));
+                Intent intent = new Intent(SkillAdd.this, Profile.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });

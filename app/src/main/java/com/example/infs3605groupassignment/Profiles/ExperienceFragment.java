@@ -37,6 +37,8 @@ public class ExperienceFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private int savedUserID;
+
     public ExperienceFragment() {
         // Required empty public constructor
     }
@@ -82,13 +84,18 @@ public class ExperienceFragment extends Fragment {
 
         final DbHelper dbHelper = new DbHelper(getContext());
 
-        List<Experience> experienceList = dbHelper.getExperiences();
+        final int userID = getArguments().getInt("userID");
+
+        savedUserID = userID;
+
+        List<Experience> experienceList = dbHelper.getExperiences(savedUserID);
 
         adapter = new ExperienceAdapter(this, experienceList, new ExperienceAdapter.ExperienceClickListener() {
             @Override
             public void onClick(String title) {
                 Intent intent = new Intent(getContext(), ProfileDetail.class);
                 intent.putExtra(ProfileDetail.CODE_EXTRA, title);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             }
 

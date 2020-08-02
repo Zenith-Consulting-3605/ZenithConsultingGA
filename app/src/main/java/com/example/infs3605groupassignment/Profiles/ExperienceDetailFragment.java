@@ -76,6 +76,7 @@ public class ExperienceDetailFragment extends Fragment {
 
         Bundle arguments = getArguments();
         String title = arguments.getString("title");
+        final int userID = getArguments().getInt("userID");
 
         recyclerView = v.findViewById(R.id.rvList);
         recyclerView.setHasFixedSize(false);
@@ -84,7 +85,7 @@ public class ExperienceDetailFragment extends Fragment {
 
         final DbHelper dbHelper = new DbHelper(getContext());
 
-        List<Experience> experienceList = dbHelper.getDetailExperiences();
+        List<Experience> experienceList = dbHelper.getDetailExperiences(userID);
 
         adapter = new ExperienceDetailAdapter(this, experienceList, new ExperienceDetailAdapter.ExperienceEditListener() {
             @Override
@@ -96,6 +97,7 @@ public class ExperienceDetailFragment extends Fragment {
             public void onButtonClick(String title) {
                 Intent intent = new Intent(getContext(), ExperienceEdit.class);
                 intent.putExtra(ExperienceEdit.CODE_EXTRA, title);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             }
         });

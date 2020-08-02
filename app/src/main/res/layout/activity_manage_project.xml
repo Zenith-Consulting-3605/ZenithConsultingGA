@@ -18,15 +18,21 @@
 
             <TextView
                 android:id="@+id/txvMPTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Manage your Projects:" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/bold"
+                android:text="Manage your Projects"
+                android:textSize="30sp" />
 
             <View
                 android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
+                android:layout_width="300dp"
+                android:layout_height="2dp"
+
+                android:layout_marginLeft="20dp"
+                android:background="@color/dark_magenta" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,28 +41,24 @@
 
                 <TextView
                     android:id="@+id/textView24"
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
                     android:text="Create a New Project! / It looks like you're new here!" />
 
                 <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/btnCreateProj"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
                     android:text="Create" />
             </LinearLayout>
 
-            <View
-                android:id="@+id/divider6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -66,16 +68,19 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView26"
+                        android:id="@+id/txvProjectPM"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Projects" />
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Projects"
+                        android:textSize="18sp" />
 
                     <View
-                        android:id="@+id/divider4"
+                        android:id="@+id/dividerProject"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="?android:attr/listDivider" />
+                        android:layout_height="2dp"
+                        android:background="@drawable/selected" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -85,18 +90,19 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView25"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/txvInvitationPM"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Invitations" />
+                        android:gravity="center"
+                        android:text="Invitations"
+                        android:textSize="18sp" />
 
                     <View
-                        android:id="@+id/divider3"
+                        android:id="@+id/dividerInvitation"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_weight="1"
-                        android:background="?android:attr/listDivider" />
+                        android:layout_height="2dp"
+                        android:background="@color/white" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -104,9 +110,9 @@
             <View
                 android:id="@+id/divider5"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="3dp"
                 android:layout_weight="1"
-                android:background="?android:attr/listDivider" />
+                android:background="@drawable/divider" />
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/scvFragment1"

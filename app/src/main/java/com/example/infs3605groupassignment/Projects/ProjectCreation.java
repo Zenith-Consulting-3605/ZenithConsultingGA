@@ -4,75 +4,111 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.MainActivity;
+import com.example.infs3605groupassignment.Objects.Project;
 import com.example.infs3605groupassignment.R;
 
-public class ProjectCreation extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    DbHelper db;
-    EditText projectName,description;
-    Spinner spinner = findViewById(R.id.spinnerCategory);
-    RadioGroup progress;
-    Button create;
+public class ProjectCreation extends AppCompatActivity {
+    private EditText name, description, company, country;
+    private RadioButton ideation, development, complete, selectedProgress;
+    private RadioButton sponsorship, notProfit, selectedFunding;
+    private RadioGroup progress;
+    private RadioGroup funding;
+    private Button create;
+    private Spinner category;
+
+    private String TAG = "PROJECT_CREATION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_creation);
 
+        Intent intent = getIntent();
+        final int userID = intent.getIntExtra("userID", 0);
 
-        db = new DbHelper(this);
+        final DbHelper dbHelper = new DbHelper(getApplicationContext());
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.categories, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        name = findViewById(R.id.edtProjectName);
+        description = findViewById(R.id.edtProjectDescription);
+        company = findViewById(R.id.edtProjectCompany);
+        country = findViewById(R.id.edtProjectCountry);
 
+        ideation = findViewById(R.id.rbtIdeation);
+        development = findViewById(R.id.rbtInDevelopment);
+        complete = findViewById(R.id.rbtComplete);
 
-        projectName = findViewById(R.id.edtProjectName);
-        description = findViewById(R.id.edtProjectName);
-        spinner = findViewById(R.id.spinnerCategory);
-        progress = findViewById(R.id.rgProgress);
-        create = findViewById(R.id.btnCreate);
+        ideation.setChecked(false);
+        development.setChecked(false);
+        complete.setChecked(false);
 
+        ideation.setEnabled(true);
+        development.setEnabled(true);
+        complete.setEnabled(true);
 
-    create.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String n = projectName.getText().toString();
-            String d = description.getText().toString();
+        progress = findViewById(R.id.rgpProgress);
+        funding = findViewById(R.id.rgpFunding);
+        sponsorship = findViewById(R.id.rbtRS);
+        notProfit = findViewById(R.id.rbtNFP);
 
-            //RadioButton checkBtn = findViewById(userType.getCheckedRadioButtonId());
-            //String utv = checkBtn.getText().toString();
-            Boolean insertProjects = db.insertProjects(n,d);
+        create = findViewById(R.id.btnNextCreateProject);
 
-            if (insertProjects = true){
-                Toast.makeText(getApplicationContext(), "Project Creation Successful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(ProjectCreation.this, MainActivity.class));
-            }else{
-                Toast.makeText(getApplicationContext(), "Project Creation Unsuccessful", Toast.LENGTH_SHORT).show();
+        category = findViewById(R.id.sprProjCategory);
+        String[] categoryOptions = new String[] {"Creative Writing & Copywriting", "Graphic Design", "UX/UI Design", "Product Design", "Front-end Development", "Mobile & Web Development", "Illustration & Animation", "Fashion & Textile Design", "Architecture", "Photography & Videography"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categoryOptions);
+        category.setAdapter(adapter);
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String projName = name.getText().toString();
+                String projDescription = description.getText().toString();
+                String projCompany = company.getText().toString();
+                String projCountry = country.getText().toString();
+
+                int checkedProgress = progress.getCheckedRadioButtonId();
+                selectedProgress = findViewById(checkedProgress);
+                String bProgress = selectedProgress.getText().toString();
+                String projProgress;
+
+                if (bProgress.equals("Ideation")) {
+                    projProgress = "A";
+                } else if (bProgress.equals("In Development")) {
+                    projProgress = "B";
+                } else {
+                    projProgress = "C";
                 }
+
+                int checkedFunding = funding.getCheckedRadioButtonId();
+                selectedFunding = findViewById(checkedFunding);
+                String projFunding = selectedFunding.getText().toString();
+
+                String projCategory = category.getSelectedItem().toString();
+
+//                Log.d(TAG, projName + projDescription + projCompany + projCountry + projProgress + projFunding + projCategory);
+                Project newProject = new Project(projName, projDescription, projCategory, projFunding, projProgress, projCountry, projCompany);
+                dbHelper.addProject(newProject, userID);
+
+                Intent intent = new Intent(getApplicationContext(), ProjectInvitation.class);
+                intent.putExtra("projName", projName);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+
             }
         });
-    }
 
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String text = parent.getItemAtPosition(position).toString();
-            Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT);
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
 
     }
 

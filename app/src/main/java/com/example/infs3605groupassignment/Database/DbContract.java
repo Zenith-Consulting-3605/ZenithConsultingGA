@@ -59,8 +59,16 @@ public final class DbContract {
 
     public static class CollaboratorTable implements BaseColumns {
         public static final String TABLE_NAME = "collaborator";
-        public static final String MEMBER = "member";
-        public static final String OWNER = "user_id";
+        public static final String MEMBER = "member_id";
+        public static final String OWNER = "owner_user_id";
+        public static final String PROJECT_ID = "project_id";
+        public static final String STATUS = "status";
+    }
+
+    public static class InviteeTable implements BaseColumns {
+        public static final String TABLE_NAME = "invitee";
+        public static final String OWNER = "inviter";
+        public static final String INVITEE = "invitee";
         public static final String PROJECT_ID = "project_id";
     }
 

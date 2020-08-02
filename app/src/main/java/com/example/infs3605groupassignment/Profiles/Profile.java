@@ -42,6 +42,9 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        Intent intent = getIntent();
+        final int userID = intent.getIntExtra("userID", 0);
+
         toolbar = getSupportActionBar();
         BottomNavigationView nav = findViewById(R.id.bnvNav);
         nav.setSelectedItemId(R.id.profile);
@@ -50,13 +53,19 @@ public class Profile extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), Home.class));
+                        Intent intent = new Intent(getApplicationContext(), Home.class);
+                        intent.putExtra("userID", userID);
+                        startActivity(intent);
                         return true;
                     case R.id.project:
-                        startActivity(new Intent(getApplicationContext(), ManageProject.class));
+                        Intent intent1 = new Intent(getApplicationContext(), ManageProject.class);
+                        intent1.putExtra("userID", userID);
+                        startActivity(intent1);
                         return true;
                     case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(), Profile.class));
+                        Intent intent2 = new Intent(getApplicationContext(), Profile.class);
+                        intent2.putExtra("userID", userID);
+                        startActivity(intent2);
                         return true;
                 }
                 return false;
@@ -66,6 +75,9 @@ public class Profile extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         Fragment fragment = new ExperienceFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("userID", userID);
+        fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.scvFragment, fragment).commit();
 
         experience = findViewById(R.id.txvExperience);
@@ -82,6 +94,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ExperienceAdd.class);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             }
         });
@@ -91,6 +104,9 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new ExperienceFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("userID", userID);
+                fragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.scvFragment, fragment).commit();
                 dividerExperience.setBackgroundResource(R.color.dark_magenta);
                 dividerSkill.setBackgroundResource(R.color.white);
@@ -103,6 +119,9 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new SkillFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("userID", userID);
+                fragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.scvFragment, fragment).commit();
                 dividerExperience.setBackgroundResource(R.color.white);
                 dividerSkill.setBackgroundResource(R.color.dark_magenta);
@@ -115,7 +134,10 @@ public class Profile extends AppCompatActivity {
         qualification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new ProjectFragment(); //NEED TO CREATE CORRECT FRAGMENT
+                Fragment fragment = new ProjectFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("userID", userID);
+                fragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.scvFragment, fragment).commit();
                 dividerExperience.setBackgroundResource(R.color.white);
                 dividerSkill.setBackgroundResource(R.color.white);

@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profiles.ExperienceAdd"></activity>
+        <activity android:name=".Projects.ProjectReview"></activity>
+        <activity android:name=".Projects.ProjectInvitation" />
+        <activity
+            android:name=".Profiles.ExperienceAdd"
+            android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".Profiles.SkillAdd"
             android:theme="@style/AppTheme.CustomTheme" />
@@ -17,8 +21,10 @@
             android:name=".Profiles.ExperienceEdit"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity android:name=".Profiles.ProfileDetail" />
-        <activity android:name=".Projects.ManageProject"
-            android:theme="@style/AppTheme.BaseTheme"/>
+        <activity
+            android:name=".Projects.ManageProject"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".Projects.ProjectCreation" />
         <activity
             android:name=".Profiles.Profile"
             android:theme="@style/AppTheme.BaseTheme" />

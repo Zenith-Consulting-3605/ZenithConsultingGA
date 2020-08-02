@@ -31,6 +31,9 @@ public class ExperienceAdd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_experience_add);
 
+        Intent intent = getIntent();
+        final int userID = intent.getIntExtra("userID", 0);
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -77,10 +80,13 @@ public class ExperienceAdd extends AppCompatActivity {
                 Log.d(TAG, "The Experience is: " + assemTitle);
                 Experience newExp = new Experience(assemTitle, assemEmp, assemCompany, assemLocation, assemStart, assemEnd, assemDescription);
 
-                dbHelper.addExperience(newExp);
+                dbHelper.addExperience(newExp, userID);
 
                 finish();
-                startActivity(new Intent(getApplicationContext(), Profile.class));
+
+                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });
@@ -91,6 +97,9 @@ public class ExperienceAdd extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 startActivity(new Intent(getApplicationContext(), Profile.class));
+                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });
