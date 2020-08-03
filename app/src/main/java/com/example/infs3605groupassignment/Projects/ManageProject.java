@@ -92,7 +92,7 @@ public class ManageProject extends AppCompatActivity {
         invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new ProjectManageFragment(); //NEED TO FIX TO CREATE PROPER FRAGMENT ---------------
+                Fragment fragment = new InvitationFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("userID", userID);
                 fragment.setArguments(bundle);

@@ -9,6 +9,7 @@ public class Project {
     private String country;
     private String company;
     private int ID;
+    private int owner;
 
     public Project() {
 
@@ -16,6 +17,12 @@ public class Project {
 
     public Project(int ID) {
         this.ID = ID;
+    }
+
+    public Project(int ID, int owner, String name) {
+        this.ID = ID;
+        this.owner = owner;
+        this.name = name;
     }
 
     public Project(String name, String company, String category) {
@@ -78,6 +85,14 @@ public class Project {
         return company;
     }
 
+    public int getOwner() {
+        return owner;
+    }
+
+    public void setOwner(int owner) {
+        this.owner = owner;
+    }
+
     public int getID() { return ID; }
 
     public void setName(String name) {
@@ -104,7 +119,7 @@ public class Project {
         this.country = country;
     }
 
-    public void setOwner(String company) {
+    public void setCompany(String company) {
         this.company = company;
     }
 

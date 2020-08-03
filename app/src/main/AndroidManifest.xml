@@ -28,7 +28,7 @@
         <activity
             android:name=".Profiles.Profile"
             android:theme="@style/AppTheme.BaseTheme" />
-        <activity android:name=".SignUp" />
+        <activity android:name=".SignUp" android:theme="@style/AppTheme.BaseTheme"/>
         <activity
             android:name=".Home"
             android:theme="@style/AppTheme.BaseTheme" />

@@ -26,7 +26,7 @@ public class ProjectCreation extends AppCompatActivity {
     private RadioButton sponsorship, notProfit, selectedFunding;
     private RadioGroup progress;
     private RadioGroup funding;
-    private Button create;
+    private Button create, cancel;
     private Spinner category;
 
     private String TAG = "PROJECT_CREATION";
@@ -69,6 +69,15 @@ public class ProjectCreation extends AppCompatActivity {
         String[] categoryOptions = new String[] {"Creative Writing & Copywriting", "Graphic Design", "UX/UI Design", "Product Design", "Front-end Development", "Mobile & Web Development", "Illustration & Animation", "Fashion & Textile Design", "Architecture", "Photography & Videography"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categoryOptions);
         category.setAdapter(adapter);
+
+        cancel = findViewById(R.id.btnCPC);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ManageProject.class);
+                startActivity(intent);
+            }
+        });
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override

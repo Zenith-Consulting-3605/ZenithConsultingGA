@@ -19,7 +19,7 @@ import java.util.Set;
 public class ProjectReview extends AppCompatActivity {
     private String TAG = "PROJECT_REVIEW";
     private int[] invitees;
-    private Button complete;
+    private Button complete, inviteMore;
     private String projectName;
 
     @Override
@@ -41,6 +41,17 @@ public class ProjectReview extends AppCompatActivity {
 
         invitees = removeDuplicates(inviteeArray);
 
+        inviteMore = findViewById(R.id.btnInvMore);
+        inviteMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProjectInvitation.class);
+                intent.putExtra("Invitee_Array", invitees);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
+        });
+
         complete = findViewById(R.id.btnCompleteProject);
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,9 +59,13 @@ public class ProjectReview extends AppCompatActivity {
                 int projID = dbHelper.getProjectID(projectName, userID);
                 Log.d(TAG, "corresponding ID is " + projID);
                 for(int i = 0; i < invitees.length; i++) {
-                    dbHelper.sendInvitation(invitees[i], userID, projID); //CHECK FOR USER IDS PROPERLY
+                    dbHelper.sendInvitation(invitees[i], userID, projID);
 
                     Log.d(TAG, "INFO IS " + invitees[i] + " " + 1);
+
+                    Intent intent = new Intent(getApplicationContext(), ManageProject.class);
+                    intent.putExtra("userID", userID);
+                    startActivity(intent);
                 }
             }
         });

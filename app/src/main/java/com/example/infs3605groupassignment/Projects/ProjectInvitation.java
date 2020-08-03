@@ -45,7 +45,7 @@ public class ProjectInvitation extends AppCompatActivity implements Collaborator
         Bundle extras = getIntent().getExtras();
         final String projName = extras.getString("projName");
         final int userID = intent.getIntExtra("userID", 0);
-        Log.d(TAG, projName);
+//        Log.d(TAG, projName);
         project = findViewById(R.id.txvDisplayProjName);
         project.setText(projName);
 
@@ -61,6 +61,7 @@ public class ProjectInvitation extends AppCompatActivity implements Collaborator
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ProjectCreation.class);
+                intent.putExtra("userID", userID);
                 startActivity(intent);
             }
         });

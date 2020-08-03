@@ -458,5 +458,77 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("INSERT INTO " + DbContract.CollaboratorTable.TABLE_NAME + " (" + DbContract.CollaboratorTable.MEMBER + ", " + DbContract.CollaboratorTable.OWNER + ", " + DbContract.CollaboratorTable.PROJECT_ID + ", " + DbContract.CollaboratorTable.STATUS + ") VALUES (" + member + ", " + owner + ", " + projectID + ", '" + false + "')");
     }
+    //FIXED//
+    public List<Project> getInvitations(int userID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        Cursor cursor1 = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.CollaboratorTable.PROJECT_ID + ", " + DbContract.CollaboratorTable.OWNER + " FROM " + DbContract.CollaboratorTable.TABLE_NAME + " WHERE " + DbContract.CollaboratorTable.STATUS + " = 'false' AND " + DbContract.CollaboratorTable.MEMBER + " = " + userID, null);
+
+            int IDCol = cursor.getColumnIndex(DbContract.CollaboratorTable.PROJECT_ID);
+            int ownerCol = cursor.getColumnIndex(DbContract.CollaboratorTable.OWNER);
+
+            String projName = "";
+
+            while(cursor.moveToNext()) {
+                int projID = cursor.getInt(IDCol);
+                int ownerID = cursor.getInt(ownerCol);
+
+                cursor1 = db.rawQuery("SELECT " + DbContract.ProjectTable.NAME + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable._ID + " = " + projID, null);
+
+                int nameCol = cursor1.getColumnIndex(DbContract.ProjectTable.NAME);
+
+                while(cursor1.moveToNext()) {
+                    projName = cursor1.getString(nameCol);
+                }
+
+                Project invitation = new Project(projID, ownerID, projName);
+                projectList.add(invitation);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();;
+        } finally {
+            cursor.close();
+        }
+        return projectList;
+    }
+
+    public String getProjectName(int projID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String projName = "";
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable.NAME + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable._ID + " = '" + projID + "'", null);
+
+            int nameCol = cursor.getColumnIndex(DbContract.ProjectTable.NAME);
+
+            while(cursor.moveToNext()) {
+                String name = cursor.getString(nameCol);
+
+                projName = name;
+            }
+
+            return projName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+
+        return projName;
+    }
+
+    public void rejectInvitation(int projID, int userID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("UPDATE " + DbContract.CollaboratorTable.TABLE_NAME + " SET " + DbContract.CollaboratorTable.STATUS + " = 'rejected' WHERE " + DbContract.CollaboratorTable.PROJECT_ID + " = '" + projID + "' AND " + DbContract.CollaboratorTable.MEMBER + " = '" + userID + "'");
+    }
+
+    public void acceptInvitation(int projID, int userID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("UPDATE " + DbContract.CollaboratorTable.TABLE_NAME + " SET " + DbContract.CollaboratorTable.STATUS + " = 'accepted' WHERE " + DbContract.CollaboratorTable.PROJECT_ID + " = '" + projID + "' AND " + DbContract.CollaboratorTable.MEMBER + " = '" + userID + "'");
+    }
 
 }
