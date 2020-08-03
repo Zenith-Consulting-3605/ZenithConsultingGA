@@ -21,7 +21,7 @@ public class ExperienceEdit extends AppCompatActivity {
     public static final String CODE_EXTRA = "CODE_EXTRA";
     private TextView title, company, location, description, startYear, endYear;
     private Spinner empType, startMonth, endMonth;
-    private Button save;
+    private Button save, delete;
     private ImageView close;
     private String savedTitle;
 
@@ -36,7 +36,7 @@ public class ExperienceEdit extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width*0.9), (int) (height*0.9));
+        getWindow().setLayout((int) (width * 0.9), (int) (height * 0.9));
 
         Intent intent = getIntent();
         String identifier = intent.getStringExtra(ExperienceEdit.CODE_EXTRA);
@@ -53,8 +53,8 @@ public class ExperienceEdit extends AppCompatActivity {
         startMonth = findViewById(R.id.sprStartMonth);
         endMonth = findViewById(R.id.sprEndMonth);
 
-        String[] empTypeOptions = new String[] {"Full-Time", "Part-Time", "Casual"};
-        String[] monthOptions = new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] empTypeOptions = new String[]{"Full-Time", "Part-Time", "Casual"};
+        String[] monthOptions = new String[]{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, empTypeOptions);
         empType.setAdapter(adapter);
@@ -65,7 +65,7 @@ public class ExperienceEdit extends AppCompatActivity {
 
         final DbHelper dbHelper = new DbHelper(getApplicationContext());
 
-        Experience experience = dbHelper.getExperience(identifier, userID);
+        final Experience experience = dbHelper.getExperience(identifier, userID);
         title.setText(experience.getTitle());
         savedTitle = experience.getTitle();
         company.setText(experience.getCompany());
@@ -93,12 +93,12 @@ public class ExperienceEdit extends AppCompatActivity {
             empType.setSelection(position);
         }
 
-        if(startMonth1 != null) {
+        if (startMonth1 != null) {
             int position = adapter1.getPosition(monthRet(startMonth1));
             startMonth.setSelection(position);
         }
 
-        if(endMonth1 != null) {
+        if (endMonth1 != null) {
             int position = adapter1.getPosition(monthRet(endMonth1));
             endMonth.setSelection(position);
         }
@@ -138,91 +138,109 @@ public class ExperienceEdit extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
+
+        delete = findViewById(R.id.deleteExp);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int expID = dbHelper.getExperienceID(experience.getTitle(), userID);
+                dbHelper.deleteExperience(expID);
+                finish();
+                Intent intent = new Intent(ExperienceEdit.this, ProfileDetail.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+
+            }
+        });
     }
 
-    public String monthRet(String retrieved) {
-        String monthS = null;
-        switch(retrieved) {
-            case "1":
-                monthS = "January";
-                break;
-            case "2":
-                monthS = "February";
-                break;
-            case "3":
-                monthS = "March";
-                break;
-            case "4":
-                monthS = "April";
-                break;
-            case "5":
-                monthS = "May";
-                break;
-            case "6":
-                monthS = "June";
-                break;
-            case "7":
-                monthS = "July";
-                break;
-            case "8":
-                monthS = "August";
-                break;
-            case "9":
-                monthS = "September";
-                break;
-            case "10":
-                monthS = "October";
-                break;
-            case "11":
-                monthS = "November";
-                break;
-            case "12":
-                monthS = "December";
-                break;
+        public String monthRet (String retrieved){
+            String monthS = null;
+            switch (retrieved) {
+                case "1":
+                    monthS = "January";
+                    break;
+                case "2":
+                    monthS = "February";
+                    break;
+                case "3":
+                    monthS = "March";
+                    break;
+                case "4":
+                    monthS = "April";
+                    break;
+                case "5":
+                    monthS = "May";
+                    break;
+                case "6":
+                    monthS = "June";
+                    break;
+                case "7":
+                    monthS = "July";
+                    break;
+                case "8":
+                    monthS = "August";
+                    break;
+                case "9":
+                    monthS = "September";
+                    break;
+                case "10":
+                    monthS = "October";
+                    break;
+                case "11":
+                    monthS = "November";
+                    break;
+                case "12":
+                    monthS = "December";
+                    break;
+            }
+            return monthS;
         }
-        return monthS;
+
+        public String monthSet (String setter){
+            String monthS = null;
+            switch (setter) {
+                case "January":
+                    monthS = "1";
+                    break;
+                case "February":
+                    monthS = "2";
+                    break;
+                case "March":
+                    monthS = "3";
+                    break;
+                case "April":
+                    monthS = "4";
+                    break;
+                case "May":
+                    monthS = "5";
+                    break;
+                case "June":
+                    monthS = "6";
+                    break;
+                case "July":
+                    monthS = "7";
+                    break;
+                case "August":
+                    monthS = "8";
+                    break;
+                case "September":
+                    monthS = "9";
+                    break;
+                case "October":
+                    monthS = "10";
+                    break;
+                case "November":
+                    monthS = "11";
+                    break;
+                case "December":
+                    monthS = "12";
+                    break;
+            }
+            return monthS;
+        }
     }
 
-    public String monthSet(String setter) {
-        String monthS = null;
-        switch(setter) {
-            case "January":
-                monthS = "1";
-                break;
-            case "February":
-                monthS = "2";
-                break;
-            case "March":
-                monthS = "3";
-                break;
-            case "April":
-                monthS = "4";
-                break;
-            case "May":
-                monthS = "5";
-                break;
-            case "June":
-                monthS = "6";
-                break;
-            case "July":
-                monthS = "7";
-                break;
-            case "August":
-                monthS = "8";
-                break;
-            case "September":
-                monthS = "9";
-                break;
-            case "October":
-                monthS = "10";
-                break;
-            case "November":
-                monthS = "11";
-                break;
-            case "December":
-                monthS = "12";
-                break;
-        }
-        return monthS;
-    }
-}
+
+

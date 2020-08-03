@@ -259,6 +259,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("UPDATE " + DbContract.ExperienceTable.TABLE_NAME + " SET " + DbContract.ExperienceTable.TITLE + " = '" + title + "', " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + " = '" + empType + "', " + DbContract.ExperienceTable.COMPANY + " = '" + company + "', " + DbContract.ExperienceTable.LOCATION + " = '" + location + "', " + DbContract.ExperienceTable.DESCRIPTION + " = '" + description + "', " + DbContract.ExperienceTable.START_DATE + " = '" + startDate + "', " + DbContract.ExperienceTable.END_DATE + " = '" + endDate + "' WHERE " + DbContract.ExperienceTable.TITLE + " = '" + oldTitle + "'");
     }
+    public void deleteExperience(int expId){
+        SQLiteDatabase db = this.getWritableDatabase();
+      db.execSQL("DELETE FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable._ID + " = '" + expId + "'");
+
+    }
     //FIXED//
     public void addExperience(Experience newExperience, int userID) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -451,6 +456,25 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         return userID;
+    }
+    public int getExperienceID(String experience, int userID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int expID = 0;
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.ExperienceTable._ID + " FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable.TITLE + " = '" + experience + "' AND " + DbContract.ExperienceTable.USER_ID + " = " + userID, null);
+
+            while (cursor.moveToNext()) {
+                expID = cursor.getInt(cursor.getColumnIndex(DbContract.ExperienceTable._ID));
+            }
+            return expID;
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+
+        return expID;
     }
     //FIXED//
     public void sendInvitation(int member, int owner, int projectID) {
