@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.infs3605groupassignment.Home;
-import com.example.infs3605groupassignment.Profiles.Profile;
+import com.example.infs3605groupassignment.Profiles.ProfileActivity;
 import com.example.infs3605groupassignment.Profiles.ProfileDetail;
 import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -54,7 +54,7 @@ public class ManageProject extends AppCompatActivity {
                         startActivity(intent1);
                         return true;
                     case R.id.profile:
-                        Intent intent2 = new Intent(getApplicationContext(), Profile.class);
+                        Intent intent2 = new Intent(getApplicationContext(), ProfileActivity.class);
                         intent2.putExtra("userID", userID);
                         startActivity(intent2);
                         return true;

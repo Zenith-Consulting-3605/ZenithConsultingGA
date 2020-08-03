@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Objects.Project;
-import com.example.infs3605groupassignment.Profiles.Profile;
+import com.example.infs3605groupassignment.Profiles.ProfileActivity;
 import com.example.infs3605groupassignment.R;
 
 import java.util.List;
@@ -92,7 +92,7 @@ public class ProjectManageFragment extends Fragment {
         adapter = new ProjectManageAdapter(this, projectList, new ProjectManageAdapter.ProjectManageClickListener() {
             @Override
             public void onClick(String title) {
-                Intent intent = new Intent(getContext(), Profile.class); //REDIRECTS TO THE WRONG PLACE NEED TO FIX
+                Intent intent = new Intent(getContext(), ProfileActivity.class); //REDIRECTS TO THE WRONG PLACE NEED TO FIX
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }

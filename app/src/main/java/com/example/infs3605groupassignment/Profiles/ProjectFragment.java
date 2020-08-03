@@ -91,7 +91,7 @@ public class ProjectFragment extends Fragment {
         adapter = new ProjectAdapter(this, projectList, new ProjectAdapter.ProjectClickListener() {
              @Override
              public void onClick(String title) {
-                 Intent intent = new Intent(getContext(), Profile.class); //WILL NEED TO FIX THIS
+                 Intent intent = new Intent(getContext(), ProfileActivity.class); //WILL NEED TO FIX THIS
                  intent.putExtra("userID", userID);
                  startActivity(intent);
              }

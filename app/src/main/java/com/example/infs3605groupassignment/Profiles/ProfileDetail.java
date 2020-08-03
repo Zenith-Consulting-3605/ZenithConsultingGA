@@ -40,7 +40,7 @@ public class ProfileDetail extends AppCompatActivity {
         fabR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
             }

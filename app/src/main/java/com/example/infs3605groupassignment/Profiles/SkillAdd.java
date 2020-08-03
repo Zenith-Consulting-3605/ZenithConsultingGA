@@ -50,7 +50,7 @@ public class SkillAdd extends AppCompatActivity {
                 Skill tbdSkill = new Skill(assemName, assemDescription);
                 dbHelper.addSkill(tbdSkill, userID);
                 finish();
-                Intent intent = new Intent(SkillAdd.this, Profile.class);
+                Intent intent = new Intent(SkillAdd.this, ProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -61,14 +61,12 @@ public class SkillAdd extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent intent = new Intent(SkillAdd.this, Profile.class);
+                Intent intent = new Intent(SkillAdd.this, ProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });
-
-
 
     }
 }

@@ -15,17 +15,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Home;
 import com.example.infs3605groupassignment.MainActivity;
+import com.example.infs3605groupassignment.Objects.Profile;
 import com.example.infs3605groupassignment.Projects.ManageProject;
 import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Profile extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
     private ImageView home;
     private ImageView project;
     private ImageView profile;
+
+    private TextView name;
+    private TextView occupation;
+    private TextView location;
 
     private TextView experience;
     private TextView skill;
@@ -40,6 +46,7 @@ public class Profile extends AppCompatActivity {
     private FloatingActionButton fab;
 
     private Button logout;
+    private Button edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +74,7 @@ public class Profile extends AppCompatActivity {
                         startActivity(intent1);
                         return true;
                     case R.id.profile:
-                        Intent intent2 = new Intent(getApplicationContext(), Profile.class);
+                        Intent intent2 = new Intent(getApplicationContext(), ProfileActivity.class);
                         intent2.putExtra("userID", userID);
                         startActivity(intent2);
                         return true;
@@ -83,6 +90,18 @@ public class Profile extends AppCompatActivity {
         bundle.putInt("userID", userID);
         fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.scvFragment, fragment).commit();
+
+        name = findViewById(R.id.fullName);
+        occupation = findViewById(R.id.occupation);
+        location = findViewById(R.id.location);
+
+        final DbHelper dbHelper = new DbHelper(getApplicationContext());
+
+        Profile profile = dbHelper.getProfile(userID);
+        String namee = profile.getFirst_name() + " " + profile.getLast_name();
+        name.setText(namee);
+        occupation.setText(profile.getOccupation());
+        location.setText(profile.getLocation());
 
         experience = findViewById(R.id.txvExperience);
         skill = findViewById(R.id.txvSkill);
@@ -114,7 +133,16 @@ public class Profile extends AppCompatActivity {
 
         });
 
+        edit = findViewById(R.id.editheader);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileHeaderEdit.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
 
+        });
 
         experience.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,7 +189,6 @@ public class Profile extends AppCompatActivity {
                 fab.setVisibility(View.GONE);
             }
         });
-
     }
 
 }

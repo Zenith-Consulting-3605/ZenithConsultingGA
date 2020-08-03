@@ -84,7 +84,7 @@ public class ExperienceAdd extends AppCompatActivity {
 
                 finish();
 
-                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -96,8 +96,8 @@ public class ExperienceAdd extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(getApplicationContext(), Profile.class));
-                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 intent.putExtra("userID", userID);
                 startActivity(intent);
                 overridePendingTransition(0, 0);

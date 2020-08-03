@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
-import com.example.infs3605groupassignment.Profiles.Profile;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = "MAIN_ACTIVITY";
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         email = findViewById(R.id.edtEmail);
         password = findViewById(R.id.edtPassword);
 
-
         signIn = findViewById(R.id.btnLogin);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, em);
                 Log.d(TAG, ps);
 
-                if(checkLogin==true){
+                if(checkLogin){
                     Toast.makeText(getApplicationContext(),"Successful Login", Toast.LENGTH_SHORT).show();
                     int userID = db.getUserID(em, ps);
                     Log.d(TAG, "userID is " + userID);
