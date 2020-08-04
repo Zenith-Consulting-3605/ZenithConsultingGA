@@ -14,9 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.infs3605groupassignment.Home;
+import com.example.infs3605groupassignment.Home.Home;
 import com.example.infs3605groupassignment.Profiles.ProfileActivity;
-import com.example.infs3605groupassignment.Profiles.ProfileDetail;
 import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,7 +24,7 @@ public class ManageProject extends AppCompatActivity {
     private TextView project, invitation;
     private View dividerProject, dividerInvitation;
     private Button create;
-
+    private int ID;
     private ActionBar toolbar;
 
     @Override
@@ -35,6 +34,7 @@ public class ManageProject extends AppCompatActivity {
 
         Intent intent = getIntent();
         final int userID = intent.getIntExtra("userID", 0);
+        ID = userID;
 
         toolbar = getSupportActionBar();
         BottomNavigationView nav = findViewById(R.id.bnvNav);

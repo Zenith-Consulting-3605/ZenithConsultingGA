@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
+import com.example.infs3605groupassignment.Home.Home;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = "MAIN_ACTIVITY";

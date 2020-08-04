@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
-import com.example.infs3605groupassignment.Home;
+import com.example.infs3605groupassignment.Home.Home;
 import com.example.infs3605groupassignment.MainActivity;
 import com.example.infs3605groupassignment.Objects.Profile;
 import com.example.infs3605groupassignment.Projects.ManageProject;

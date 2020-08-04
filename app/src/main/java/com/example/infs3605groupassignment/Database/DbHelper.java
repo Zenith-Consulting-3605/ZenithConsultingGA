@@ -262,6 +262,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL("UPDATE " + DbContract.ExperienceTable.TABLE_NAME + " SET " + DbContract.ExperienceTable.TITLE + " = '" + title + "', " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + " = '" + empType + "', " + DbContract.ExperienceTable.COMPANY + " = '" + company + "', " + DbContract.ExperienceTable.LOCATION + " = '" + location + "', " + DbContract.ExperienceTable.DESCRIPTION + " = '" + description + "', " + DbContract.ExperienceTable.START_DATE + " = '" + startDate + "', " + DbContract.ExperienceTable.END_DATE + " = '" + endDate + "' WHERE " + DbContract.ExperienceTable.TITLE + " = '" + oldTitle + "'");
     }
+    //FIXED//
     public void deleteExperience(int expId){
         SQLiteDatabase db = this.getWritableDatabase();
       db.execSQL("DELETE FROM " + DbContract.ExperienceTable.TABLE_NAME + " WHERE " + DbContract.ExperienceTable._ID + " = '" + expId + "'");

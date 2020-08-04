@@ -1,8 +1,11 @@
-package com.example.infs3605groupassignment;
+package com.example.infs3605groupassignment.Home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.view.MenuItem;
 //import com.example.infs3605groupassignment.Profiles.Profile;
 import com.example.infs3605groupassignment.Profiles.ProfileActivity;
 import com.example.infs3605groupassignment.Projects.ManageProject;
+import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity {
@@ -53,6 +57,16 @@ public class Home extends AppCompatActivity {
                 return false;
             }
         });
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment fragment = new FeaturedFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("userID", userID);
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.scvFeatured, fragment).commit();
+
+
 
 
     }

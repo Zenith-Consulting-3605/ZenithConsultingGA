@@ -93,6 +93,4 @@ public class ProjectInvitation extends AppCompatActivity implements Collaborator
         Log.d(TAG, "id " + Arrays.toString(ids));
     }
 
-
-
 }
