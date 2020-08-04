@@ -10,51 +10,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/bold"
+            android:gravity="center_horizontal|center_vertical"
             android:text="Start Creating"
+            android:textColor="@color/dark_magenta"
             android:textSize="30sp" />
-
-        <View
-            android:id="@+id/divider4"
-            android:layout_width="191dp"
-            android:layout_height="2dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/dark_magenta" />
 
         <EditText
             android:id="@+id/edtProjectName"
             android:layout_width="300sp"
             android:layout_height="30sp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/input_field"
             android:ems="10"
+            android:fontFamily="@font/regular"
             android:hint="Project Name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edtProjectDescription"
             android:layout_width="300sp"
             android:layout_height="80sp"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/input_field"
             android:ems="10"
+            android:fontFamily="@font/regular"
             android:hint="Description"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
 
         <Spinner
             android:id="@+id/sprProjCategory"
             android:layout_width="300dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/spinner" />
 
@@ -75,6 +71,7 @@
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
                     android:text="Current Progress"
                     android:textSize="18sp" />
 
@@ -91,7 +88,8 @@
                         android:fontFamily="@font/regular"
                         android:text="Ideation"
                         android:textColor="#FE635D5D"
-                        android:textColorLink="#FFFFFF" />
+                        android:textColorLink="#FFFFFF"
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/rbtInDevelopment"
@@ -122,6 +120,7 @@
                     android:id="@+id/textView23"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
                     android:text="Funding"
                     android:textSize="18sp" />
 
@@ -154,38 +153,40 @@
             android:id="@+id/edtProjectCompany"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/input_field"
             android:ems="10"
             android:hint="Company"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edtProjectCountry"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/input_field"
             android:ems="10"
             android:hint="Country"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
             <Button
                 android:id="@+id/btnCPC"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/button"
                 android:fontFamily="@font/regular"
-                android:text="Cancel"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="CANCEL"
                 android:textAllCaps="false"
                 android:textColor="@color/light_gray"
                 android:textSize="18sp" />
@@ -195,10 +196,12 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/button"
                 android:fontFamily="@font/regular"
-                android:text="Next"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="NEXT"
                 android:textAllCaps="false"
                 android:textColor="@color/light_gray"
                 android:textSize="18sp" />

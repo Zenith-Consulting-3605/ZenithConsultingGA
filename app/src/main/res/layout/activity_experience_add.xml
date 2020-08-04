@@ -49,6 +49,7 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +64,7 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -87,6 +89,7 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/sprEmpTypeAdd"
@@ -101,6 +104,7 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/txvLocationAdd"
@@ -154,8 +158,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Title"
         android:fontFamily="@font/bold"
+        android:text="Title"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvTitleAdd"
         app:layout_constraintStart_toStartOf="@+id/txvTitleAdd" />
 
@@ -165,8 +170,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Company"
         android:fontFamily="@font/bold"
+        android:text="Company"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvCompanyAdd"
         app:layout_constraintStart_toStartOf="@+id/txvCompanyAdd" />
 
@@ -176,8 +182,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Employment Type"
         android:fontFamily="@font/bold"
+        android:text="Employment Type"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/sprEmpTypeAdd"
         app:layout_constraintStart_toStartOf="@+id/sprEmpTypeAdd" />
 
@@ -187,8 +194,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Location"
         android:fontFamily="@font/bold"
+        android:text="Location"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvLocationAdd"
         app:layout_constraintStart_toStartOf="@+id/txvLocationAdd" />
 
@@ -198,8 +206,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Description"
         android:fontFamily="@font/bold"
+        android:text="Description"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvDescriptionAdd"
         app:layout_constraintStart_toStartOf="@+id/txvDescriptionAdd" />
 
@@ -209,8 +218,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Start Date"
         android:fontFamily="@font/bold"
+        android:text="Start Date"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/sprStartMonthAdd"
         app:layout_constraintStart_toStartOf="@+id/sprStartMonthAdd" />
 
@@ -220,8 +230,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="End Date"
         android:fontFamily="@font/bold"
+        android:text="End Date"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/sprEndMonthAdd"
         app:layout_constraintStart_toStartOf="@+id/sprEndMonthAdd" />
 </androidx.constraintlayout.widget.ConstraintLayout>

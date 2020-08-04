@@ -100,7 +100,7 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/button"
         android:fontFamily="@font/regular"
-        android:text="Sign Up"
+        android:text="SIGN UP"
         android:textAllCaps="false"
         android:textColor="@color/light_gray"
         android:textSize="18sp"
@@ -139,7 +139,8 @@
             android:fontFamily="@font/regular"
             android:text="Individual"
             android:textColor="#FE635D5D"
-            android:textColorLink="#FFFFFF" />
+            android:textColorLink="#FFFFFF"
+            android:textSize="18sp" />
 
         <RadioButton
             android:id="@+id/Company"
@@ -147,7 +148,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/regular"
             android:text="Company"
-            android:textColor="#595050" />
+            android:textColor="#595050"
+            android:textSize="18sp" />
 
     </RadioGroup>
 
@@ -159,6 +161,7 @@
         android:layout_marginLeft="52dp"
         android:fontFamily="@font/regular"
         android:text="I am a:"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/rgUserType"
         app:layout_constraintStart_toStartOf="parent" />
 

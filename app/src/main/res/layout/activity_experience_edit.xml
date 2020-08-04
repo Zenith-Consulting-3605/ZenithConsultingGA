@@ -49,6 +49,7 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:hint="Job Title"
         android:inputType="textPersonName"
         android:text="Job Title"
@@ -65,6 +66,7 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:hint="Company"
         android:inputType="textPersonName"
         android:text="Company"
@@ -92,6 +94,7 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:hint="Location"
         android:inputType="textPersonName"
         android:text="Location"
@@ -108,6 +111,7 @@
         android:layout_marginRight="36dp"
         android:background="@drawable/input_field"
         android:ems="10"
+        android:fontFamily="@font/regular"
         android:hint="Description"
         android:inputType="textPersonName"
         android:text="Description"
@@ -167,8 +171,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Title"
         android:fontFamily="@font/bold"
+        android:text="Title"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvTitle"
         app:layout_constraintStart_toStartOf="@+id/txvTitle" />
 
@@ -178,8 +183,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Company"
         android:fontFamily="@font/bold"
+        android:text="Company"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvCompany"
         app:layout_constraintStart_toStartOf="@+id/txvCompany" />
 
@@ -189,8 +195,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Employment Type"
         android:fontFamily="@font/bold"
+        android:text="Employment Type"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/sprEmpType"
         app:layout_constraintStart_toStartOf="@+id/sprEmpType" />
 
@@ -200,8 +207,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Location"
         android:fontFamily="@font/bold"
+        android:text="Location"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvLocation"
         app:layout_constraintStart_toStartOf="@+id/txvLocation" />
 
@@ -211,8 +219,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Description"
         android:fontFamily="@font/bold"
+        android:text="Description"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvDescription"
         app:layout_constraintStart_toStartOf="@+id/txvDescription" />
 
@@ -222,8 +231,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Start Date"
         android:fontFamily="@font/bold"
+        android:text="Start Date"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/sprStartMonth"
         app:layout_constraintStart_toStartOf="@+id/sprStartMonth" />
 
@@ -233,23 +243,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="End Date"
         android:fontFamily="@font/bold"
+        android:text="End Date"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/sprEndMonth"
         app:layout_constraintStart_toStartOf="@+id/sprEndMonth" />
 
     <Button
         android:id="@+id/deleteExp"
-        android:layout_width="86dp"
+        android:layout_width="140dp"
         android:layout_height="40dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
         android:layout_marginTop="48dp"
         android:background="@drawable/button"
         android:fontFamily="@font/regular"
         android:text="Delete"
         android:textAllCaps="true"
-        android:textSize="12dp"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sprEndMonth" />
 

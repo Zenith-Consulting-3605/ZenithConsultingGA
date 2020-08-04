@@ -46,7 +46,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="30dp"
-                    android:text="Create a New Project! / It looks like you're new here!" />
+                    android:text="Create a New Project! / It looks like you're new here!"
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/btnCreateProj"

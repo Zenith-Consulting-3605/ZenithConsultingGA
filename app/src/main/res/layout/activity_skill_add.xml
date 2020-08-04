@@ -63,6 +63,7 @@
         android:layout_marginLeft="10dp"
         android:fontFamily="@font/bold"
         android:text="Name"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvTitle"
         app:layout_constraintStart_toStartOf="@+id/txvTitle" />
 
@@ -74,6 +75,7 @@
         android:layout_marginLeft="10dp"
         android:fontFamily="@font/bold"
         android:text="Description"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/txvCompany"
         app:layout_constraintStart_toStartOf="@+id/txvCompany" />
 
