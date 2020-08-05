@@ -12,16 +12,22 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Home.Home;
+import com.example.infs3605groupassignment.Objects.Project;
 import com.example.infs3605groupassignment.Profiles.ProfileActivity;
 import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
+
 public class ManageProject extends AppCompatActivity {
     public static final String CODE_EXTRA = "CODE_EXTRA";
-    private TextView project, invitation;
+    private TextView project, invitation, createTextBit;
+    private ImageView nothingsHere;
     private View dividerProject, dividerInvitation;
     private Button create;
     private int ID;
@@ -112,6 +118,17 @@ public class ManageProject extends AppCompatActivity {
             }
         });
 
+        nothingsHere = findViewById(R.id.nothingshere);
+        createTextBit = findViewById(R.id.createprojtext);
+        final DbHelper dbHelper = new DbHelper(getApplicationContext());
+        List<Project> projects = dbHelper.getIndividualProjects(userID);
+        if(projects.isEmpty() || projects.equals(null)){
+            createTextBit.setText("Get started! Create your first project");
+        }
+        else{
+            createTextBit.setText("Create a new project!");
+            nothingsHere.setVisibility(View.GONE);
+        }
 
     }
 }
