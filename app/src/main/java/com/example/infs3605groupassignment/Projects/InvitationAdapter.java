@@ -67,7 +67,7 @@ public class InvitationAdapter extends RecyclerView.Adapter<InvitationAdapter.In
     }
 
     @Override
-    public InvitationAdapter.InvitationViewHolder onCreateViewHolder (ViewGroup parent, int vieType) {
+    public InvitationAdapter.InvitationViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.invitation_list_row, parent, false);
         InvitationViewHolder holder = new InvitationViewHolder(v, listener);
         return holder;

@@ -10,6 +10,7 @@ public class Project {
     private String company;
     private int ID;
     private int owner;
+    private String imageURL;
 
     public Project() {
 
@@ -23,6 +24,21 @@ public class Project {
         this.ID = ID;
         this.owner = owner;
         this.name = name;
+    }
+
+    public Project(int ID, String name, String company, String category) {
+        this.ID = ID;
+        this.name = name;
+        this.company = company;
+        this.category = category;
+    }
+
+    public Project(int ID, String name, String company, String category, String imageURL) {
+        this.ID = ID;
+        this.name = name;
+        this.company = company;
+        this.category = category;
+        this.imageURL = imageURL;
     }
 
     public Project(String name, String company, String category) {
@@ -124,5 +140,13 @@ public class Project {
     }
 
     public void setID(int ID) { this.ID = ID; }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 }
 

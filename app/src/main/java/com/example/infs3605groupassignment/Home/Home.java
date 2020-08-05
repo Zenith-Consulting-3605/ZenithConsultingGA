@@ -66,8 +66,5 @@ public class Home extends AppCompatActivity {
         fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.scvFeatured, fragment).commit();
 
-
-
-
     }
 }

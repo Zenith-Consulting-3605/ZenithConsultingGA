@@ -61,6 +61,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + DbContract.UsersTable.TABLE_NAME + "( " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + ", " + DbContract.UsersTable.PASSWORD + ") VALUES ('Shiv', 'Kumar', 'shivkumar@hotmail.com', 'shivkumar')");
         db.execSQL("INSERT INTO " + DbContract.UsersTable.TABLE_NAME + "( " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + ", " + DbContract.UsersTable.PASSWORD + ") VALUES ('Vidal', 'Coe', 'coe.vidal@outlook.com', 'vidalcoe')");
         db.execSQL("INSERT INTO " + DbContract.UsersTable.TABLE_NAME + "( " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + ", " + DbContract.UsersTable.PASSWORD + ") VALUES ('Jesus', 'Christ', 'jesus@gmail.com', 'jesuschrist')");
+        db.execSQL("INSERT INTO " + DbContract.UsersTable.TABLE_NAME + "( " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + ", " + DbContract.UsersTable.PASSWORD + ") VALUES ('a', 'a', 'a', 'a')");
 
         db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " ( " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('Web Designer, Frontend Developer', 'Full-Time', 'Champion', 'Sydney, Australia', '2009-12-12', '2010-09-11', 'Worked at Champion like an absolute Champ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 1)");
         db.execSQL("INSERT INTO " + DbContract.ExperienceTable.TABLE_NAME + " ( " + DbContract.ExperienceTable.TITLE + ", " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + ", " + DbContract.ExperienceTable.COMPANY + ", " + DbContract.ExperienceTable.LOCATION + ", " + DbContract.ExperienceTable.START_DATE + ", " + DbContract.ExperienceTable.END_DATE + ", " + DbContract.ExperienceTable.DESCRIPTION + ", " + DbContract.ExperienceTable.USER_ID + ") VALUES ('Frontend Developer', 'Full-Time', 'BigBoi Co.', 'Sydney, Australia', '2005-12-14', '2006-11-20', 'Was a BigLad', 1)");
@@ -461,6 +462,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return userID;
     }
+
     public int getExperienceID(String experience, int userID){
         SQLiteDatabase db = this.getReadableDatabase();
         int expID = 0;
@@ -571,6 +573,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     "VALUES ('" + fName + "', '" + lName + "', '" + location + "', '" + occupation + "', " + userID + ")");
 
     }
+
     public Profile getProfile(int userID) {
         Profile failedProfile = new Profile("failedtoretrieve","failedtoretrieve","failedtoretrieve","failedtoretrieve");
 
@@ -647,5 +650,55 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.LOCATION+ " = '" + location + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
         db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.OCCUPATION+ " = '" + occupation + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
     }
+    //FIXED//
+    public List<Project> getFeaturedProjects(int id1, int id2, int id3) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable._ID + ", " + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.CATEGORY + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable._ID + " = " + id1 + " OR " + DbContract.ProjectTable._ID + " = " + id2 + " OR " + DbContract.ProjectTable._ID + " = " + id3, null);
 
+            int IDCol = cursor.getColumnIndex(DbContract.ProjectTable._ID);
+            int nameCol = cursor.getColumnIndex(DbContract.ProjectTable.NAME);
+            int companyCol = cursor.getColumnIndex(DbContract.ProjectTable.COMPANY);
+            int categoryCol = cursor.getColumnIndex(DbContract.ProjectTable.CATEGORY);
+
+
+            while (cursor.moveToNext()) {
+                int ID = cursor.getInt(IDCol);
+                String name = cursor.getString(nameCol);
+                String company = cursor.getString(companyCol);
+                String category = cursor.getString(categoryCol);
+
+                Project retreivedProj = new Project(ID, name, company, category);
+                projectList.add(retreivedProj);
+            }
+
+            return projectList;
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+
+        return projectList;
+    }
+
+    public int getNumberProjects() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        int number = 0;
+        try {
+            cursor = db.rawQuery("SELECT * FROM " + DbContract.ProjectTable.TABLE_NAME, null);
+
+//            while(cursor.moveToNext()) {
+                number = cursor.getCount();
+//            }
+            return number;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+        return number;
+    }
 }
