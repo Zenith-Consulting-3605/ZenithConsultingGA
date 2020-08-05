@@ -606,37 +606,6 @@ public class DbHelper extends SQLiteOpenHelper {
         return failedProfile;
     }
 
-//    public void setProfileName(int userID) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        SQLiteDatabase db2 = this.getReadableDatabase();
-//
-//        String fname = "";
-//        String lname = "";
-//        Cursor cursor = null;
-//        try {
-//            cursor = db2.rawQuery("SELECT " + DbContract.ProfileTable.FIRST_NAME + " FROM " + DbContract.ProfileTable.TABLE_NAME + " WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'", null);
-//            int nameCol = cursor.getColumnIndex(DbContract.ProfileTable.FIRST_NAME);
-//
-//            cursor = db2.rawQuery("SELECT " + DbContract.ProfileTable.LAST_NAME + " FROM " + DbContract.ProfileTable.TABLE_NAME + " WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'", null);
-//            int nameCol2 = cursor.getColumnIndex(DbContract.ProfileTable.LAST_NAME);
-//
-//            while(cursor.moveToNext()) {
-//                String name = cursor.getString(nameCol);
-//                String name2 = cursor.getString(nameCol2);
-//
-//                fname = name;
-//                lname = name2;
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            cursor.close();
-//        }
-//        db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.FIRST_NAME+ " = '" + fname + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
-//        db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.LAST_NAME+ " = '" + lname + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
-//    }
-
     public void editProfile(Profile profile, int userID) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -701,4 +670,11 @@ public class DbHelper extends SQLiteOpenHelper {
         }
         return number;
     }
+
+    public void generateAddSkill(int userId){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('Add Skill+', 'Add Skill+', " + userId + ", 1)");
+    }
+
 }

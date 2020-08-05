@@ -173,10 +173,6 @@ public class FeaturedFragment extends Fragment {
             });
             requestQueue.add(request);
 
-
-
-
-
         }
 
 
