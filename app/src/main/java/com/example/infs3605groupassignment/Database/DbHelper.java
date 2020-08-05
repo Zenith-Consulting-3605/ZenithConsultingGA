@@ -344,6 +344,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return projectList;
     }
+
     //FIXED//
     public List<Project> getProjectManageList(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
