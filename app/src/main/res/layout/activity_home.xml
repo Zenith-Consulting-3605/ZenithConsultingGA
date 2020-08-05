@@ -41,12 +41,14 @@
                 android:text="Featured Projects"
                 android:textSize="18sp" />
 
-            <HorizontalScrollView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/scvFeatured"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="15dp">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/textView4"
