@@ -45,6 +45,7 @@ public class ProjectInvitation extends AppCompatActivity implements Collaborator
         Bundle extras = getIntent().getExtras();
         final String projName = extras.getString("projName");
         final int userID = intent.getIntExtra("userID", 0);
+        Log.d(TAG, "userID: " + userID);
 //        Log.d(TAG, projName);
         project = findViewById(R.id.txvDisplayProjName);
         project.setText(projName);
@@ -52,6 +53,9 @@ public class ProjectInvitation extends AppCompatActivity implements Collaborator
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         Fragment fragment = new CollaboratorSearchFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("userID", userID);
+        fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.scvSearchContainer, fragment).commit();
 
         back = findViewById(R.id.btnBack);

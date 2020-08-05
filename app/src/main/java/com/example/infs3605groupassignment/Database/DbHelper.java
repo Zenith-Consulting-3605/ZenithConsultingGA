@@ -413,11 +413,11 @@ public class DbHelper extends SQLiteOpenHelper {
         return projID;
     }
     //WILL NEED TO PERHAPS FILTER OUT INDIVIDUAL OWNING PROJECT//
-    public List<User> getUserList() {
+    public List<User> getUserList(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         try {
-            cursor = db.rawQuery("SELECT " + DbContract.UsersTable._ID + ", " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + " FROM " + DbContract.UsersTable.TABLE_NAME, null);
+            cursor = db.rawQuery("SELECT " + DbContract.UsersTable._ID + ", " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + " FROM " + DbContract.UsersTable.TABLE_NAME + " WHERE " + DbContract.UsersTable._ID + " != " + userID, null);
 
             int idCol = cursor.getColumnIndex(DbContract.UsersTable._ID);
             int fNameCol = cursor.getColumnIndex(DbContract.UsersTable.FIRST_NAME);
