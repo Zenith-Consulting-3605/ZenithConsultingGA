@@ -677,4 +677,54 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('Add Skill+', 'Add Skill+', " + userId + ", 1)");
     }
 
+    public List<Project> getAllProjects() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable._ID + ", " + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.CATEGORY + " FROM " + DbContract.ProjectTable.TABLE_NAME, null);
+
+            int idCol = cursor.getColumnIndex(DbContract.ProjectTable._ID);
+            int nameCol = cursor.getColumnIndex(DbContract.ProjectTable.NAME);
+            int fundingCol = cursor.getColumnIndex(DbContract.ProjectTable.FUNDING);
+            int companyCol = cursor.getColumnIndex(DbContract.ProjectTable.COMPANY);
+            int countryCol = cursor.getColumnIndex(DbContract.ProjectTable.COUNTRY);
+            int descriptionCol = cursor.getColumnIndex(DbContract.ProjectTable.DESCRIPTION);
+            int progressCol = cursor.getColumnIndex(DbContract.ProjectTable.PROGRESS);
+            int categoryCol = cursor.getColumnIndex(DbContract.ProjectTable.CATEGORY);
+
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(idCol);
+                String name = cursor.getString(nameCol);
+                String funding = cursor.getString(fundingCol);
+                String company = cursor.getString(companyCol);
+                String country = cursor.getString(countryCol);
+                String description = cursor.getString(descriptionCol);
+                String progress = cursor.getString(progressCol);
+                String category = cursor.getString(categoryCol);
+                Project retreivedProj = new Project(name, funding, company, country, description, progress, category);
+                projectList.add(retreivedProj);
+            }
+
+            return projectList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+
+        return projectList;
+    }
+
+//    public List<Project> getProjectList() {
+//        SQLiteDatabase db = getReadableDatabase();
+//        Cursor cursor = null;
+//        try {
+//            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable._ID + ", " + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.CATEGORY + " FROM " + DbContract.ProjectTable.TABLE_NAME, null);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            cursor.close();
+//        }
+//    }
+
 }

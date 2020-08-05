@@ -21,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Home extends AppCompatActivity {
     private String TAG = "HOME";
     private ActionBar toolbar;
+    private int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Intent intent = getIntent();
-        final int userID = intent.getIntExtra("userID", 0);
+        userID = intent.getIntExtra("userID", 0);
         Log.d(TAG, "userID is " + userID);
 
         toolbar = getSupportActionBar();
@@ -58,6 +59,12 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        setFragment1();
+        setFragment2();
+
+    }
+
+    private void setFragment1() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         Fragment fragment = new FeaturedFragment();
@@ -65,6 +72,15 @@ public class Home extends AppCompatActivity {
         bundle.putInt("userID", userID);
         fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.scvFeatured, fragment).commit();
+    }
 
+    private void setFragment2() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment fragment1 = new ProjectSearchFragment();
+        Bundle bundle1 = new Bundle();
+        bundle1.putInt("userID", userID);
+        fragment1.setArguments(bundle1);
+        getSupportFragmentManager().beginTransaction().replace(R.id.scvNestedProjectSearch, fragment1).commit();
     }
 }

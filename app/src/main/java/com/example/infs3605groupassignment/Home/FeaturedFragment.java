@@ -141,8 +141,12 @@ public class FeaturedFragment extends Fragment {
                             try {
                                 JSONArray jsonArray = response.getJSONArray("hits");
 
-                                JSONObject hit = jsonArray.getJSONObject(0);
-                                webformatURL = hit.getString("webformatURL");
+                                if(jsonArray.length() < 1) {
+                                    webformatURL = "NO_RESULTS";
+                                } else {
+                                    JSONObject hit = jsonArray.getJSONObject(0);
+                                    webformatURL = hit.getString("webformatURL");
+                                }
                                 Log.d(TAG, "CORRECT URL IS: " + webformatURL);
 
                                 Project newProj = new Project(project.getID(), project.getName(), project.getCompany(), project.getCategory(), webformatURL);
