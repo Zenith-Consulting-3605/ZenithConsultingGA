@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Objects.Experience;
+import com.example.infs3605groupassignment.Objects.Project;
 import com.example.infs3605groupassignment.R;
 
 import java.util.List;

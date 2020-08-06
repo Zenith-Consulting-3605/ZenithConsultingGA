@@ -6,12 +6,14 @@ public class Profile {
     private String last_name;
     private String occupation;
     private String location;
+    private int profilePreference;
 
-    public Profile(String first_name, String last_name, String location, String occupation) {
+    public Profile(String first_name, String last_name, String location, String occupation, int profilepref) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.occupation = occupation;
         this.location = location;
+        this.profilePreference = profilepref;
     }
 
     public Profile(){
@@ -49,4 +51,13 @@ public class Profile {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public int getProfilePreference() {
+        return profilePreference;
+    }
+
+    public void setProfilePreference(int profilePreference) {
+        this.profilePreference = profilePreference;
+    }
+
 }

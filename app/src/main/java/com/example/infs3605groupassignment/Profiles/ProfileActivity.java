@@ -18,16 +18,20 @@ import android.widget.TextView;
 import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Home.Home;
 import com.example.infs3605groupassignment.MainActivity;
+import com.example.infs3605groupassignment.Objects.Experience;
 import com.example.infs3605groupassignment.Objects.Profile;
+import com.example.infs3605groupassignment.Objects.Project;
 import com.example.infs3605groupassignment.Projects.ManageProject;
 import com.example.infs3605groupassignment.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 public class ProfileActivity extends AppCompatActivity {
     private ImageView home;
     private ImageView project;
-    private ImageView profile;
+    private ImageView profileImg;
 
     private TextView name;
     private TextView occupation;
@@ -44,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ActionBar toolbar;
 
     private FloatingActionButton fab;
+    private TextView nothingsHere;
 
     private Button logout;
     private Button edit;
@@ -94,14 +99,34 @@ public class ProfileActivity extends AppCompatActivity {
         name = findViewById(R.id.fullName);
         occupation = findViewById(R.id.occupation);
         location = findViewById(R.id.location);
+        profileImg = findViewById(R.id.imvDP);
+        nothingsHere = findViewById(R.id.addDetails);
+        nothingsHere.setVisibility(View.INVISIBLE);
+
 
         final DbHelper dbHelper = new DbHelper(getApplicationContext());
+
+        List<Experience> experienceList = dbHelper.getExperiences(userID);
+        if(experienceList.isEmpty() || experienceList.equals(null)){
+            nothingsHere.setVisibility(View.VISIBLE);
+        }
+        else{
+            nothingsHere.setVisibility(View.INVISIBLE);
+        }
 
         Profile profile = dbHelper.getProfile(userID);
         String namee = profile.getFirst_name() + " " + profile.getLast_name();
         name.setText(namee);
         occupation.setText(profile.getOccupation());
         location.setText(profile.getLocation());
+        profileImg.setImageResource(R.drawable.avatar1);
+
+        if(profile.getProfilePreference() == 1){
+            profileImg.setImageResource(R.drawable.avatar1);
+        }
+        else if (profile.getProfilePreference() == 2){
+            profileImg.setImageResource(R.drawable.avatar2);
+        }
 
         experience = findViewById(R.id.txvExperience);
         skill = findViewById(R.id.txvSkill);
@@ -156,6 +181,14 @@ public class ProfileActivity extends AppCompatActivity {
                 dividerSkill.setBackgroundResource(R.color.white);
                 dividerQualification.setBackgroundResource(R.color.white);
                 fab.setVisibility(View.VISIBLE);
+
+                List<Experience> experienceList = dbHelper.getExperiences(userID);
+                if(experienceList.isEmpty() || experienceList.equals(null)){
+                    nothingsHere.setVisibility(View.VISIBLE);
+                }
+                else{
+                    nothingsHere.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
@@ -171,7 +204,7 @@ public class ProfileActivity extends AppCompatActivity {
                 dividerSkill.setBackgroundResource(R.color.dark_magenta);
                 dividerQualification.setBackgroundResource(R.color.white);
                 fab.setVisibility(View.GONE);
-
+                nothingsHere.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -187,6 +220,14 @@ public class ProfileActivity extends AppCompatActivity {
                 dividerSkill.setBackgroundResource(R.color.white);
                 dividerQualification.setBackgroundResource(R.color.dark_magenta);
                 fab.setVisibility(View.GONE);
+
+                List<Project> projectsList = dbHelper.getIndividualProjects(userID);
+                if(projectsList.isEmpty() || projectsList.equals(null)){
+                    nothingsHere.setVisibility(View.VISIBLE);
+                }
+                else{
+                    nothingsHere.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }

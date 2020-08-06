@@ -50,7 +50,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_CREATE_USERS_TABLE);
 
-        db.execSQL("CREATE TABLE " + DbContract.ProfileTable.TABLE_NAME + "( " + DbContract.ProfileTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ProfileTable.FIRST_NAME + " TEXT, " + DbContract.ProfileTable.LAST_NAME + " TEXT, " + DbContract.ProfileTable.LOCATION + " TEXT, " + DbContract.ProfileTable.OCCUPATION + " TEXT, "  +  DbContract.ProfileTable.USER_ID + " INTEGER )");
+        db.execSQL("CREATE TABLE " + DbContract.ProfileTable.TABLE_NAME + "( " + DbContract.ProfileTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ProfileTable.FIRST_NAME + " TEXT, " + DbContract.ProfileTable.LAST_NAME + " TEXT, " + DbContract.ProfileTable.LOCATION + " TEXT, " + DbContract.ProfileTable.OCCUPATION + " TEXT, "  + DbContract.ProfileTable.PROFILE_PREF + " INTEGER, " +  DbContract.ProfileTable.USER_ID + " INTEGER )");
         db.execSQL("CREATE TABLE " + DbContract.ExperienceTable.TABLE_NAME + "( " + DbContract.ExperienceTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ExperienceTable.TITLE + " TEXT, " + DbContract.ExperienceTable.EMPLOYMENT_TYPE + " TEXT, " + DbContract.ExperienceTable.COMPANY + " TEXT, " + DbContract.ExperienceTable.LOCATION + " TEXT, " + DbContract.ExperienceTable.START_DATE + " TEXT, " + DbContract.ExperienceTable.END_DATE + " TEXT, " + DbContract.ExperienceTable.DESCRIPTION + " TEXT, " + DbContract.ExperienceTable.USER_ID + " INTEGER )");
         db.execSQL("CREATE TABLE " + DbContract.SkillTable.TABLE_NAME + "( " + DbContract.SkillTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.SkillTable.NAME + " TEXT, " + DbContract.SkillTable.DESCRIPTION + " TEXT, " + DbContract.SkillTable.USER_ID + " INTEGER, " + DbContract.SkillTable.DUMMY + " INTEGER)");
         db.execSQL("CREATE TABLE " + DbContract.ProjectTable.TABLE_NAME + "( " + DbContract.ProjectTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbContract.ProjectTable.NAME + " TEXT, " + DbContract.ProjectTable.DESCRIPTION + " TEXT, " + DbContract.ProjectTable.FUNDING + " TEXT, " + DbContract.ProjectTable.CATEGORY + " TEXT, " + DbContract.ProjectTable.PROGRESS + " TEXT, " + DbContract.ProjectTable.COUNTRY + " TEXT, " + DbContract.ProjectTable.COMPANY + " TEXT, " + DbContract.ProjectTable.OWNER + " INTEGER)"); //CREATE TABLE FOR PROJECTS
@@ -89,13 +89,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Falling Clouds', 'Instead of Falling Water, join Frank Lloyd Wright in designing and building Falling Clouds. Falling Clouds is his next big project for the Australian Government and will define the next generation of architects', 'Architecture', 'Not-for-profit', 'A', 'USA', 'Masterton Artchitects', 4)");
         db.execSQL("INSERT INTO " + DbContract.ProjectTable.TABLE_NAME + " (" + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.OWNER + ") VALUES ('Fast & Furious 21', 'Join the leading producers from the Fast & Furious franchise as a photographer. Your primary role will be to find views which befit the storied movie franchise', 'Photography & Videography', 'Requires Sponsorship', 'B', 'Japan', 'Roadshow Studios', 4)");
 
-        db.execSQL("INSERT INTO " + DbContract.ProfileTable.TABLE_NAME + " (" + DbContract.ProfileTable.FIRST_NAME + ", " + DbContract.ProfileTable.LAST_NAME + ", " + DbContract.ProfileTable.LOCATION + ", " + DbContract.ProfileTable.OCCUPATION + ", " + DbContract.ProfileTable.USER_ID + ") VALUES ('James', 'Cook', 'Sydney', 'Captain', 1)");
+        db.execSQL("INSERT INTO " + DbContract.ProfileTable.TABLE_NAME + " (" + DbContract.ProfileTable.FIRST_NAME + ", " + DbContract.ProfileTable.LAST_NAME + ", " + DbContract.ProfileTable.LOCATION + ", " + DbContract.ProfileTable.OCCUPATION + ", " + DbContract.ProfileTable.PROFILE_PREF + ", " + DbContract.ProfileTable.USER_ID + ") VALUES ('James', 'Cook', 'Sydney', 'Captain', 2, 1)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + DbContract.UsersTable.TABLE_NAME);
-
         db.execSQL("DROP TABLE IF EXISTS " + DbContract.ProfileTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DbContract.ExperienceTable.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DbContract.SkillTable.TABLE_NAME);
@@ -494,6 +493,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         Cursor cursor1 = null;
+        List<Project> invitationsList = new ArrayList<>();
         try {
             cursor = db.rawQuery("SELECT " + DbContract.CollaboratorTable.PROJECT_ID + ", " + DbContract.CollaboratorTable.OWNER + " FROM " + DbContract.CollaboratorTable.TABLE_NAME + " WHERE " + DbContract.CollaboratorTable.STATUS + " = 'false' AND " + DbContract.CollaboratorTable.MEMBER + " = " + userID, null);
 
@@ -506,23 +506,24 @@ public class DbHelper extends SQLiteOpenHelper {
                 int projID = cursor.getInt(IDCol);
                 int ownerID = cursor.getInt(ownerCol);
 
-                cursor1 = db.rawQuery("SELECT " + DbContract.ProjectTable.NAME + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable._ID + " = " + projID, null);
+                cursor1 = db.rawQuery("SELECT " + DbContract.ProjectTable.NAME + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable._ID + " = " + projID + " AND " + DbContract.ProjectTable.OWNER + " != " + userID, null);
 
                 int nameCol = cursor1.getColumnIndex(DbContract.ProjectTable.NAME);
 
                 while(cursor1.moveToNext()) {
                     projName = cursor1.getString(nameCol);
                 }
-
                 Project invitation = new Project(projID, ownerID, projName);
-                projectList.add(invitation);
+                if(!projName.equals("") && invitation.getOwner()!=userID) {
+                    invitationsList.add(invitation);
+                }
             }
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
             cursor.close();
         }
-        return projectList;
+        return invitationsList;
     }
 
     public String getProjectName(int projID) {
@@ -576,27 +577,28 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public Profile getProfile(int userID) {
-        Profile failedProfile = new Profile("failedtoretrieve","failedtoretrieve","failedtoretrieve","failedtoretrieve");
+        Profile failedProfile = new Profile("failedtoretrieve","failedtoretrieve","failedtoretrieve","failedtoretrieve",1);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         try {
-            cursor = db.rawQuery("SELECT " + DbContract.ProfileTable.FIRST_NAME + ", " + DbContract.ProfileTable.LAST_NAME + ", " + DbContract.ProfileTable.LOCATION + ", " + DbContract.ProfileTable.OCCUPATION + " FROM " + DbContract.ProfileTable.TABLE_NAME + " WHERE " + DbContract.ProfileTable.USER_ID + " = " + userID, null);
+            cursor = db.rawQuery("SELECT " + DbContract.ProfileTable.FIRST_NAME + ", " + DbContract.ProfileTable.LAST_NAME + ", " + DbContract.ProfileTable.LOCATION + ", " + DbContract.ProfileTable.OCCUPATION + ", " + DbContract.ProfileTable.PROFILE_PREF + " FROM " + DbContract.ProfileTable.TABLE_NAME + " WHERE " + DbContract.ProfileTable.USER_ID + " = " + userID, null);
 
             int fnameCol = cursor.getColumnIndex(DbContract.ProfileTable.FIRST_NAME);
             int lnameCol = cursor.getColumnIndex(DbContract.ProfileTable.LAST_NAME);
             int locationCol = cursor.getColumnIndex(DbContract.ProfileTable.LOCATION);
             int occupationCol = cursor.getColumnIndex(DbContract.ProfileTable.OCCUPATION);
+            int PPCol = cursor.getColumnIndex(DbContract.ProfileTable.PROFILE_PREF);
 
             while(cursor.moveToNext()) {
-
                 String fname = cursor.getString(fnameCol);
                 String lname = cursor.getString(lnameCol);
                 String location = cursor.getString(locationCol);
                 String occupation = cursor.getString(occupationCol);
+                int profilePref = cursor.getInt(PPCol);
 
-                Profile retrievedProfile = new Profile(fname, lname, location, occupation);
-                //   Log.d(TAG, "getProfile: " + fname);
+                Profile retrievedProfile = new Profile(fname, lname, location, occupation, profilePref);
+                Log.d(TAG, "getProfile: " + fname);
                 return retrievedProfile;
             }
         } catch(Exception e) {
@@ -614,12 +616,15 @@ public class DbHelper extends SQLiteOpenHelper {
         String lname = profile.getLast_name();
         String location = profile.getLocation();
         String occupation = profile.getOccupation();
+        int pp = profile.getProfilePreference();
 
         db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.FIRST_NAME+ " = '" + fname + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
         db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.LAST_NAME+ " = '" + lname + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
         db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.LOCATION+ " = '" + location + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
         db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.OCCUPATION+ " = '" + occupation + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
+        db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.PROFILE_PREF+ " = '" + pp + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
     }
+
     //FIXED//
     public List<Project> getFeaturedProjects(int id1, int id2, int id3) {
         SQLiteDatabase db = this.getReadableDatabase();

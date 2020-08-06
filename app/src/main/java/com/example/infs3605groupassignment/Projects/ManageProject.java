@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.infs3605groupassignment.Database.DbContract;
 import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Home.Home;
 import com.example.infs3605groupassignment.Objects.Project;
@@ -69,6 +70,7 @@ public class ManageProject extends AppCompatActivity {
             }
         });
 
+
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         Fragment fragment = new ProjectManageFragment();
@@ -81,6 +83,9 @@ public class ManageProject extends AppCompatActivity {
         invitation = findViewById(R.id.txvInvitationPM);
         dividerProject = findViewById(R.id.dividerProject);
         dividerInvitation = findViewById(R.id.dividerInvitation);
+        nothingsHere = findViewById(R.id.nothingshere);
+        createTextBit = findViewById(R.id.createprojtext);
+        final DbHelper dbHelper = new DbHelper(getApplicationContext());
 
         project.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +97,16 @@ public class ManageProject extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.scvFragment1, fragment).commit();
                 dividerProject.setBackgroundResource(R.color.dark_magenta);
                 dividerInvitation.setBackgroundResource(R.color.white);
+
+                List<Project> projects = dbHelper.getIndividualProjects(userID);
+                if(projects.isEmpty() || projects.equals(null)){
+                    createTextBit.setText("Get started! Create your first project");
+                    nothingsHere.setVisibility(View.VISIBLE);
+                }
+                else{
+                    createTextBit.setText("Create a new project!");
+                    nothingsHere.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
@@ -105,6 +120,14 @@ public class ManageProject extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.scvFragment1, fragment).commit();
                 dividerInvitation.setBackgroundResource(R.color.dark_magenta);
                 dividerProject.setBackgroundResource(R.color.white);
+
+                List<Project> invitations = dbHelper.getInvitations(userID);
+                if (invitations.isEmpty() || invitations.equals(null)){
+                    nothingsHere.setVisibility(View.VISIBLE);
+                }
+                else{
+                    nothingsHere.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
@@ -118,16 +141,14 @@ public class ManageProject extends AppCompatActivity {
             }
         });
 
-        nothingsHere = findViewById(R.id.nothingshere);
-        createTextBit = findViewById(R.id.createprojtext);
-        final DbHelper dbHelper = new DbHelper(getApplicationContext());
         List<Project> projects = dbHelper.getIndividualProjects(userID);
         if(projects.isEmpty() || projects.equals(null)){
             createTextBit.setText("Get started! Create your first project");
+            nothingsHere.setVisibility(View.VISIBLE);
         }
         else{
             createTextBit.setText("Create a new project!");
-            nothingsHere.setVisibility(View.GONE);
+            nothingsHere.setVisibility(View.INVISIBLE);
         }
 
     }

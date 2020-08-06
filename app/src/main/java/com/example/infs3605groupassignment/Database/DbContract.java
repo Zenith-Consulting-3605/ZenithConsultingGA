@@ -23,6 +23,7 @@ public final class DbContract {
         public static final String LAST_NAME = "last_name";
         public static final String LOCATION = "location";
         public static final String OCCUPATION = "occupation";
+        public static final String PROFILE_PREF = "profile_pref";
         public static final String USER_ID = "user_id";
     }
 

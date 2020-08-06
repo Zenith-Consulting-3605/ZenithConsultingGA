@@ -48,7 +48,6 @@ public class InvitationAdapter extends RecyclerView.Adapter<InvitationAdapter.In
             reject = v.findViewById(R.id.imvReject);
             accept = v.findViewById(R.id.imvAccept);
 
-
             reject.setOnClickListener(this);
             accept.setOnClickListener(this);
         }

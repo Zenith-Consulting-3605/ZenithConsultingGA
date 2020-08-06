@@ -20,7 +20,7 @@ public class ProfileHeaderEdit extends AppCompatActivity {
     public static final String CODE_EXTRA = "CODE_EXTRA";
     private TextView fname, lname, location, occupation;
     private Button save;
-    private ImageView close;
+    private ImageView close, option1, option2;
     private String savedTitle;
 
     @Override
@@ -34,7 +34,7 @@ public class ProfileHeaderEdit extends AppCompatActivity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * 0.9), (int) (height * 0.7));
+        getWindow().setLayout((int) (width * 0.9), (int) (height * 0.9));
 
         Intent intent = getIntent();
         String identifier = intent.getStringExtra(ProfileHeaderEdit.CODE_EXTRA);
@@ -44,6 +44,8 @@ public class ProfileHeaderEdit extends AppCompatActivity {
         lname = findViewById(R.id.txvLName);
         location = findViewById(R.id.txvLocation);
         occupation = findViewById(R.id.txvOccupation);
+        option1 = findViewById(R.id.profileOption1);
+        option2 = findViewById(R.id.profileOption2);
 
         final DbHelper dbHelper = new DbHelper(getApplicationContext());
 
@@ -54,6 +56,20 @@ public class ProfileHeaderEdit extends AppCompatActivity {
         location.setText(profile.getLocation());
         occupation.setText(profile.getOccupation());
 
+        option1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                profile.setProfilePreference(1);
+            }
+        });
+
+        option2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                profile.setProfilePreference(2);
+            }
+        });
+
         save = findViewById(R.id.btnSave);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,9 +79,8 @@ public class ProfileHeaderEdit extends AppCompatActivity {
                 String assemLocation = location.getText().toString();
                 String assemOccupation = occupation.getText().toString();
 
-                Profile editProf = new Profile(assemFname, assemLname, assemLocation, assemOccupation);
+                Profile editProf = new Profile(assemFname, assemLname, assemLocation, assemOccupation, profile.getProfilePreference());
                 dbHelper.editProfile(editProf, userID);
-
                 finish();
                 Intent intent = new Intent(ProfileHeaderEdit.this, ProfileActivity.class);
                 intent.putExtra("userID", userID);

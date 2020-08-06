@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
+import com.example.infs3605groupassignment.Objects.Profile;
 
 public class SignUp extends AppCompatActivity {
 
@@ -57,6 +58,8 @@ public class SignUp extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Register Successful", Toast.LENGTH_SHORT).show();
                                 int userId = db.getUserID(em, ps);
                                 db.generateAddSkill(userId);
+                                Profile profile = new Profile(fn,ln, "please update your location", "please update your occupation", 1);
+                                db.createProfile(profile, userId);
                                 startActivity(new Intent(SignUp.this, MainActivity.class));
                             }
                         }
