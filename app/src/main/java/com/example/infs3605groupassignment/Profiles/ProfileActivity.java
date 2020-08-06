@@ -28,10 +28,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileActivity extends AppCompatActivity {
     private ImageView home;
     private ImageView project;
-    private ImageView profileImg;
+    private CircleImageView profileImg;
 
     private TextView name;
     private TextView occupation;
