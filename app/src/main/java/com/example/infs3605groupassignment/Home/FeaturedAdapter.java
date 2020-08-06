@@ -44,7 +44,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
         private ImageView image;
         private FeaturedClickListener listener;
 
-        public FeaturedViewHolder(View v, FeaturedClickListener listener) {
+        public FeaturedViewHolder(View v, final FeaturedClickListener listener) {
             super(v);
             this.listener = listener;
 
@@ -52,6 +52,13 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
             title = v.findViewById(R.id.txvFeatureTitle);
             company = v.findViewById(R.id.txvFeatureCompany);
             category = v.findViewById(R.id.txvFeatureCategory);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick(getSpecID(getAdapterPosition()));
+                }
+            });
         }
 
         @Override

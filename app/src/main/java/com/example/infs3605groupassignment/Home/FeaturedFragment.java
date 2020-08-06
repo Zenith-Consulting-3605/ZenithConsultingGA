@@ -146,7 +146,6 @@ public class FeaturedFragment extends Fragment {
                                     JSONObject hit = jsonArray.getJSONObject(0);
                                     webformatURL = hit.getString("webformatURL");
                                 }
-                                Log.d(TAG, "CORRECT URL IS: " + webformatURL);
 
                                 Project newProj = new Project(project.getID(), project.getName(), project.getCompany(), project.getCategory(), webformatURL);
                                 updatedProjects.add(newProj);
@@ -155,7 +154,8 @@ public class FeaturedFragment extends Fragment {
                                     @Override
                                     public void onClick(int ID) {
                                         Log.d(TAG, "Feature was clicked, ID was: " + ID);
-                                        Intent intent = new Intent(getContext(), ProjectDetail.class); //NEED TO FIX TO GO TO CORRECT ACTIVITY
+                                        Intent intent = new Intent(getContext(), ProjectDetail.class);
+                                        intent.putExtra("projID",ID);
                                         intent.putExtra("userID", userID);
                                         startActivity(intent);
                                     }

@@ -146,9 +146,9 @@ public class ProjectSearchFragment extends Fragment {
         for (int i = 0; i < projList.size(); i++) {
             final Project pj = projList.get(i);
             String fullName = pj.getName();
+            Log.d(TAG, "PROJECTID: " + pj.getID());
             String[] nameArray = fullName.split("\\s+");
             String fWord = nameArray[0];
-//            Log.d(TAG, "WORD: " + fWord);
 
             String url = "https://pixabay.com/api/?key=17762136-3d8484fce3723ad954e31049c&q=" + fWord + "&image_type=photo&pretty=true";
 
@@ -166,14 +166,16 @@ public class ProjectSearchFragment extends Fragment {
                                     webformatURL = hit.getString("webformatURL");
                                 }
                                 Project update = new Project(pj.getID(), pj.getName(), pj.getFunding(), pj.getCompany(), pj.getCountry(), pj.getDescription(), pj.getProgress(), pj.getCategory(), webformatURL);
+
                                 updatedList.add(update);
 
                                 adapter = new ProjectSearchAdapter(getContext(), ProjectSearchFragment.this, updatedList, new ProjectSearchAdapter.ProjectSearchClickListener() {
                                     @Override
-                                    public void onClick(int id) {
-//                                        Log.d(TAG, "Project " + id + " was clicked");
+                                    public void onUserClick(int id) {
                                         Intent intent = new Intent(getContext(), ProjectDetail.class);
                                         intent.putExtra("userID", userID);
+                                        intent.putExtra("projID", id);
+                                        Log.d(TAG, "LOADING DETAIL CLASS, ID is " + id);
                                         startActivity(intent);
                                     }
                                 });

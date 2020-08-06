@@ -42,14 +42,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/scvFeatured"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/scvFeatured"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp">
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:focusable="true"/>
 
             <TextView
                 android:id="@+id/textView4"

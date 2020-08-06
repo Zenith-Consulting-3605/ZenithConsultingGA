@@ -78,11 +78,15 @@ public class InvitationAdapter extends RecyclerView.Adapter<InvitationAdapter.In
         Project invitation = invitations.get(position);
 
         holder.content.setText(invitation.getName());
-//        holder.title.setText("Invitation from " + invitation.getName());
     }
 
     @Override
     public int getItemCount() { return invitations.size(); }
 
     public int getSpecID(int position) { return invitations.get(position).getID(); }
+
+    public void reload(List<Project> reloadedList) {
+        invitations = reloadedList;
+        notifyDataSetChanged();
+    }
 }

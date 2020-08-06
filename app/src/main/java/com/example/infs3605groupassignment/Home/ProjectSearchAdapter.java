@@ -33,7 +33,7 @@ public class ProjectSearchAdapter extends RecyclerView.Adapter<ProjectSearchAdap
     }
 
     public interface ProjectSearchClickListener {
-        void onClick (int id);
+        void onUserClick (int id);
     }
 
     public class ProjectSearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -50,10 +50,17 @@ public class ProjectSearchAdapter extends RecyclerView.Adapter<ProjectSearchAdap
             name = v.findViewById(R.id.txvPSName);
             company = v.findViewById(R.id.txvPSCompany);
             category = v.findViewById(R.id.txvPSCategory);
+
+//            v.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    listener.onUserClick(getAdapterPosition());
+//                }
+//            });
         }
 
         @Override
-        public void onClick (View view) { listener.onClick(getSpecID(getAdapterPosition())); }
+        public void onClick (View view) { listener.onUserClick(getSpecID(getAdapterPosition())); }
     }
 
     @Override
@@ -65,8 +72,6 @@ public class ProjectSearchAdapter extends RecyclerView.Adapter<ProjectSearchAdap
     @Override
     public void onBindViewHolder(ProjectSearchViewHolder holder, int position) {
         Project project = projectList.get(position);
-        Log.d(TAG, "onBindViewHolder: " + project.getImageURL());
-
 
         if(project.getImageURL().equals("NO_RESULTS")) {
             holder.picture.setImageResource(R.drawable.no_image);
@@ -82,10 +87,10 @@ public class ProjectSearchAdapter extends RecyclerView.Adapter<ProjectSearchAdap
     @Override
     public int getItemCount() { return projectList.size(); }
 
+    public int getSpecID(int position) { return projectList.get(position).getID(); }
+
     public void filterList(List<Project> filteredList) {
         projectList = filteredList;
         notifyDataSetChanged();
     }
-
-    public int getSpecID(int position) { return projectList.get(position).getID(); }
 }

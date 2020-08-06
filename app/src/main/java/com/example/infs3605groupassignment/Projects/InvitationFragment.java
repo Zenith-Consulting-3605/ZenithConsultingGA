@@ -10,11 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
 import com.example.infs3605groupassignment.Objects.Project;
 import com.example.infs3605groupassignment.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,8 +32,9 @@ public class InvitationFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private InvitationAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private List<Project> invitationList = new ArrayList<>();
 
     private String TAG = "INVITATION_FRAGMENT";
 
@@ -86,21 +89,27 @@ public class InvitationFragment extends Fragment {
 
         final DbHelper dbHelper = new DbHelper(getContext());
 
-        List<Project> invitationList = dbHelper.getInvitations(userID);
+        invitationList = dbHelper.getInvitations(userID);
 
         adapter = new InvitationAdapter(this, invitationList, new InvitationAdapter.InvitationClickListener() {
             @Override
             public void onReject(int ID) {
                 Log.d(TAG, "REJECT WAS PRESSED ON INVITATION FOR PROJECT " + ID);
+                Toast.makeText(getContext(), "Invitation was Rejected", Toast.LENGTH_SHORT).show();
                 dbHelper.rejectInvitation(ID, userID);
-                adapter.notifyDataSetChanged();
+                invitationList.clear();
+                invitationList = dbHelper.getInvitations(userID);
+                adapter.reload(invitationList);
             }
 
             @Override
             public void onAccept(int ID) {
                 Log.d(TAG, "ACCEPT WAS PRESSED ON INVITATION FOR PROJECT " + ID);
+                Toast.makeText(getContext(), "Invitation was Accepted", Toast.LENGTH_SHORT).show();
                 dbHelper.acceptInvitation(ID, userID);
-                adapter.notifyDataSetChanged();
+                invitationList.clear();
+                invitationList = dbHelper.getInvitations(userID);
+                adapter.reload(invitationList);
             }
         });
 

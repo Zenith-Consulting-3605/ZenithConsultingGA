@@ -702,7 +702,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 String description = cursor.getString(descriptionCol);
                 String progress = cursor.getString(progressCol);
                 String category = cursor.getString(categoryCol);
-                Project retreivedProj = new Project(name, funding, company, country, description, progress, category);
+                Project retreivedProj = new Project(id, name, funding, company, country, description, progress, category);
                 projectList.add(retreivedProj);
             }
 
@@ -743,5 +743,40 @@ public class DbHelper extends SQLiteOpenHelper {
             cursor.close();
         }
         return retreivedUser;
+    }
+
+    public Project getDetailProject(int projID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Project project = new Project();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.CATEGORY + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.PROGRESS + " FROM " + DbContract.ProjectTable.TABLE_NAME + " WHERE " + DbContract.ProjectTable._ID + " = '" + projID + "'", null);
+
+            int nameCol = cursor.getColumnIndex(DbContract.ProjectTable.NAME);
+            int companyCol = cursor.getColumnIndex(DbContract.ProjectTable.COMPANY);
+            int countryCol = cursor.getColumnIndex(DbContract.ProjectTable.COUNTRY);
+            int descriptionCol = cursor.getColumnIndex(DbContract.ProjectTable.DESCRIPTION);
+            int categoryCol = cursor.getColumnIndex(DbContract.ProjectTable.CATEGORY);
+            int fundingCol = cursor.getColumnIndex(DbContract.ProjectTable.FUNDING);
+            int progressCol = cursor.getColumnIndex(DbContract.ProjectTable.PROGRESS);
+
+            while(cursor.moveToNext()) {
+                String name = cursor.getString(nameCol);
+                String company = cursor.getString(companyCol);
+                String country = cursor.getString(countryCol);
+                String description = cursor.getString(descriptionCol);
+                String category = cursor.getString(categoryCol);
+                String funding = cursor.getString(fundingCol);
+                String progress = cursor.getString(progressCol);
+
+                project = new Project(name, description, category, funding, progress, country, company);
+            }
+            return project;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cursor.close();
+        }
+        return project;
     }
 }
