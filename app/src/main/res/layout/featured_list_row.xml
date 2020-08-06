@@ -35,13 +35,15 @@
                     android:id="@+id/txvFeatureTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Title" />
+                    android:text="Title"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txvFeatureCompany"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Company" />
+                    android:text="Company"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
@@ -49,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Category" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

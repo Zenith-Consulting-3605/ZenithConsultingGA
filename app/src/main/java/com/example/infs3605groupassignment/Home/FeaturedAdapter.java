@@ -73,7 +73,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
             Picasso.with(context).load(feature.getImageURL()).fit().centerCrop().into(holder.image);
         }
         holder.title.setText(feature.getName());
-        holder.company.setText(feature.getCompany());
+        holder.company.setText(" | "+ feature.getCompany());
         holder.category.setText(feature.getCategory());
     }
 

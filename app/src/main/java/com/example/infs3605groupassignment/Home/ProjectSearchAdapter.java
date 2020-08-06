@@ -75,8 +75,8 @@ public class ProjectSearchAdapter extends RecyclerView.Adapter<ProjectSearchAdap
         }
 
         holder.name.setText(project.getName());
-        holder.company.setText(project.getCompany());
-        holder.category.setText(project.getCategory());
+        holder.company.setText(project.getCategory());
+        holder.category.setText(project.getCompany());
     }
 
     @Override
