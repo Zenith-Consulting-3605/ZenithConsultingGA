@@ -715,17 +715,4 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return projectList;
     }
-
-//    public List<Project> getProjectList() {
-//        SQLiteDatabase db = getReadableDatabase();
-//        Cursor cursor = null;
-//        try {
-//            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable._ID + ", " + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.CATEGORY + " FROM " + DbContract.ProjectTable.TABLE_NAME, null);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            cursor.close();
-//        }
-//    }
-
 }

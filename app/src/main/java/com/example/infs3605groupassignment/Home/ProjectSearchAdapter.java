@@ -1,6 +1,7 @@
 package com.example.infs3605groupassignment.Home;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,8 +65,12 @@ public class ProjectSearchAdapter extends RecyclerView.Adapter<ProjectSearchAdap
     @Override
     public void onBindViewHolder(ProjectSearchViewHolder holder, int position) {
         Project project = projectList.get(position);
-//        Log.d(TAG, "onBindViewHolder: " + project.getImageURL());
-        if(!(project.getImageURL()).equals("NO_RESULTS")) {
+        Log.d(TAG, "onBindViewHolder: " + project.getImageURL());
+
+
+        if(project.getImageURL().equals("NO_RESULTS")) {
+            holder.picture.setImageResource(R.drawable.no_image);
+        } else {
             Picasso.with(context).load(project.getImageURL()).fit().centerCrop().into(holder.picture);
         }
 

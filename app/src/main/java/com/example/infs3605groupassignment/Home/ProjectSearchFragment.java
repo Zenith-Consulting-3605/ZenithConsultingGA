@@ -59,7 +59,7 @@ public class ProjectSearchFragment extends Fragment {
     private String webformatURL;
     private List<Project> projectList = new ArrayList<>();
     private List<Project> updatedList = new ArrayList<>();
-    private List<Project> lister = new ArrayList<>();
+//    private List<Project> lister = new ArrayList<>();
     private Context context;
 
     // TODO: Rename and change types of parameters
@@ -194,14 +194,14 @@ public class ProjectSearchFragment extends Fragment {
     }
 
     public void filter(String text) {
-        lister.clear();
-
+//        lister.clear();
+        final List<Project> lister = new ArrayList<>();
         List<Project> filteredList = new ArrayList<>();
 
         final DbHelper dbHelper = new DbHelper(getContext());
 
         List<Project> returnList = dbHelper.getAllProjects();
-//NEED TO MAKE SO IF NOTHING TYPED IN THEN RETURN ALL PROJECTS
+
         if (text.trim().length() == 0) {
             filteredList = returnList;
         } else {
@@ -217,7 +217,7 @@ public class ProjectSearchFragment extends Fragment {
             String name = rp.getName();
             String[] nameArray = name.split("\\s+");
             String fWord = nameArray[0];
-            Log.d(TAG, name);
+            Log.d(TAG, "FWORD:" + name);
 
             String url = "https://pixabay.com/api/?key=17762136-3d8484fce3723ad954e31049c&q=" + fWord + "&image_type=photo&pretty=true";
 
@@ -233,15 +233,11 @@ public class ProjectSearchFragment extends Fragment {
                                 } else {
                                     JSONObject hit = jsonArray.getJSONObject(0);
                                     webformatURL = hit.getString("webformatURL");
-//                                    Log.d(TAG, "WEBFORMAT: " + webformatURL);
-
-                                    Project update = new Project(rp.getID(), rp.getName(), rp.getFunding(), rp.getCompany(), rp.getCountry(), rp.getDescription(), rp.getProgress(), rp.getCategory(), webformatURL);
-
-                                    lister.add(update);
-
-//                                    Log.d(TAG, update.toString());
-                                    adapter.filterList(lister);
                                 }
+
+                                Project update = new Project(rp.getID(), rp.getName(), rp.getFunding(), rp.getCompany(), rp.getCountry(), rp.getDescription(), rp.getProgress(), rp.getCategory(), webformatURL);
+                                lister.add(update);
+                                adapter.filterList(lister);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
