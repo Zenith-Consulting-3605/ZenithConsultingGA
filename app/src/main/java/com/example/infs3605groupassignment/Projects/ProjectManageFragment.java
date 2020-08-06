@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.infs3605groupassignment.Database.DbHelper;
+import com.example.infs3605groupassignment.Home.ProjectEdit;
 import com.example.infs3605groupassignment.Objects.Project;
 import com.example.infs3605groupassignment.Profiles.ProfileActivity;
 import com.example.infs3605groupassignment.R;
@@ -91,9 +92,10 @@ public class ProjectManageFragment extends Fragment {
 
         adapter = new ProjectManageAdapter(this, projectList, new ProjectManageAdapter.ProjectManageClickListener() {
             @Override
-            public void onClick(String title) {
-                Intent intent = new Intent(getContext(), ProfileActivity.class); //REDIRECTS TO THE WRONG PLACE NEED TO FIX
+            public void onEdit(int ID) {
+                Intent intent = new Intent(getContext(), ProjectEdit.class);
                 intent.putExtra("userID", userID);
+                intent.putExtra("projID", ID);
                 startActivity(intent);
             }
         });

@@ -41,6 +41,13 @@ public class ProjectDetail extends AppCompatActivity {
         description.setText(project.getDescription());
         category.setText(project.getCategory());
         funding.setText(project.getFunding());
-        progress.setText(project.getProgress());
+
+        if (project.getProgress().equals("A")) {
+            progress.setText("Ideation");
+        } else if (project.getProgress().equals("B")) {
+            progress.setText("In Development");
+        } else {
+            progress.setText("Complete");
+        }
     }
 }

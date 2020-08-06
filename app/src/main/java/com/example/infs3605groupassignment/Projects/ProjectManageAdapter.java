@@ -1,9 +1,11 @@
 package com.example.infs3605groupassignment.Projects;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,12 +32,13 @@ public class ProjectManageAdapter extends RecyclerView.Adapter<ProjectManageAdap
     }
 
     public interface ProjectManageClickListener {
-        void onClick (String title);
+        void onEdit (int ID);
     }
 
     public class ProjectManageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView name, funding, company, country, description;
         private ImageView cover;
+        private Button edit;
         private ProjectManageClickListener listener;
 
         public ProjectManageViewHolder(View v, ProjectManageClickListener listener) {
@@ -49,10 +52,18 @@ public class ProjectManageAdapter extends RecyclerView.Adapter<ProjectManageAdap
             company = v.findViewById(R.id.txvProjManageCompany);
             country = v.findViewById(R.id.txvProjManageCountry);
             description = v.findViewById(R.id.txvProjManageDescription);
+
+            edit = v.findViewById(R.id.btnMPEdit);
+            edit.setOnClickListener(this);
         }
 
         @Override
-        public void onClick (View view) { listener.onClick(getSpecTitle(getAdapterPosition())); }
+        public void onClick (View view) {
+            if (view.getId() == R.id.btnMPEdit) {
+                listener.onEdit(getSpecID(getAdapterPosition()));
+            }
+
+        }
 
     }
 
@@ -84,5 +95,5 @@ public class ProjectManageAdapter extends RecyclerView.Adapter<ProjectManageAdap
     @Override
     public int getItemCount() { return projects.size(); }
 
-    public String getSpecTitle(int position) { return projects.get(position).getName(); }
+    public int getSpecID(int position) { return projects.get(position).getID(); }
 }

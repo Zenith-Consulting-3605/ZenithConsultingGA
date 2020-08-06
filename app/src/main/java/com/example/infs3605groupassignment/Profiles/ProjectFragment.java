@@ -86,14 +86,14 @@ public class ProjectFragment extends Fragment {
 
         final DbHelper dbHelper = new DbHelper(getContext());
 
-        List<Project> projectList = dbHelper.getIndividualProjects(userID);
+        List<Project> projectList = dbHelper.getIndividualProjects2(userID);
 
         adapter = new ProjectAdapter(this, projectList, new ProjectAdapter.ProjectClickListener() {
              @Override
              public void onClick(String title) {
-                 Intent intent = new Intent(getContext(), ProfileActivity.class); //WILL NEED TO FIX THIS
-                 intent.putExtra("userID", userID);
-                 startActivity(intent);
+//                 Intent intent = new Intent(getContext(), ProfileActivity.class); //WILL NEED TO FIX THIS
+//                 intent.putExtra("userID", userID);
+//                 startActivity(intent);
              }
          });
         recyclerView.setAdapter(adapter);

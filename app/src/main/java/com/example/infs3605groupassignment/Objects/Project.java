@@ -96,6 +96,17 @@ public class Project {
         this.company = company;
     }
 
+    public Project(int ID, String name, String funding, String company, String country, String description, String progress) {
+        this.ID = ID;
+        this.name = name;
+        this.description = description;
+        this.funding = funding;
+        this.progress = progress;
+        this.country = country;
+        this.company = company;
+    }
+
+
     public String getName() {
         return name;
     }

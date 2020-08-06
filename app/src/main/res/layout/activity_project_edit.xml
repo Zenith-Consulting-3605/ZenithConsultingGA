@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home.ProjectEdit">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cslTop2"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/dark_magenta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imvClose2"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cross" />
+
+        <Button
+            android:id="@+id/btnProjSave"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:elevation="0dp"
+            android:stateListAnimator="@null"
+            android:text="Save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:fontFamily="@font/bold"
+            android:text="Name"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtProjName"
+            android:layout_width="300sp"
+            android:layout_height="30sp"
+            android:background="@drawable/input_field"
+            android:ems="10"
+            android:fontFamily="@font/regular"
+            android:hint="Project Name"
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/bold"
+            android:text="Description"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtProjDescription"
+            android:layout_width="300sp"
+            android:layout_height="80sp"
+            android:background="@drawable/input_field"
+            android:ems="10"
+            android:fontFamily="@font/regular"
+            android:hint="Description"
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/bold"
+            android:text="Category"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/sprProjectCategory"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:background="@drawable/spinner" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
+                    android:text="Current Progress"
+                    android:textSize="18sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgpProgress1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content">
+
+
+                    <RadioButton
+                        android:id="@+id/rbtIdeation1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="Ideation"
+                        android:textColor="#FE635D5D"
+                        android:textColorLink="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbtInDevelopment1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="In Development"
+                        android:textColor="#595050" />
+
+                    <RadioButton
+                        android:id="@+id/rbtComplete1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="Complete"
+                        android:textColor="#595050" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
+                    android:text="Funding"
+                    android:textSize="18sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgpFunding1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/rbtRS1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="Requires Sponsorship"
+                        android:textColor="#595050" />
+
+                    <RadioButton
+                        android:id="@+id/rbtNFP1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="Not-for-profit"
+                        android:textColor="#595050" />
+                </RadioGroup>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/bold"
+            android:text="Company"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtProjCompany"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:background="@drawable/input_field"
+            android:ems="10"
+            android:hint="Company"
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/bold"
+            android:text="Country"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtProjCountry"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:background="@drawable/input_field"
+            android:ems="10"
+            android:hint="Country"
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

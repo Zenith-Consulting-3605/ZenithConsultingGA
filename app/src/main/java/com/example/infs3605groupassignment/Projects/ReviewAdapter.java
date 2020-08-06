@@ -75,6 +75,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         User user = userList.get(position);
         holder.name.setText(user.getFirstName() + " " + user.getLastName());
         holder.email.setText(user.getEmail());
+        holder.dp.setImageResource(R.drawable.avatar2);
     }
 
     @Override

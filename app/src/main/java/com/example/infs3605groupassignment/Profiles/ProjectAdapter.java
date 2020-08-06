@@ -1,5 +1,6 @@
 package com.example.infs3605groupassignment.Profiles;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
