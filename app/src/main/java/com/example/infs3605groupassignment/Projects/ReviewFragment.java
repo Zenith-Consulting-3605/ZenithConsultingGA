@@ -17,6 +17,7 @@ import com.example.infs3605groupassignment.Objects.User;
 import com.example.infs3605groupassignment.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -38,6 +39,8 @@ public class ReviewFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private List<User> userList = new ArrayList<>();
     private int[] collaborate;
+    private List<Integer> reviewed = new ArrayList<>();
+    private String TAG = "REVIEW_FRAGMENT";
 
 
     // TODO: Rename and change types of parameters
@@ -81,6 +84,7 @@ public class ReviewFragment extends Fragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_project_review, container, false);
         collaborate = getArguments().getIntArray("collaborators");
+        Log.d(TAG, Arrays.toString(collaborate));
 
         recyclerView = v.findViewById(R.id.rvListReview);
         recyclerView.setHasFixedSize(true);
@@ -89,20 +93,27 @@ public class ReviewFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         final DbHelper dbHelper = new DbHelper(getContext());
 
-//        for (int i=0;i<collaborate.length;i++){
-//            int person = collaborate[i];
-//           int userID = dbHelper.getUser(person);
-//           User user = new User(userID);
-//           userList.add(user);
-//
-//
-//        }
+        for (int i=0;i<collaborate.length;i++){
+            int personalID = collaborate[i];
+//            Log.d(TAG, "USERID IS: " + person);
+            User user = dbHelper.getReviewInvites(personalID);
+            userList.add(user);
+        }
 
+//        reviewed = new int[collaborate.length - 1];
 
         adapter = new ReviewAdapter(this,userList, new ReviewAdapter.ReviewClickListener() {
             @Override
             public void onReject(int id){
-
+                Log.d(TAG, "REMOVE PERSON WAS PRESSED");
+//                for (int i = 0; i < collaborate.length; i++) {
+//                    int j = collaborate[i];
+//                    if (j != id) {
+//                        reviewed.add(collaborate[i]);
+//                    }
+//
+//                }
+                Log.d(TAG, "" + reviewed);
             }
 
         });
