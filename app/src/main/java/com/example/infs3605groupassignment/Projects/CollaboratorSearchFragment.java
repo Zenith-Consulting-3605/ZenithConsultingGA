@@ -1,6 +1,7 @@
 package com.example.infs3605groupassignment.Projects;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -43,6 +44,7 @@ public class CollaboratorSearchFragment extends Fragment {
 
     public List<User> invitees = new ArrayList<>();
     public onNextPass passer;
+    private int userID;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -111,7 +113,8 @@ public class CollaboratorSearchFragment extends Fragment {
 
         final DbHelper dbHelper = new DbHelper(getContext());
 
-        List<User> userList = dbHelper.getUserList();
+        userID = getArguments().getInt("userID");
+        List<User> userList = dbHelper.getUserList(userID);
 
         adapter = new CollaboratorSearchAdapter(this, userList, new CollaboratorSearchAdapter.CollaboratorSearchClickListener() {
             @Override
@@ -139,7 +142,7 @@ public class CollaboratorSearchFragment extends Fragment {
 
         final DbHelper dbHelper = new DbHelper(getContext());
 
-        List<User> userList = dbHelper.getUserList();
+        List<User> userList = dbHelper.getUserList(userID);
         for (User user : userList) {
             if (user.getEmail().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(user);
@@ -158,3 +161,5 @@ public class CollaboratorSearchFragment extends Fragment {
         passer = (onNextPass) context;
     }
 }
+//STRING WAS: d-----
+//STRING WAS: -----

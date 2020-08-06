@@ -3,15 +3,14 @@ package com.example.infs3605groupassignment.Home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -141,8 +140,12 @@ public class FeaturedFragment extends Fragment {
                             try {
                                 JSONArray jsonArray = response.getJSONArray("hits");
 
-                                JSONObject hit = jsonArray.getJSONObject(0);
-                                webformatURL = hit.getString("webformatURL");
+                                if(jsonArray.length() < 1) {
+                                    webformatURL = "NO_RESULTS";
+                                } else {
+                                    JSONObject hit = jsonArray.getJSONObject(0);
+                                    webformatURL = hit.getString("webformatURL");
+                                }
                                 Log.d(TAG, "CORRECT URL IS: " + webformatURL);
 
                                 Project newProj = new Project(project.getID(), project.getName(), project.getCompany(), project.getCategory(), webformatURL);
@@ -173,12 +176,7 @@ public class FeaturedFragment extends Fragment {
             });
             requestQueue.add(request);
 
-
-
-
-
         }
-
 
 
     }

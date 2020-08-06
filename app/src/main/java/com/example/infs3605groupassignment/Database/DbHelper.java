@@ -344,6 +344,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return projectList;
     }
+
     //FIXED//
     public List<Project> getProjectManageList(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -413,11 +414,11 @@ public class DbHelper extends SQLiteOpenHelper {
         return projID;
     }
     //WILL NEED TO PERHAPS FILTER OUT INDIVIDUAL OWNING PROJECT//
-    public List<User> getUserList() {
+    public List<User> getUserList(int userID) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         try {
-            cursor = db.rawQuery("SELECT " + DbContract.UsersTable._ID + ", " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + " FROM " + DbContract.UsersTable.TABLE_NAME, null);
+            cursor = db.rawQuery("SELECT " + DbContract.UsersTable._ID + ", " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + " FROM " + DbContract.UsersTable.TABLE_NAME + " WHERE " + DbContract.UsersTable._ID + " != " + userID, null);
 
             int idCol = cursor.getColumnIndex(DbContract.UsersTable._ID);
             int fNameCol = cursor.getColumnIndex(DbContract.UsersTable.FIRST_NAME);
@@ -462,7 +463,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return userID;
     }
-
 
     public int getExperienceID(String experience, int userID){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -607,37 +607,6 @@ public class DbHelper extends SQLiteOpenHelper {
         return failedProfile;
     }
 
-//    public void setProfileName(int userID) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        SQLiteDatabase db2 = this.getReadableDatabase();
-//
-//        String fname = "";
-//        String lname = "";
-//        Cursor cursor = null;
-//        try {
-//            cursor = db2.rawQuery("SELECT " + DbContract.ProfileTable.FIRST_NAME + " FROM " + DbContract.ProfileTable.TABLE_NAME + " WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'", null);
-//            int nameCol = cursor.getColumnIndex(DbContract.ProfileTable.FIRST_NAME);
-//
-//            cursor = db2.rawQuery("SELECT " + DbContract.ProfileTable.LAST_NAME + " FROM " + DbContract.ProfileTable.TABLE_NAME + " WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'", null);
-//            int nameCol2 = cursor.getColumnIndex(DbContract.ProfileTable.LAST_NAME);
-//
-//            while(cursor.moveToNext()) {
-//                String name = cursor.getString(nameCol);
-//                String name2 = cursor.getString(nameCol2);
-//
-//                fname = name;
-//                lname = name2;
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            cursor.close();
-//        }
-//        db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.FIRST_NAME+ " = '" + fname + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
-//        db.execSQL("UPDATE " + DbContract.ProfileTable.TABLE_NAME + " SET " + DbContract.ProfileTable.LAST_NAME+ " = '" + lname + "' WHERE " + DbContract.ProfileTable.USER_ID + " = '" + userID + "'");
-//    }
-
     public void editProfile(Profile profile, int userID) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -703,21 +672,47 @@ public class DbHelper extends SQLiteOpenHelper {
         return number;
     }
 
-    public int getUser(int collaborator) {
+    public void generateAddSkill(int userId){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("INSERT INTO " + DbContract.SkillTable.TABLE_NAME + " (" + DbContract.SkillTable.NAME + ", " + DbContract.SkillTable.DESCRIPTION + ", " + DbContract.SkillTable.USER_ID + ", " + DbContract.SkillTable.DUMMY + ") VALUES ('Add Skill+', 'Add Skill+', " + userId + ", 1)");
+    }
+
+    public List<Project> getAllProjects() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = null;
         try {
-            cursor=db.rawQuery("SELECT * FROM "+ DbContract.UsersTable.TABLE_NAME, null);
-            while (cursor.moveToNext()) {
-                collaborator = cursor.getInt(cursor.getColumnIndex(DbContract.UsersTable._ID));
-            }
-        } catch(Exception e){
-            e.printStackTrace();
+            cursor = db.rawQuery("SELECT " + DbContract.ProjectTable._ID + ", " + DbContract.ProjectTable.NAME + ", " + DbContract.ProjectTable.FUNDING + ", " + DbContract.ProjectTable.COMPANY + ", " + DbContract.ProjectTable.COUNTRY + ", " + DbContract.ProjectTable.DESCRIPTION + ", " + DbContract.ProjectTable.PROGRESS + ", " + DbContract.ProjectTable.CATEGORY + " FROM " + DbContract.ProjectTable.TABLE_NAME, null);
 
+            int idCol = cursor.getColumnIndex(DbContract.ProjectTable._ID);
+            int nameCol = cursor.getColumnIndex(DbContract.ProjectTable.NAME);
+            int fundingCol = cursor.getColumnIndex(DbContract.ProjectTable.FUNDING);
+            int companyCol = cursor.getColumnIndex(DbContract.ProjectTable.COMPANY);
+            int countryCol = cursor.getColumnIndex(DbContract.ProjectTable.COUNTRY);
+            int descriptionCol = cursor.getColumnIndex(DbContract.ProjectTable.DESCRIPTION);
+            int progressCol = cursor.getColumnIndex(DbContract.ProjectTable.PROGRESS);
+            int categoryCol = cursor.getColumnIndex(DbContract.ProjectTable.CATEGORY);
+
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(idCol);
+                String name = cursor.getString(nameCol);
+                String funding = cursor.getString(fundingCol);
+                String company = cursor.getString(companyCol);
+                String country = cursor.getString(countryCol);
+                String description = cursor.getString(descriptionCol);
+                String progress = cursor.getString(progressCol);
+                String category = cursor.getString(categoryCol);
+                Project retreivedProj = new Project(name, funding, company, country, description, progress, category);
+                projectList.add(retreivedProj);
+            }
+
+            return projectList;
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             cursor.close();
         }
 
-        return collaborator;
+        return projectList;
     }
 }

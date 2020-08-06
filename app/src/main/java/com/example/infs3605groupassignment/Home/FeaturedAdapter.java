@@ -68,8 +68,10 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @Override
     public void onBindViewHolder(FeaturedViewHolder holder, int position) {
         Project feature = features.get(position);
+        if(!(feature.getImageURL()).equals("NO_RESULTS")) {
 
-        Picasso.with(context).load(feature.getImageURL()).fit().centerCrop().into(holder.image);
+            Picasso.with(context).load(feature.getImageURL()).fit().centerCrop().into(holder.image);
+        }
         holder.title.setText(feature.getName());
         holder.company.setText(feature.getCompany());
         holder.category.setText(feature.getCategory());

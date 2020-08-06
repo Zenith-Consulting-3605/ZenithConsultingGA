@@ -55,13 +55,14 @@ public class SignUp extends AppCompatActivity {
                             Boolean insert = db.insert(fn, ln, em, ps);
                             if (insert == true) {
                                 Toast.makeText(getApplicationContext(), "Register Successful", Toast.LENGTH_SHORT).show();
+                                int userId = db.getUserID(em, ps);
+                                db.generateAddSkill(userId);
                                 startActivity(new Intent(SignUp.this, MainActivity.class));
                             }
                         }
                         else {
                             Toast.makeText(getApplicationContext(), "Email Already Exists", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                     else{}
                 }

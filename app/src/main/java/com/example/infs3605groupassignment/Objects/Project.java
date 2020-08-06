@@ -63,6 +63,29 @@ public class Project {
         this.progress = progress;
     }
 
+    public Project(int ID, String name, String funding, String company, String country, String description, String progress, String category) {
+        this.ID = ID;
+        this.name = name;
+        this.funding = funding;
+        this.company = company;
+        this.country = country;
+        this.description = description;
+        this.progress = progress;
+        this.category = category;
+    }
+
+    public Project(int ID, String name, String funding, String company, String country, String description, String progress, String category, String imageURL) {
+        this.ID = ID;
+        this.name = name;
+        this.funding = funding;
+        this.company = company;
+        this.country = country;
+        this.description = description;
+        this.progress = progress;
+        this.category = category;
+        this.imageURL = imageURL;
+    }
+
     public Project(String name, String description, String category, String funding, String progress, String country, String company) {
         this.name = name;
         this.description = description;
