@@ -715,4 +715,33 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return projectList;
     }
+
+    public User getReviewInvites(int userID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        User retreivedUser = new User();
+        try {
+            cursor = db.rawQuery("SELECT " + DbContract.UsersTable._ID + ", " + DbContract.UsersTable.FIRST_NAME + ", " + DbContract.UsersTable.LAST_NAME + ", " + DbContract.UsersTable.EMAIL + " FROM " + DbContract.UsersTable.TABLE_NAME + " WHERE " + DbContract.UsersTable._ID + " = " + userID, null);
+
+            int idCol = cursor.getColumnIndex(DbContract.UsersTable._ID);
+            int fNameCol = cursor.getColumnIndex(DbContract.UsersTable.FIRST_NAME);
+            int lNameCol = cursor.getColumnIndex(DbContract.UsersTable.LAST_NAME);
+            int emailCol = cursor.getColumnIndex(DbContract.UsersTable.EMAIL);
+
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(idCol);
+                String fName = cursor.getString(fNameCol);
+                String lName = cursor.getString(lNameCol);
+                String email = cursor.getString(emailCol);
+                retreivedUser = new User(id, fName, lName, email);
+            }
+
+            return retreivedUser;
+        } catch (Exception e) {
+
+        } finally {
+            cursor.close();
+        }
+        return retreivedUser;
+    }
 }

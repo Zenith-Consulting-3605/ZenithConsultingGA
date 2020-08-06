@@ -84,7 +84,7 @@ public class ProjectReview extends AppCompatActivity {
         Fragment fragment1 = new ReviewFragment();
         Bundle bundle1 = new Bundle();
         bundle1.putInt("userID", userID);
-        bundle1.putIntArray("Collaborators", invitees);
+        bundle1.putIntArray("collaborators", invitees);
         fragment1.setArguments(bundle1);
         getSupportFragmentManager().beginTransaction().replace(R.id.scvInvitedContainer, fragment1).commit();
     }

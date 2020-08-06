@@ -161,5 +161,3 @@ public class CollaboratorSearchFragment extends Fragment {
         passer = (onNextPass) context;
     }
 }
-//STRING WAS: d-----
-//STRING WAS: -----

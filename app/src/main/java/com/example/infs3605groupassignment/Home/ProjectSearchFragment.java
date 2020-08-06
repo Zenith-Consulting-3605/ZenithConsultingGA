@@ -172,7 +172,7 @@ public class ProjectSearchFragment extends Fragment {
                                     @Override
                                     public void onClick(int id) {
 //                                        Log.d(TAG, "Project " + id + " was clicked");
-                                        Intent intent = new Intent(getContext(), ProfileActivity.class);
+                                        Intent intent = new Intent(getContext(), ProjectDetail.class);
                                         intent.putExtra("userID", userID);
                                         startActivity(intent);
                                     }

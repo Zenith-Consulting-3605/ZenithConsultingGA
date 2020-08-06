@@ -57,7 +57,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         }
 
         @Override
-        public void onClick (View view) { listener.onReject(getSpecID(getAdapterPosition())); }
+        public void onClick (View view) {
+            if(view.getId() == R.id.imReject) {
+                listener.onReject(getSpecID(getAdapterPosition()));
+            }
+        }
     }
 
     @Override
@@ -75,11 +79,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     @Override
     public int getItemCount() { return userList.size(); }
-
-    public void filterList(List<User> filteredList) {
-        userList = filteredList;
-        notifyDataSetChanged();
-    }
 
     public int getSpecID(int position) { return userList.get(position).getID(); }
 

@@ -155,15 +155,12 @@ public class FeaturedFragment extends Fragment {
                                     @Override
                                     public void onClick(int ID) {
                                         Log.d(TAG, "Feature was clicked, ID was: " + ID);
-                                        Intent intent = new Intent(getContext(), ProfileActivity.class); //NEED TO FIX TO GO TO CORRECT ACTIVITY
+                                        Intent intent = new Intent(getContext(), ProjectDetail.class); //NEED TO FIX TO GO TO CORRECT ACTIVITY
                                         intent.putExtra("userID", userID);
                                         startActivity(intent);
                                     }
                                 });
-
                                 recyclerView.setAdapter(adapter);
-//                                adapter.notifyDataSetChanged();
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -175,9 +172,6 @@ public class FeaturedFragment extends Fragment {
                 }
             });
             requestQueue.add(request);
-
         }
-
-
     }
 }
