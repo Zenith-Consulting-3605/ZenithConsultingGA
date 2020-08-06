@@ -463,6 +463,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return userID;
     }
 
+
     public int getExperienceID(String experience, int userID){
         SQLiteDatabase db = this.getReadableDatabase();
         int expID = 0;
@@ -700,5 +701,23 @@ public class DbHelper extends SQLiteOpenHelper {
             cursor.close();
         }
         return number;
+    }
+
+    public int getUser(int collaborator) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor=db.rawQuery("SELECT * FROM "+ DbContract.UsersTable.TABLE_NAME, null);
+            while (cursor.moveToNext()) {
+                collaborator = cursor.getInt(cursor.getColumnIndex(DbContract.UsersTable._ID));
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+
+        } finally {
+            cursor.close();
+        }
+
+        return collaborator;
     }
 }

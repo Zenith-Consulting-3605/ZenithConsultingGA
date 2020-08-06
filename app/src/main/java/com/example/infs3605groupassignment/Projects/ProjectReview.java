@@ -1,6 +1,11 @@
 package com.example.infs3605groupassignment.Projects;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +26,10 @@ public class ProjectReview extends AppCompatActivity {
     private int[] invitees;
     private Button complete, inviteMore;
     private String projectName;
+
+  
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +79,14 @@ public class ProjectReview extends AppCompatActivity {
             }
         });
 
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment fragment1 = new ReviewFragment();
+        Bundle bundle1 = new Bundle();
+        bundle1.putInt("userID", userID);
+        bundle1.putIntArray("Collaborators", invitees);
+        fragment1.setArguments(bundle1);
+        getSupportFragmentManager().beginTransaction().replace(R.id.scvInvitedContainer, fragment1).commit();
     }
 
     public int[] removeDuplicates(int[] invitees) {
